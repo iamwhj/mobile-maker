@@ -4,7 +4,7 @@
       <el-button type="primary" @click="add">添加活动</el-button>
     </div>
     <div class="list">
-      <el-table :data="activityList" style="width: 100%">
+      <el-table :data="activityList">
         <el-table-column label="序号" width="90">
           <template #default="scope">
             {{ scope.$index + 1 }}

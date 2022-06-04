@@ -8,7 +8,9 @@
       </div>
     </div>
     <div class="activity-assemble">
-      <div class="components"></div>
+      <div class="components">
+        <ComponentList />
+      </div>
       <div class="mobile">
         <div class="preview-content"></div>
       </div>
@@ -17,7 +19,9 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import ComponentList from './activityEdit/ComponentList.vue';
+</script>
 
 <style lang="scss" scoped>
 .activity-edit {
@@ -45,7 +49,8 @@
     .components {
       width: 300px;
       height: 100%;
-      background-color: aqua;
+      // box-shadow: 7px 0px 7px 0px rgb(0 21 41 / 8%);
+      border-right: 1px solid #eee;
     }
     .mobile {
       width: 276px;
@@ -61,7 +66,7 @@
       }
     }
     .attribute {
-      width: 300px;
+      width: 400px;
       height: 100%;
       background-color: antiquewhite;
     }
