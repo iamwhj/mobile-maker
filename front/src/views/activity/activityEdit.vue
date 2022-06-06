@@ -14,14 +14,17 @@
       <div class="mobile">
         <ComponentPreview />
       </div>
-      <div class="attribute"></div>
+      <div class="attribute">
+        <ComponentSetting />
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
 import ComponentList from './activityEdit/ComponentList.vue';
-import ComponentPreview from './activityEdit/ComponentPreview.vue'
+import ComponentPreview from './activityEdit/ComponentPreview.vue';
+import ComponentSetting from './activityEdit/ComponentSetting.vue';
 </script>
 
 <style lang="scss" scoped>
@@ -65,7 +68,7 @@ import ComponentPreview from './activityEdit/ComponentPreview.vue'
     .attribute {
       width: 400px;
       height: 100%;
-      background-color: antiquewhite;
+      border-left: 1px solid #eee;
     }
   }
 }

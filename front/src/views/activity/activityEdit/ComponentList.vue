@@ -7,10 +7,10 @@
           v-for="item in componentList"
           :key="item.id"
           draggable="true"
-          @dragstart="dragStart($event, item.componentName)"
+          @dragstart="dragStart($event, item)"
         >
           <img :src="item.path" />
-          <span>{{ item.name }}</span>
+          <span>{{ item.fullName }}</span>
         </div>
       </div>
     </el-collapse-item>
@@ -27,25 +27,29 @@ const componentList = [
   {
     id: 0,
     path: require('@/assets/文字.png'),
-    componentName: 'Text',
-    name: '文字',
+    name: 'vText',
+    fullName: '文字',
   },
   {
     id: 1,
     path: require('@/assets/按钮.png'),
-    componentName: 'Button',
-    name: '按钮',
+    name: 'vButton',
+    fullName: '按钮',
   },
   {
     id: 2,
     path: require('@/assets/图片.png'),
-    componentName: 'Image',
-    name: '图片',
+    name: 'Image',
+    fullName: '图片',
   },
 ];
 
-const dragStart = (e, name) => {
-  e.dataTransfer.setData('component-drag', name);
+const dragStart = (e, item) => {
+  const transferData = {
+    name: item.name,
+    fullName: item.fullName,
+  };
+  e.dataTransfer.setData('component-drag', JSON.stringify(transferData));
 };
 </script>
 
