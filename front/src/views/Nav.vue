@@ -35,7 +35,7 @@ const menuBackgroundColor = '#1c1c1c';
   .menu-list:not(.el-menu--collapse) {
     width: 200px;
   }
-  ::v-deep .el-menu {
+  :deep(.el-menu) {
     min-height: 100vh;
   }
 }

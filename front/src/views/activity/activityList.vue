@@ -11,6 +11,7 @@
           </template>
         </el-table-column>
         <el-table-column prop="name" label="活动名称" width="180" />
+        <el-table-column prop="id" label="活动ID" />
         <el-table-column prop="creator" label="创建人" />
         <el-table-column prop="create_time" label="创建时间" />
         <el-table-column prop="reviewer" label="审核人" />
@@ -33,6 +34,7 @@ import { useRouter } from 'vue-router';
 const activityList = [
   {
     name: 'hello activity',
+    id: 1,
     creator: 'daw',
     create_time: '2022-06-02',
     reviewer: 'daw',

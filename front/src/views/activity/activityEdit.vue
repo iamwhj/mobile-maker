@@ -12,7 +12,7 @@
         <ComponentList />
       </div>
       <div class="mobile">
-        <div class="preview-content"></div>
+        <ComponentPreview />
       </div>
       <div class="attribute"></div>
     </div>
@@ -21,6 +21,7 @@
 
 <script setup>
 import ComponentList from './activityEdit/ComponentList.vue';
+import ComponentPreview from './activityEdit/ComponentPreview.vue'
 </script>
 
 <style lang="scss" scoped>
@@ -60,10 +61,6 @@ import ComponentList from './activityEdit/ComponentList.vue';
       background-size: 276px 560px;
       box-sizing: border-box;
       padding: 69px 18px 66px;
-      .preview-content {
-        height: 100%;
-        background-color: rgb(230, 242, 126);
-      }
     }
     .attribute {
       width: 400px;
