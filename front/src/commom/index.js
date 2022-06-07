@@ -1,12 +1,12 @@
 export const getActivityTemplateData = () => {
   return {
-    page: {
-      components: [],
-      detail: {
-        name: '',
-        title: '活动标题',
-      },
+    components: [],
+    detail: {
+      name: '',
+      title: '活动页',
+      date: [],
     },
+    mark: 'activity-' + Date.now(),
   };
 };
 

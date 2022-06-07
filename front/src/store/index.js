@@ -1,15 +1,9 @@
 import { createStore } from 'vuex';
+import { getActivityTemplateData } from '@/commom';
 
 export default createStore({
   state: {
-    page: {
-      components: [],
-      detail: {
-        name: '',
-        title: '活动标题',
-      },
-      mark: 'activity-' + Date.now(),
-    },
+    page: getActivityTemplateData(),
     currentComponent: {
       name: '',
       fullName: '',
@@ -24,11 +18,14 @@ export default createStore({
     addComponent(state, componentData) {
       state.page.components.push(componentData);
     },
-    updateComponet(state, newDetail) {
+    updateComponet(state, { newDetail, key }) {
+      if (key === 'page') {
+        state.page.detail = { ...state.page.detail, ...newDetail };
+        return;
+      }
       const mark = state.currentComponent.mark;
       let currentComp = state.page.components.find((c) => c.mark === mark);
       currentComp.detail = { ...currentComp.detail, ...newDetail };
-      console.log(state.page);
     },
     changeCurrentComponent(state, newComp) {
       state.currentComponent = newComp;

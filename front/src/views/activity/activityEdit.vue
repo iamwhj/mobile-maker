@@ -22,9 +22,15 @@
 </template>
 
 <script setup>
+import { useStore } from 'vuex';
 import ComponentList from './activityEdit/ComponentList.vue';
 import ComponentPreview from './activityEdit/ComponentPreview.vue';
 import ComponentSetting from './activityEdit/ComponentSetting.vue';
+import { openActivityConfig } from '@/commom/helper';
+
+const store = useStore();
+// 默认选中顶部栏
+openActivityConfig(store);
 </script>
 
 <style lang="scss" scoped>

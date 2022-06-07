@@ -13,8 +13,9 @@ const store = useStore();
 const name = computed(() => store.getters.currentComponent.name + 'Config');
 const fullName = computed(() => store.getters.currentComponent.fullName);
 
-const updateCompDeail = (newDatil) => {
-  store.commit('updateComponet', newDatil);
+// 注入更新配置函数
+const updateCompDeail = (newDetail, key = 'component') => {
+  store.commit('updateComponet', { newDetail, key });
 };
 </script>
 

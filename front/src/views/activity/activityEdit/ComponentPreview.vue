@@ -4,6 +4,7 @@
     @drop.stop.prevent="componentDrap"
     @dragover.prevent
   >
+    <ActivtiyConfig></ActivtiyConfig>
     <div
       v-for="component in page.components"
       :key="component.mark"
@@ -21,6 +22,7 @@
 import { useStore } from 'vuex';
 import { getComponentTemplateData } from '@/commom';
 import { computed } from 'vue';
+import ActivtiyConfig from './activityConfig';
 
 const store = useStore();
 const page = store.getters.page;
