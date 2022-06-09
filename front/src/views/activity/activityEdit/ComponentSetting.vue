@@ -1,21 +1,40 @@
 <template>
   <div class="component-setting">
     <div class="title">属性配置 - {{ fullName }}</div>
-    <component :is="name" :updateCompDeail="updateCompDeail"></component>
+    <component
+      :is="name"
+      :updateCompDeail="updateCompDeail"
+      v-bind="config"
+    ></component>
   </div>
 </template>
 
 <script setup>
 import { computed } from 'vue';
 import { useStore } from 'vuex';
+import { updateComponent } from '@/commom/helper';
 
 const store = useStore();
 const name = computed(() => store.getters.currentComponent.name + 'Config');
 const fullName = computed(() => store.getters.currentComponent.fullName);
 
+const config = computed(() => {
+  const page = store.getters.page;
+  const currentComponent = store.getters.currentComponent;
+  if (currentComponent.name === 'activity') {
+    return page.detail;
+  } else {
+    const component = page.components.find(
+      (c) => c.mark === currentComponent.mark
+    );
+    const componentConfig = component?.detail || {};
+    return componentConfig;
+  }
+});
+
 // 注入更新配置函数
-const updateCompDeail = (newDetail, key = 'component') => {
-  store.commit('updateComponet', { newDetail, key });
+const updateCompDeail = (newDetail, key = 'detail') => {
+  updateComponent(store, { newDetail, key });
 };
 </script>
 
@@ -28,9 +47,6 @@ const updateCompDeail = (newDetail, key = 'component') => {
     font-weight: 500;
     font-family: Arial, Helvetica, sans-serif;
     margin-bottom: 30px;
-  }
-  :deep(.el-input) {
-    width: 230px;
   }
 }
 </style>

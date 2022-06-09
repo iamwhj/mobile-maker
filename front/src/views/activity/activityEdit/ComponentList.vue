@@ -23,6 +23,7 @@
 <script setup>
 const activeName = ['basic'];
 
+// 组件列表 后续改成从接口获取
 const componentList = [
   {
     id: 0,
@@ -39,11 +40,12 @@ const componentList = [
   {
     id: 2,
     path: require('@/assets/图片.png'),
-    name: 'Image',
+    name: 'vImage',
     fullName: '图片',
   },
 ];
 
+// 拖动组件
 const dragStart = (e, item) => {
   const transferData = {
     name: item.name,

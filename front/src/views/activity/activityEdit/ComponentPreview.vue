@@ -12,8 +12,14 @@
         'component-container': true,
         checked: component.mark === currentMark,
       }"
+      :style="{ 'text-align': component.style.align }"
+      @click="switchComponent(component)"
     >
-      <component :is="component.name" v-bind="component.detail"></component>
+      <component
+        :is="component.name"
+        :class="component.mark"
+        v-bind="{ ...component.detail, ...generateStyle(component.style) }"
+      ></component>
     </div>
   </div>
 </template>
@@ -23,23 +29,33 @@ import { useStore } from 'vuex';
 import { getComponentTemplateData } from '@/commom';
 import { computed } from 'vue';
 import ActivtiyConfig from './activityConfig';
+import { selectComponent, generateStyle } from '@/commom/helper';
 
 const store = useStore();
 const page = store.getters.page;
 const currentMark = computed(() => store.getters.currentComponent.mark);
 
+// 拖入组件
 const componentDrap = (e) => {
   const data = e.dataTransfer.getData('component-drag');
   const component = JSON.parse(data);
-  const componentData = getComponentTemplateData(component.name);
+  const componentData = getComponentTemplateData({
+    name: component.name,
+    fullName: component.fullName,
+  });
   // 添加组件
   store.commit('addComponent', componentData);
   // 更新选中组件
-  store.commit('changeCurrentComponent', {
+  selectComponent(store, {
     name: component.name,
     fullName: component.fullName,
     mark: componentData.mark,
   });
+};
+
+// 选中组件
+const switchComponent = (component) => {
+  selectComponent(store, component);
 };
 </script>
 
@@ -55,6 +71,10 @@ const componentDrap = (e) => {
   }
   .checked {
     border: 1px dashed #1890ff;
+  }
+
+  .component-container {
+    overflow: hidden;
   }
 }
 </style>

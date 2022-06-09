@@ -6,7 +6,7 @@
 import { computed } from 'vue';
 
 const props = defineProps({
-  width: { type: String, default: '100%' },
+  width: { type: String, default: '240px' },
   height: { type: String, default: '20px' },
   content: { type: String, default: '请输入内容' },
   color: { type: String, default: '' },

@@ -1,16 +1,18 @@
 <template>
   <el-form :model="form">
     <el-form-item label="文字：">
-      <el-input v-model="form.content" />
+      <el-input v-model="form.content" style="width: 230px" />
     </el-form-item>
     <el-form-item label="颜色：">
-      <el-input v-model="form.color" />
+      <el-input v-model="form.color" style="width: 230px" />
     </el-form-item>
   </el-form>
+  <BaseSetting></BaseSetting>
 </template>
 
 <script setup>
 import { reactive, watch } from 'vue';
+import BaseSetting from '@/components/baseSetting';
 
 const props = defineProps({
   updateCompDeail: { type: Function },

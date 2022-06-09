@@ -31,6 +31,7 @@
 <script setup>
 import { useRouter } from 'vue-router';
 
+// table列表 后续改成接口获取
 const activityList = [
   {
     name: 'hello activity',

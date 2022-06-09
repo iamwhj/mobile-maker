@@ -18,6 +18,11 @@ const routes = [
         name: 'activityEdit',
         component: () => import('@/views/activity/activityEdit.vue'),
       },
+      {
+        path: '/component',
+        name: 'component',
+        component: () => import('@/views/material'),
+      },
     ],
   },
 ];
