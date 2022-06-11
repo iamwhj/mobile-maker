@@ -38,9 +38,9 @@ npm run serve
 
 图片资源均通过网上获取，后经个人切图调整。
 
-![样图1](https://raw.githubusercontent.com/iamwhj/mobile-maker/master/assets/example1.jpg)
+![样图1](https://s1.ax1x.com/2022/06/11/XcGyWD.jpg)
 
-![样图2](https://raw.githubusercontent.com/iamwhj/mobile-maker/master/assets/example2.jpg)
+![样图2](https://s1.ax1x.com/2022/06/11/XcGsJO.jpg)
 
 ## JOIN
 
