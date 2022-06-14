@@ -1,45 +1,33 @@
 <template>
-  <div class="color-picker">
-    <input
-      type="text"
-      :value="modelValue"
-      @input="update($event.target.value)"
-    />
-    <el-color-picker v-model="color" />
+  <div class="base-input">
+    <input :value="parseInt(modelValue)" @input="update($event.target.value)" />
+    <SuffixCharacter gap="16px" :suffix="suffix" />
   </div>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import SuffixCharacter from '@/components/suffixCharacter';
 
 const props = defineProps({
   modelValue: {
     type: String,
-    default: '#000',
+    default: '1',
+  },
+  suffix: {
+    type: String,
+    default: 'px',
   },
 });
 
-const color = ref(props.modelValue);
-
 const emit = defineEmits(['update:modelValue']);
-
 const update = (value) => {
+  value = value ? value + props.suffix : '0';
   emit('update:modelValue', value);
-  color.value = value;
 };
-
-watch(color, () => {
-  update(color.value);
-});
 </script>
 
 <style lang="scss" scoped>
-.color-picker {
-  :deep(.el-color-picker) {
-    position: relative;
-    top: 1px;
-    left: 10px;
-  }
+.base-input {
   input {
     -webkit-appearance: none;
     background-color: #fff;

@@ -8,7 +8,7 @@
         :max="240"
         controls-position="right"
       />
-      <suffixCharacter />
+      <SuffixCharacter />
     </el-form-item>
     <el-form-item label="高度：">
       <el-input-number
@@ -16,7 +16,7 @@
         :min="0"
         controls-position="right"
       />
-      <suffixCharacter />
+      <SuffixCharacter />
     </el-form-item>
     <el-form-item label="对齐方式：">
       <el-radio-group v-model="form.align">
@@ -31,7 +31,7 @@
 <script setup>
 import { nextTick, reactive, watch } from 'vue';
 import { useStore } from 'vuex';
-import suffixCharacter from '@/components/suffixCharacter';
+import SuffixCharacter from '@/components/suffixCharacter';
 import { getCurrentComponet, updateComponent } from '@/commom/helper';
 
 const store = useStore();

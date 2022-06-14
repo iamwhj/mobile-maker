@@ -4,13 +4,13 @@
       <el-input v-model="form.content" style="width: 230px" />
     </el-form-item>
     <el-form-item label="文字颜色：">
-      <ColorPicker v-model:value="form.color"></ColorPicker>
+      <ColorPicker v-model="form.color"></ColorPicker>
     </el-form-item>
     <el-form-item label="背景颜色：">
-      <el-input v-model="form.backgroundColor" style="width: 230px" />
+      <ColorPicker v-model="form.backgroundColor"></ColorPicker>
     </el-form-item>
     <el-form-item label="按钮圆角：">
-      <el-input v-model="form.borderRadius" style="width: 230px" />
+      <BaseInput v-model="form.borderRadius" />
     </el-form-item>
   </el-form>
   <BaseSetting></BaseSetting>
@@ -20,6 +20,7 @@
 import { reactive, watch } from 'vue';
 import BaseSetting from '@/components/baseSetting';
 import ColorPicker from '@/components/colorPicker';
+import BaseInput from '@/components/baseInput';
 
 const props = defineProps({
   updateCompDeail: { type: Function },
@@ -37,7 +38,6 @@ const form = reactive({
 });
 
 watch(form, () => {
-  console.log('form',form );
   props.updateCompDeail(form);
 });
 </script>
