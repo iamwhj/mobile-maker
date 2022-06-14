@@ -3,6 +3,7 @@
     <div class="title">属性配置 - {{ fullName }}</div>
     <component
       :is="name"
+      :key="currentMark"
       :updateCompDeail="updateCompDeail"
       v-bind="config"
     ></component>
@@ -17,6 +18,7 @@ import { updateComponent } from '@/commom/helper';
 const store = useStore();
 const name = computed(() => store.getters.currentComponent.name + 'Config');
 const fullName = computed(() => store.getters.currentComponent.fullName);
+const currentMark = computed(() => store.getters.currentComponent.mark);
 
 const config = computed(() => {
   const page = store.getters.page;
