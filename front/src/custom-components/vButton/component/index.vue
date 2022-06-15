@@ -31,6 +31,6 @@ const btnStyle = computed(() => {
 .btn-box {
   text-align: center;
   line-height: v-bind(height);
-  border: none
+  border: none;
 }
 </style>

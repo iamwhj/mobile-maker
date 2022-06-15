@@ -3,7 +3,7 @@ export const openActivityConfig = (store) => {
   store.commit('changeCurrentComponent', {
     name: 'activity',
     fullName: '活动页',
-    mark: 'activity' + Date.now(),
+    mark: 'activity-' + Date.now(),
   });
 };
 
@@ -24,6 +24,14 @@ export const getCurrentComponet = (store) => {
   const currenComp = components.find((c) => c.mark === currentMark);
   return currenComp;
 };
+// 获取当前选中组件索引
+export const getCurrentComponetIndex = (store) => {
+  const currentMark = store.getters.currentComponent.mark;
+  const page = store.getters.page;
+  const components = page.components;
+  const index = components.findIndex((c) => c.mark === currentMark);
+  return index;
+};
 
 // 更新组件数据
 export const updateComponent = (store, { newDetail, key }) => {
@@ -32,7 +40,7 @@ export const updateComponent = (store, { newDetail, key }) => {
 
 // 处理传入的style对象
 export const generateStyle = (style) => {
-  // 几何属性，需要加单位
+  // 几何属性，需要加单位px
   const sizeList = ['width', 'height'];
   // 多余属性，需要剔除
   const reduceList = ['align'];

@@ -13,6 +13,7 @@
       </div>
       <div class="mobile">
         <ComponentPreview />
+        <sideControllBar />
       </div>
       <div class="attribute">
         <ComponentSetting />
@@ -26,6 +27,8 @@ import { useStore } from 'vuex';
 import ComponentList from './activityEdit/ComponentList.vue';
 import ComponentPreview from './activityEdit/ComponentPreview.vue';
 import ComponentSetting from './activityEdit/ComponentSetting.vue';
+import SideControllBar from '@/components/sideControllBar';
+
 import { openActivityConfig } from '@/commom/helper';
 
 const store = useStore();
@@ -63,6 +66,7 @@ openActivityConfig(store);
       border-right: 1px solid #eee;
     }
     .mobile {
+      position: relative;
       width: 276px;
       height: 560px;
       background-image: url('@/assets/image/model.png');

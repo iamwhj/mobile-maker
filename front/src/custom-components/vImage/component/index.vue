@@ -15,7 +15,7 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 .img-box {
-    font-size: 0;
+  font-size: 0;
   img {
     width: 100%;
   }
