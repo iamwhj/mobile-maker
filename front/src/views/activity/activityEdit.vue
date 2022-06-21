@@ -13,10 +13,13 @@
       </div>
       <div class="mobile">
         <ComponentPreview />
-        <sideControllBar />
+        <SideControllBar />
       </div>
       <div class="attribute">
         <ComponentSetting />
+      </div>
+      <div class="toolsBar">
+        <ToolsBar />
       </div>
     </div>
   </div>
@@ -28,7 +31,7 @@ import ComponentList from './activityEdit/ComponentList.vue';
 import ComponentPreview from './activityEdit/ComponentPreview.vue';
 import ComponentSetting from './activityEdit/ComponentSetting.vue';
 import SideControllBar from '@/components/sideControllBar';
-
+import ToolsBar from '@/components/toolsBar';
 import { openActivityConfig } from '@/commom/helper';
 
 const store = useStore();
@@ -79,6 +82,11 @@ openActivityConfig(store);
       width: 400px;
       height: 100%;
       border-left: 1px solid #eee;
+    }
+    .toolsBar {
+      position: absolute;
+      top: 100px;
+      right: 400px;
     }
   }
 }

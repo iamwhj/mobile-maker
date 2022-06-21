@@ -1,3 +1,5 @@
+import { deepClone } from '@/utils';
+
 // 打开活动配置
 export const openActivityConfig = (store) => {
   store.commit('changeCurrentComponent', {
@@ -54,4 +56,16 @@ export const generateStyle = (style) => {
     }
   }
   return ripeStyle;
+};
+
+// 添加历史记录数据
+export const collectHistoryData = (store, { type, name }) => {
+  const pageData = store.getters.page;
+  const historyData = {
+    type,
+    name,
+    data: deepClone(pageData),
+  };
+
+  store.commit('addHistoryData', historyData);
 };

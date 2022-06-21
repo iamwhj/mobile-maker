@@ -32,7 +32,7 @@ import ActivtiyConfig from './activityConfig';
 import { selectComponent, generateStyle } from '@/commom/helper';
 
 const store = useStore();
-const page = store.getters.page;
+const page = computed(() => store.getters.page);
 const currentMark = computed(() => store.getters.currentComponent.mark);
 
 // 拖入组件
