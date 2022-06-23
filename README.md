@@ -6,10 +6,10 @@ mobile-maker 是搭建一个低代码平台，用于快速制作h5页面。
 
 ## 项目组成和技术栈
 
-1. 配置服务（front): vue3 + element-plus + webpack
-2. 预览服务（preview): vue3 + element-plus + webpack
-3. 打包服务（mobile-maker): koa + shell + fs/child_process
-4. 接口服务（mobile-maker-server): koa + typescript + mysql
+1. 配置服务[(front)](https://github.com/iamwhj/mobile-maker/tree/master/front): vue3 + element-plus + webpack
+2. 预览服务(preview): vue3 + element-plus + webpack
+3. 打包服务(mobile-maker): koa + shell + fs/child_process
+4. 接口服务[(mobile-maker-server)](https://github.com/iamwhj/mobile-maker-server): koa + typescript + mongodb
 
 ## 项目启动
 
