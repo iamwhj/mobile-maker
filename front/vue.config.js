@@ -1,10 +1,22 @@
 const { defineConfig } = require('@vue/cli-service');
 const { resolve } = require('path');
 
+const remoteUrl = 'http://localhost:3000';
+
 module.exports = defineConfig({
   transpileDependencies: true,
   devServer: {
     port: 8080,
+    proxy: {
+      '/api': {
+        target: remoteUrl,
+        secure: false,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': '',
+        },
+      },
+    },
   },
   chainWebpack(config) {
     // 默认加载svg规则，排除掉我们新建icon文件夹

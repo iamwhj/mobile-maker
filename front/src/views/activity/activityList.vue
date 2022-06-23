@@ -30,6 +30,7 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
+import axios from '@/utils/axios';
 
 // table列表 后续改成接口获取
 const activityList = [
@@ -45,6 +46,8 @@ const activityList = [
 
 const router = useRouter();
 const add = () => router.push({ path: '/activityEdit' });
+
+axios.get('/activity');
 </script>
 
 <style lang="scss" scoped>
