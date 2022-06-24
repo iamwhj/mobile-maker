@@ -66,6 +66,10 @@ export const collectHistoryData = (store, { type, name }) => {
     name,
     data: deepClone(pageData),
   };
-
   store.commit('addHistoryData', historyData);
+};
+
+// 合并覆盖page数据
+export const recoverPageData = (store, data) => {
+  store.commit('recoverPageData', data);
 };

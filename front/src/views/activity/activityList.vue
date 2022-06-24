@@ -37,8 +37,11 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { getActivityList } from '@/api/activity';
+import { recoverPageData } from '@/commom/helper';
+import { getActivityTemplateData } from '@/commom';
+import { useStore } from 'vuex';
 
-// table列表 后续改成接口获取
+// table列表
 const activityList = ref([]);
 const getList = () => {
   getActivityList().then((result) => {
@@ -51,7 +54,16 @@ const getList = () => {
 getList();
 
 const router = useRouter();
-const add = () => router.push({ path: '/activityEdit' });
+const store = useStore();
+const add = () => {
+  recoverPageData(store, getActivityTemplateData());
+  router.push({ path: '/activityEdit' });
+};
+const edit = (activity) => {
+  const page = JSON.parse(activity.page);
+  recoverPageData(store, page);
+  router.push({ path: '/activityEdit' });
+};
 </script>
 
 <style lang="scss" scoped>

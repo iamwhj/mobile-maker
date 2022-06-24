@@ -80,7 +80,7 @@ export default createStore({
       // 添加历史记录数据
       state.historyData.unshift(historyData);
     },
-    recoverHistoryData(state, historyData) {
+    recoverPageData(state, historyData) {
       state.page = { ...state.page, ...historyData };
     },
   },

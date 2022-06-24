@@ -27,13 +27,12 @@
 <script setup>
 import { BrushFilled, Tickets } from '@element-plus/icons-vue';
 import { useStore } from 'vuex';
+import { recoverPageData } from '@/commom/helper';
 
 const store = useStore();
 const historyData = store.getters.historyData;
 
-const recoverData = (historyItem) => {
-  store.commit('recoverHistoryData', historyItem.data);
-};
+const recoverData = (historyItem) => recoverPageData(store, historyItem.data);
 </script>
 
 <style lang="scss" scoped>
