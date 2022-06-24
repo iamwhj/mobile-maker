@@ -10,11 +10,16 @@
             {{ scope.$index + 1 }}
           </template>
         </el-table-column>
-        <el-table-column prop="name" label="活动名称" width="180" />
+        <el-table-column label="活动名称">
+          <template #default="scope">
+            <el-link @click="edit(scope.row)">{{ scope.row.name }}</el-link>
+          </template>
+        </el-table-column>
         <el-table-column prop="id" label="活动ID" />
         <el-table-column prop="creator" label="创建人" />
-        <el-table-column prop="create_time" label="创建时间" />
+        <el-table-column prop="create_time" label="创建时间" width="110" />
         <el-table-column prop="reviewer" label="审核人" />
+        <el-table-column prop="reviewer_time" label="审核时间" />
         <el-table-column prop="status" label="状态" />
         <el-table-column label="操作" width="200">
           <template #default="scope">
@@ -29,25 +34,24 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import axios from '@/utils/axios';
+import { getActivityList } from '@/api/activity';
 
 // table列表 后续改成接口获取
-const activityList = [
-  {
-    name: 'hello activity',
-    id: 1,
-    creator: 'daw',
-    create_time: '2022-06-02',
-    reviewer: 'daw',
-    status: '创建',
-  },
-];
+const activityList = ref([]);
+const getList = () => {
+  getActivityList().then((result) => {
+    const res = result.data;
+    if (res.code === 0) {
+      activityList.value = res.data.data;
+    }
+  });
+};
+getList();
 
 const router = useRouter();
 const add = () => router.push({ path: '/activityEdit' });
-
-axios.get('/activity');
 </script>
 
 <style lang="scss" scoped>

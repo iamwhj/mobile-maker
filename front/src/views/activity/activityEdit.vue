@@ -3,7 +3,7 @@
     <div class="button-box">
       <div class="operate-btn">
         <el-button>预览</el-button>
-        <el-button>保存</el-button>
+        <el-button @click="save">保存</el-button>
         <el-button type="primary">发布</el-button>
       </div>
     </div>
@@ -33,10 +33,41 @@ import ComponentSetting from './activityEdit/ComponentSetting.vue';
 import SideControllBar from '@/components/sideControllBar';
 import ToolsBar from '@/components/toolsBar';
 import { openActivityConfig } from '@/commom/helper';
+import { saveActivity } from '@/api/activity';
+import { ElMessage } from 'element-plus';
 
 const store = useStore();
 // 默认选中顶部栏
 openActivityConfig(store);
+
+const save = () => {
+  const page = store.getters.page;
+  const activity = {
+    name: page.detail.name,
+    date: JSON.stringify(page.detail.name),
+    creator: 'Admin',
+    status: '创建',
+    page: JSON.stringify(page),
+  };
+
+  if (!activity.name) {
+    ElMessage({
+      type: 'error',
+      message: '请填写活动名称',
+    });
+    return;
+  }
+
+  saveActivity(activity).then((result) => {
+    const res = result.data;
+    if (res.code === 0) {
+      ElMessage({
+        type: 'success',
+        message: '活动保存成功',
+      });
+    }
+  });
+};
 </script>
 
 <style lang="scss" scoped>
