@@ -62,7 +62,7 @@ const add = () => {
 const edit = (activity) => {
   const page = JSON.parse(activity.page);
   recoverPageData(store, page);
-  router.push({ path: '/activityEdit' });
+  router.push({ path: '/activityEdit', query: { activityId: activity.id } });
 };
 </script>
 

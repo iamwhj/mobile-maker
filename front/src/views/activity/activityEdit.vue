@@ -2,7 +2,7 @@
   <div class="activity-edit">
     <div class="button-box">
       <div class="operate-btn">
-        <el-button>预览</el-button>
+        <el-button @click="preview">预览</el-button>
         <el-button @click="save">保存</el-button>
         <el-button type="primary">发布</el-button>
       </div>
@@ -23,50 +23,91 @@
       </div>
     </div>
   </div>
+  <ActivityPreview
+    v-if="isPreview"
+    :id="activityId"
+    @hidePreview="() => (isPreview = false)"
+  />
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 import ComponentList from './activityEdit/ComponentList.vue';
 import ComponentPreview from './activityEdit/ComponentPreview.vue';
 import ComponentSetting from './activityEdit/ComponentSetting.vue';
 import SideControllBar from '@/components/sideControllBar';
 import ToolsBar from '@/components/toolsBar';
+import ActivityPreview from './activityPreview.vue';
 import { openActivityConfig } from '@/commom/helper';
-import { saveActivity } from '@/api/activity';
+import { saveActivity, updateActivity } from '@/api/activity';
 import { ElMessage } from 'element-plus';
+import { checkField } from '@/utils/check';
 
+const props = defineProps(['activityId']);
+
+const router = useRouter();
 const store = useStore();
 // 默认选中顶部栏
 openActivityConfig(store);
 
+// 保存活动
 const save = () => {
   const page = store.getters.page;
   const activity = {
     name: page.detail.name,
-    date: JSON.stringify(page.detail.name),
+    date: JSON.stringify(page.detail.date),
     creator: 'Admin',
     status: '创建',
     page: JSON.stringify(page),
   };
 
-  if (!activity.name) {
+  const checkList = {
+    name: { message: '请填写活动名称' },
+  };
+  if (!checkField(checkList, activity)) return;
+
+  if (!props.activityId) {
+    // save
+    saveActivity(activity).then((result) => {
+      const res = result.data;
+      if (res.code === 0) {
+        router.push({
+          path: '/activityEdit',
+          query: { activityId: res.data.id },
+        });
+        ElMessage({
+          type: 'success',
+          message: '活动保存成功',
+        });
+      }
+    });
+  } else {
+    // update
+    updateActivity({ id: props.activityId, data: activity }).then((result) => {
+      const res = result.data;
+      if (res.code === 0) {
+        ElMessage({
+          type: 'success',
+          message: '活动更新成功',
+        });
+      }
+    });
+  }
+};
+
+// 预览
+const isPreview = ref(false);
+const preview = () => {
+  if (!props.activityId) {
     ElMessage({
-      type: 'error',
-      message: '请填写活动名称',
+      type: 'warning',
+      message: '请先保存活动',
     });
     return;
   }
-
-  saveActivity(activity).then((result) => {
-    const res = result.data;
-    if (res.code === 0) {
-      ElMessage({
-        type: 'success',
-        message: '活动保存成功',
-      });
-    }
-  });
+  isPreview.value = true;
 };
 </script>
 
