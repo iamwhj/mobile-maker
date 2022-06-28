@@ -1,5 +1,5 @@
 <template>
-  <div class="preview" @click="hidePreview">
+  <div class="preview" @click="emit('hidePreview')">
     <div class="preview-box">
       <div class="model">
         <iframe :src="src" frameborder="0"></iframe>
@@ -16,12 +16,8 @@ const props = defineProps(['id']);
 const emit = defineEmits(['hidePreview']);
 
 const src = computed(() => {
-  return 'https://staging-cn.vuejs.org/guide/introduction.html';
+  return `${process.env.VUE_APP_API_URL}/activity/preview/${props.id}`;
 });
-
-const hidePreview = () => {
-  emit('hidePreview');
-};
 </script>
 
 <style lang="scss" scoped>
@@ -49,6 +45,7 @@ const hidePreview = () => {
       box-sizing: border-box;
       padding: 69px 18px 66px;
       iframe {
+        background: #f1eaea;
         width: 100%;
         height: 100%;
       }
