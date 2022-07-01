@@ -13,12 +13,15 @@
 <script setup>
 import { ref } from 'vue';
 
+const { VUE_APP_UNIT_WIDTH } = process.env;
+
 // eslint-disable-next-line no-undef
 const components = ref(activity.components);
 components.value.forEach((comp) => {
   for (const key in comp.style) {
+    // 将px转换成rem
     if (typeof comp.style[key] === 'number')
-      comp.style[key] = comp.style[key] / 12 + 'rem';
+      comp.style[key] = comp.style[key] / VUE_APP_UNIT_WIDTH + 'rem';
   }
   comp.ripeParams = {
     ...comp.style,

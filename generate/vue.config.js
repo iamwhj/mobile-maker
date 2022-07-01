@@ -16,7 +16,7 @@ module.exports = defineConfig({
   chainWebpack: (config) => {
     if (process.env.NODE_ENV === 'production') {
       config.plugin('html').tap((args) => {
-        args[0].title = '默认活动标题';
+        args[0].title = '默认活动页';
         args[0].minify = { removeComments: false };
         return args;
       });

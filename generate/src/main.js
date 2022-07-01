@@ -1,7 +1,8 @@
 import { createApp } from 'vue';
 import App from './App.vue';
-import registerCustomComponents from './custom-components';
+import '@/style/index.scss';
 import '@/common/rem';
+import registerCustomComponents from './custom-components';
 
 const app = createApp(App);
 
