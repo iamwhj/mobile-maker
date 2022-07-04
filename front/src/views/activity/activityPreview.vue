@@ -4,13 +4,16 @@
       <div class="model">
         <iframe :src="src" frameborder="0"></iframe>
       </div>
-      <div class="qr-code"></div>
+      <div class="qr-code">
+        <QrcodeVue :value="src" :size="200" margin="1"></QrcodeVue>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
 import { computed } from 'vue';
+import QrcodeVue from 'qrcode.vue';
 
 const props = defineProps(['id']);
 const emit = defineEmits(['hidePreview']);
