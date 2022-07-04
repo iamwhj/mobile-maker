@@ -17,7 +17,10 @@ const routes = [
         path: 'activityEdit',
         name: 'activityEdit',
         component: () => import('@/views/activity/activityEdit.vue'),
-        props: (r) => ({ activityId: r.query.activityId }),
+        props: (r) => ({
+          activityId: r.query.activityId,
+          status: r.query.status,
+        }),
       },
       {
         path: '/component',

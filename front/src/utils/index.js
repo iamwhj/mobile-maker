@@ -1,3 +1,6 @@
+import dayjs from 'dayjs';
+
+// 深度克隆
 export const deepClone = (orange, target = {}) => {
   if (!orange || typeof orange !== 'object') return;
   for (const key in orange) {
@@ -12,4 +15,12 @@ export const deepClone = (orange, target = {}) => {
     }
   }
   return target;
+};
+
+// 返回格式化日期
+export const formatTime = (date) => {
+  if (date) {
+    return dayjs(date).format('YYYY-MM-DD HH:mm:ss');
+  }
+  return dayjs().format('YYYY-MM-DD HH:mm:ss');
 };

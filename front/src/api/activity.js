@@ -13,3 +13,7 @@ export const getActivityList = (params) => {
 export const updateActivity = (params) => {
   return axios.post(baseURl + '/update', params);
 };
+
+export const publishActivity = (params) => {
+  return axios.get(baseURl + '/publish', { params });
+};

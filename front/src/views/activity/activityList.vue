@@ -19,12 +19,25 @@
         <el-table-column prop="creator" label="创建人" />
         <el-table-column prop="create_time" label="创建时间" width="110" />
         <el-table-column prop="reviewer" label="审核人" />
-        <el-table-column prop="reviewer_time" label="审核时间" />
-        <el-table-column prop="status" label="状态" />
+        <el-table-column prop="reviewer_time" label="审核时间" width="110" />
+        <el-table-column prop="status" label="状态">
+          <template #default="scope">
+            <el-tag
+              :type="
+                scope.row.status === 'release'
+                  ? 'warning'
+                  : scope.row.status === 'publish'
+                  ? 'success'
+                  : 'info'
+              "
+              >{{ scope.row.status }}</el-tag
+            >
+          </template>
+        </el-table-column>
         <el-table-column label="操作" width="200">
           <template #default="scope">
             <el-link type="primary" @click="edit(scope.row)">编辑</el-link>
-            <el-link type="warning" disable>审核</el-link>
+            <el-link type="warning" @click="judge(scope.row)">审核</el-link>
             <el-link type="danger">删除</el-link>
           </template>
         </el-table-column>
@@ -40,6 +53,7 @@ import { getActivityList } from '@/api/activity';
 import { recoverPageData } from '@/commom/helper';
 import { getActivityTemplateData } from '@/commom';
 import { useStore } from 'vuex';
+import { ElMessage } from 'element-plus';
 
 // table列表
 const activityList = ref([]);
@@ -55,14 +69,30 @@ getList();
 
 const router = useRouter();
 const store = useStore();
+// 新增活动
 const add = () => {
   recoverPageData(store, getActivityTemplateData());
   router.push({ path: '/activityEdit' });
 };
+// 编辑活动
 const edit = (activity) => {
   const page = JSON.parse(activity.page);
   recoverPageData(store, page);
-  router.push({ path: '/activityEdit', query: { activityId: activity.id } });
+  router.push({
+    path: '/activityEdit',
+    query: { activityId: activity.id, status: activity.status },
+  });
+};
+// 审核活动
+const judge = (activity) => {
+  if (activity.status !== 'release') {
+    ElMessage({
+      type: 'warning',
+      message: '活动未进入审核状态',
+    });
+    return;
+  }
+  edit(activity);
 };
 </script>
 

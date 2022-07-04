@@ -3,8 +3,14 @@
     <div class="button-box">
       <div class="operate-btn">
         <el-button @click="preview">预览</el-button>
-        <el-button @click="save">保存</el-button>
-        <el-button type="primary">发布</el-button>
+        <div v-if="!isRelease">
+          <el-button @click="save">保存</el-button>
+          <el-button type="primary" @click="release">发布</el-button>
+        </div>
+        <div v-else>
+          <el-button type="success" @click="judge('pass')">通过</el-button>
+          <el-button type="danger" @click="judge('deny')">不通过</el-button>
+        </div>
       </div>
     </div>
     <div class="activity-assemble">
@@ -31,7 +37,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import ComponentList from './activityEdit/ComponentList.vue';
@@ -41,11 +47,12 @@ import SideControllBar from '@/components/sideControllBar';
 import ToolsBar from '@/components/toolsBar';
 import ActivityPreview from './activityPreview.vue';
 import { openActivityConfig } from '@/commom/helper';
-import { saveActivity, updateActivity } from '@/api/activity';
+import { saveActivity, updateActivity, publishActivity } from '@/api/activity';
 import { ElMessage } from 'element-plus';
 import { checkField } from '@/utils/check';
+import { formatTime } from '@/utils';
 
-const props = defineProps(['activityId']);
+const props = defineProps(['activityId', 'status']);
 
 const router = useRouter();
 const store = useStore();
@@ -59,7 +66,7 @@ const save = () => {
     name: page.detail.name,
     date: JSON.stringify(page.detail.date),
     creator: 'Admin',
-    status: '创建',
+    status: 'create',
     page: JSON.stringify(page),
   };
 
@@ -75,7 +82,7 @@ const save = () => {
       if (res.code === 0) {
         router.push({
           path: '/activityEdit',
-          query: { activityId: res.data.id },
+          query: { activityId: res.data.id, status: res.data.status },
         });
         ElMessage({
           type: 'success',
@@ -109,6 +116,64 @@ const preview = () => {
   }
   isPreview.value = true;
 };
+
+// 发布
+const isRelease = computed(() => props.status === 'release');
+const release = () => {
+  if (!props.activityId) {
+    ElMessage({
+      type: 'warning',
+      message: '请先将活动保存再发布',
+    });
+    return;
+  }
+
+  const data = { status: 'release' };
+  updateActivity({ id: props.activityId, data: data }).then((result) => {
+    const res = result.data;
+    if (res.code === 0) {
+      ElMessage({
+        type: 'success',
+        message: '活动更新至待发布状态，请审核',
+      });
+      router.push({ path: '/activity' });
+    }
+  });
+};
+
+// 审核
+const judge = (type) => {
+  let data = {
+    status: 'publish',
+    reviewer: 'Daw，结果：通过',
+    reviewer_time: formatTime(),
+  };
+  if (type === 'deny') {
+    // 不通过
+    data = {
+      status: 'create',
+      reviewer: 'Daw，结果：不通过',
+      reviewer_time: formatTime(),
+    };
+  }
+  updateActivity({ id: props.activityId, data: data }).then((result) => {
+    const res = result.data;
+    if (res.code === 0) {
+      router.push({ path: '/activity' });
+      if (type === 'pass') {
+        publishActivity({ id: props.activityId }).then((result) => {
+          const res = result.data;
+          if (res.code === 0) {
+            ElMessage({
+              type: 'success',
+              message: res.message + '，请及时查验',
+            });
+          }
+        });
+      }
+    }
+  });
+};
 </script>
 
 <style lang="scss" scoped>
@@ -124,6 +189,7 @@ const preview = () => {
     border-bottom: 1px solid rgb(242, 236, 236);
     .operate-btn {
       float: right;
+      display: flex;
       .el-button {
         margin-right: 12px;
       }
