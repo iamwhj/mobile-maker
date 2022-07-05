@@ -7,7 +7,11 @@ export const saveActivity = (params) => {
 };
 
 export const getActivityList = (params) => {
-  return axios.get(baseURl, params);
+  return axios.get(baseURl, { params });
+};
+
+export const deleteActivity = (params) => {
+  return axios.delete(baseURl + '/delete', { params });
 };
 
 export const updateActivity = (params) => {

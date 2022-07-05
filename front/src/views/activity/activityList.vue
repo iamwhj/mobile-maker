@@ -38,7 +38,7 @@
           <template #default="scope">
             <el-link type="primary" @click="edit(scope.row)">编辑</el-link>
             <el-link type="warning" @click="judge(scope.row)">审核</el-link>
-            <el-link type="danger">删除</el-link>
+            <el-link type="danger" @click="del(scope.row.id)">删除</el-link>
           </template>
         </el-table-column>
       </el-table>
@@ -49,11 +49,11 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { getActivityList } from '@/api/activity';
+import { getActivityList, deleteActivity } from '@/api/activity';
 import { recoverPageData } from '@/commom/helper';
 import { getActivityTemplateData } from '@/commom';
 import { useStore } from 'vuex';
-import { ElMessage } from 'element-plus';
+import { ElMessage, ElMessageBox } from 'element-plus';
 
 // table列表
 const activityList = ref([]);
@@ -93,6 +93,32 @@ const judge = (activity) => {
     return;
   }
   edit(activity);
+};
+// 删除活动
+const del = (id) => {
+  ElMessageBox.confirm('确认删除该活动吗?', {
+    confirmButtonText: '确认',
+    cancelButtonText: '取消',
+    type: 'warning',
+  })
+    .then(() => {
+      deleteActivity({ id }).then((result) => {
+        const res = result.data;
+        if (res.code === 0) {
+          ElMessage({
+            type: 'success',
+            message: res.message,
+          });
+          getList();
+        }
+      });
+    })
+    .catch(() => {
+      ElMessage({
+        type: 'info',
+        message: 'Delete canceled',
+      });
+    });
 };
 </script>
 
