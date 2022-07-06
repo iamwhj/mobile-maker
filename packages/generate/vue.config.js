@@ -1,7 +1,9 @@
 const { defineConfig } = require('@vue/cli-service');
+
+const { NODE_ENV, VUE_APP_PUBLIC_PATH } = process.env;
 module.exports = defineConfig({
   transpileDependencies: true,
-  publicPath: process.env.VUE_APP_PUBLIC_PATH,
+  publicPath: NODE_ENV === 'production' ? VUE_APP_PUBLIC_PATH : './',
   productionSourceMap: false,
   css: {
     extract: false,
@@ -14,7 +16,7 @@ module.exports = defineConfig({
     },
   },
   chainWebpack: (config) => {
-    if (process.env.NODE_ENV === 'production') {
+    if (NODE_ENV === 'production') {
       config.plugin('html').tap((args) => {
         args[0].title = '默认活动页';
         args[0].minify = { removeComments: false };
