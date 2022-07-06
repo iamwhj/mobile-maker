@@ -2,7 +2,9 @@
 
 mobile-maker 是一个低代码平台，通过拖拽的形式快速制作可交互的h5页面。
 
-该项目寓于加深低代码平台的学习和其中技术点的掌握。
+该项目寓于加深低代码平台的学习和其中技术点的掌握。  
+
+[![OSCS Status](https://www.oscs1024.com/platform/badge/iamwhj/mobile-maker-server.svg?size=small)](https://www.oscs1024.com/project/iamwhj/mobile-maker-server?ref=badge_small) ![build](https://img.shields.io/github/license/iamwhj/mobile-maker) ![vue](https://img.shields.io/github/languages/top/iamwhj/mobile-maker)
 
 ## 项目组成和技术栈
 
