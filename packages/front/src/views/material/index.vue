@@ -1,7 +1,17 @@
 <template>
-  <div>组件管理，这块后续加上组件上传功能，除维护者外用户也能自主上传组件</div>
+  <el-tabs class="tabs-wrap">
+    <el-tab-pane label="组件列表"><ComponentList /></el-tab-pane>
+    <el-tab-pane label="分类列表"><CategoryList /></el-tab-pane>
+  </el-tabs>
 </template>
 
-<script setup></script>
+<script setup>
+import ComponentList from './componentList';
+import CategoryList from './categoryList';
+</script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.tabs-wrap {
+  padding: 12px;
+}
+</style>
