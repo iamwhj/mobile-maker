@@ -24,3 +24,12 @@ export const formatTime = (date) => {
   }
   return dayjs().format('YYYY-MM-DD HH:mm:ss');
 };
+
+// 去除无需更新的字段（mongodb更新数据）
+export const removeFieldForMongodb = (data) => {
+  const fieldList = ['_id', 'id', 'create_time'];
+  for (const key of fieldList) {
+    delete data[key];
+  }
+  return data;
+};
