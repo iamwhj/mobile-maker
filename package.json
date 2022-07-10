@@ -19,10 +19,14 @@
   },
   "homepage": "https://github.com/iamwhj/mobile-maker#readme",
   "dependencies": {
+    "@koa/cors": "^3.3.0",
     "axios": "^0.27.2",
     "compressing": "^1.6.0",
     "koa": "^2.13.4",
-    "koa-router": "^11.0.1"
+    "koa-body": "^5.0.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-router": "^11.0.1",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "dotenv": "^16.0.1"

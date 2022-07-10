@@ -28,12 +28,14 @@ const processBuildResult = (data) => {
   const { status } = data;
   if (status === 'success') {
     // 打包成功
-
+    
     // TODO 保存信息
+    console.log('打包成功，保存信息');
   } else {
     // 打包失败
 
     // TODO 判断回滚
+    console.log('打包成功，回滚操作');
   }
 }
 

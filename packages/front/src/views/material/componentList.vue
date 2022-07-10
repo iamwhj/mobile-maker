@@ -40,7 +40,7 @@
       </el-form-item>
       <el-form-item label="组件代码">
         <el-upload
-          action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+          action="http://localhost:3031/upload-component"
           :show-file-list="false"
           :on-success="successCompUpload"
           :before-upload="beforeCompUpload"
@@ -88,7 +88,7 @@
       </el-form-item>
       <el-form-item label="组件代码">
         <el-upload
-          action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+          action="http://localhost:3031/upload-component"
           :show-file-list="false"
           :on-success="successCompUpload"
           :before-upload="beforeCompUpload"
@@ -215,6 +215,21 @@ const del = (id) => {
       getCompList();
     }
   });
+};
+
+// 组件上传格式校验
+const beforeCompUpload = (rawFile) => {
+  console.log(rawFile);
+  if (rawFile.type !== 'application/x-zip-compressed') {
+    ElMessage.error('上传的格式必须是zip');
+    return false;
+  }
+  return true;
+};
+// 组件上传成功
+const successCompUpload = (res, file) => {
+  console.log(URL.createObjectURL(file.raw));
+  ElMessage.success('组件上传成功');
 };
 </script>
 
