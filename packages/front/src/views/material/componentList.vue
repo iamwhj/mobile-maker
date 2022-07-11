@@ -1,6 +1,6 @@
 <template>
   <div class="component-list">
-    <el-button type="primary" class="add-btn" @click="addVisible = true">
+    <el-button type="primary" class="add-btn" @click="add">
       添加组件
     </el-button>
     <el-table :data="componentList">
@@ -17,7 +17,13 @@
       <el-table-column prop="priority" label="组件排序" />
       <el-table-column label="操作" width="200">
         <template #default="scope">
-          <el-link type="primary" @click="edit(scope.row)">编辑</el-link>
+          <el-link
+            type="primary"
+            @click="edit(scope.row)"
+            style="margin-right: 10px"
+          >
+            编辑
+          </el-link>
           <el-link type="danger" @click="del(scope.row.id)">删除</el-link>
         </template>
       </el-table-column>
@@ -40,7 +46,7 @@
       </el-form-item>
       <el-form-item label="组件代码">
         <el-upload
-          action="http://localhost:3031/upload-component"
+          :action="action"
           :show-file-list="false"
           :on-success="successCompUpload"
           :before-upload="beforeCompUpload"
@@ -88,7 +94,7 @@
       </el-form-item>
       <el-form-item label="组件代码">
         <el-upload
-          action="http://localhost:3031/upload-component"
+          :action="action"
           :show-file-list="false"
           :on-success="successCompUpload"
           :before-upload="beforeCompUpload"
@@ -159,7 +165,17 @@ getCompList();
 // 添加组件
 const addVisible = ref(false);
 const addComponent = ref({});
+const add = () => {
+  addVisible.value = true;
+  addComponent.value = {};
+  dialogType = 'add';
+};
 const addComponentFn = () => {
+  if (!addComponent.value.version) {
+    ElMessage.error('还未上传组件代码');
+    return false;
+  }
+
   // 没做登录系统，先设置默认作者
   addComponent.value.author = 'Admin';
   saveComponent(addComponent.value).then((result) => {
@@ -181,10 +197,11 @@ let editId = -1;
 const editVisible = ref(false);
 const editComponent = ref({});
 const edit = (data) => {
-  const ripeData = removeFieldForMongodb(data);
   editId = data.id;
+  const ripeData = removeFieldForMongodb(data);
   editComponent.value = ripeData;
   editVisible.value = true;
+  dialogType = 'edit';
 };
 const editComponentFn = () => {
   updateComponent({
@@ -217,9 +234,10 @@ const del = (id) => {
   });
 };
 
+// 组件上传地址
+const action = process.env.VUE_APP_BUILD_URL + '/upload-component';
 // 组件上传格式校验
 const beforeCompUpload = (rawFile) => {
-  console.log(rawFile);
   if (rawFile.type !== 'application/x-zip-compressed') {
     ElMessage.error('上传的格式必须是zip');
     return false;
@@ -227,9 +245,18 @@ const beforeCompUpload = (rawFile) => {
   return true;
 };
 // 组件上传成功
+let dialogType = 'add';
 const successCompUpload = (res, file) => {
-  console.log(URL.createObjectURL(file.raw));
-  ElMessage.success('组件上传成功');
+  ElMessage.success('组件代码上传成功');
+  const version = res.data.version;
+  if (dialogType === 'add') {
+    // 添加组件
+    addComponent.value.version = version;
+  } else {
+    // 编辑组件(记录上一个版本)
+    editComponent.value.lastVersion = editComponent.value.version;
+    editComponent.value.version = version;
+  }
 };
 </script>
 
