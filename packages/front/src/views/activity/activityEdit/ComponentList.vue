@@ -1,49 +1,59 @@
 <template>
   <el-collapse v-model="activeName">
-    <el-collapse-item title="基础组件" name="basic">
+    <el-collapse-item
+      v-for="collapse in categoryList"
+      :key="collapse.id"
+      :title="collapse.name"
+      :name="collapse.name"
+    >
       <div class="component-box">
         <div
           class="component-item"
-          v-for="item in componentList"
+          v-for="item in componentList.filter(
+            (comp) => comp.category_id === collapse.id
+          )"
           :key="item.id"
           draggable="true"
           @dragstart="dragStart($event, item)"
         >
           <img :src="item.path" />
-          <span>{{ item.fullName }}</span>
+          <span>{{ item.full_name }}</span>
         </div>
       </div>
-    </el-collapse-item>
-    <el-collapse-item title="图表组件">
-      <div>敬请期待！！！</div>
     </el-collapse-item>
   </el-collapse>
 </template>
 
 <script setup>
-const activeName = ['basic'];
+import { getComponentList } from '@/api/component';
+import { getCategoryList } from '@/api/category';
+import { ref } from 'vue';
 
-// 组件列表 后续改成从接口获取
-const componentList = [
-  {
-    id: 0,
-    path: require('@/assets/文字.png'),
-    name: 'vText',
-    fullName: '文字',
-  },
-  {
-    id: 1,
-    path: require('@/assets/按钮.png'),
-    name: 'vButton',
-    fullName: '按钮',
-  },
-  {
-    id: 2,
-    path: require('@/assets/图片.png'),
-    name: 'vImage',
-    fullName: '图片',
-  },
-];
+const activeName = ['基础组件'];
+
+// 组件分类
+const categoryList = ref([]);
+const getCategoryListFn = () => {
+  getCategoryList().then((result) => {
+    const res = result.data;
+    if (res.code === 0) {
+      categoryList.value = res.data;
+    }
+  });
+};
+getCategoryListFn();
+
+// 组件列表
+const componentList = ref([]);
+const getComponentListFn = () => {
+  getComponentList().then((result) => {
+    const res = result.data;
+    if (res.code === 0) {
+      componentList.value = res.data;
+    }
+  });
+};
+getComponentListFn();
 
 // 拖动组件
 const dragStart = (e, item) => {
