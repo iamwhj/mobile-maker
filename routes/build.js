@@ -4,10 +4,10 @@ const BuildCntl = require('../controller/build')
 const buildCntl = new BuildCntl()
 
 const router = new Router({
-  prefix: 'build',
+  prefix: '/build',
 });
 
-router.get('/build', buildCntl.build);
+router.get('/', buildCntl.build);
 
 router.get('/buildFront', buildCntl.buildFront);
 

@@ -1,8 +1,9 @@
-const { resolve, join, copy } = require('path');
-const fs = require('fs');
+const { resolve, join } = require('path');
 const util = require('util');
+const child_process = require('child_process');
 const exec = util.promisify(child_process.exec);
 const compressing = require('compressing');
+const fs = require('fs-extra')
 
 const { COMPONENT_FOLDER } = process.env;
 const componentPath = resolve(__dirname, '../', COMPONENT_FOLDER);
@@ -10,20 +11,21 @@ const buildFront = async (componentList) => {
   const frontPath = resolve(__dirname, '../packages/front');
   const frontCompPath = resolve(frontPath, './src/custom-components');
 
-  fs.emptyDir(frontCompPath);
-
+  // 清空目录
+  await fs.emptyDir(frontCompPath);
+  
   let importStr = '';
   let componentRegisterStr = '';
   for (const component of componentList) {
     const compResourcePath = join(componentPath, component.version);
-    copy(
+    fs.copy(
       resolve(compResourcePath, component.name),
       resolve(frontCompPath, component.version)
     );
 
     importStr += `
       import ${component.name} from './${component.version}/component';\n
-      import ${component.name}Config from ./${component.version}/config';\n
+      import ${component.name}Config from './${component.version}/config';\n
     `;
 
     componentRegisterStr += `
@@ -39,8 +41,8 @@ const buildFront = async (componentList) => {
     export default registerCustomComponents;
   `;
 
-  //   生成覆盖/custom-components/index.js
-  await fs.writeFile(path.resolve(frontCompPath, './index.js'), indexStr);
+  // 生成覆盖/custom-components/index.js
+  await fs.writeFile(resolve(frontCompPath, './index.js'), indexStr);
 
   console.log('front 开始打包');
   await exec('npm run build', { cwd: frontPath, encoding: 'utf-8' });
@@ -49,7 +51,7 @@ const buildFront = async (componentList) => {
   // 备份打包文件，用于回滚
   compressing.zip.compressDir(
     join(frontPath, './dist/'),
-    join(componentPath, 'front/front.zip')
+    join(componentPath, './front.zip')
   );
 
   return true;
