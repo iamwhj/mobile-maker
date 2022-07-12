@@ -4,6 +4,7 @@ const { resolve } = require('path');
 const remoteUrl = 'http://localhost:3000';
 
 module.exports = defineConfig({
+  publicPath: './',
   transpileDependencies: true,
   devServer: {
     port: 8080,
