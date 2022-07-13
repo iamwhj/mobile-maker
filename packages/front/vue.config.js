@@ -6,6 +6,7 @@ const remoteUrl = 'http://localhost:3000';
 module.exports = defineConfig({
   publicPath: './',
   transpileDependencies: true,
+  productionSourceMap: false,
   devServer: {
     port: 8080,
     proxy: {
