@@ -1,5 +1,5 @@
 <template>
-  <div :style="textStyle">{{ content }}</div>
+  <div class="text-wrap" :style="textStyle">{{ content }}</div>
 </template>
 
 <script setup>
@@ -10,14 +10,23 @@ const props = defineProps({
   height: { type: String, default: '20px' },
   content: { type: String, default: '请输入内容' },
   color: { type: String, default: '' },
+  fontSize: { type: Number, default: 16 },
 });
 
 const textStyle = computed(() => {
   return {
     width: props.width,
     height: props.height,
+    color: props.color,
+    fontSize: props.fontSize,
   };
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.text-wrap {
+  display: inline-block;
+  text-overflow: clip;
+  overflow: hidden;
+}
+</style>

@@ -3,7 +3,7 @@
     <el-form-item label="按钮文字：">
       <el-input v-model="form.content" style="width: 230px" />
     </el-form-item>
-    <el-form-item label="文字颜色：">
+    <el-form-item label="字体颜色：">
       <ColorPicker v-model="form.color"></ColorPicker>
     </el-form-item>
     <el-form-item label="背景颜色：">

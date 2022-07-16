@@ -59,7 +59,7 @@ getComponentListFn();
 const dragStart = (e, item) => {
   const transferData = {
     name: item.name,
-    fullName: item.fullName,
+    fullName: item.full_name,
   };
   e.dataTransfer.setData('component-drag', JSON.stringify(transferData));
 };
