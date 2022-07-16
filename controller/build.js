@@ -58,7 +58,7 @@ const buildFn = async ({ ctx, type = 'all' }) => {
       // 等待 front 和 generate 都结束时回滚
       if (buildResult.front.status && buildResult.generate.status) await buildFailFn({ type });
     } else if (backups && type !== 'all') {
-      await buildFailFn({ type })
+        await buildFailFn({ type })
     }
 
     // 结束打包
@@ -117,21 +117,29 @@ const buildFailFn = async ({ type }) => {
   const componentPath = resolve(__dirname, '../', COMPONENT_FOLDER);
   // 回滚 front
   if (type === 'all' || type === 'front') {
-    const frontPath = resolve(__dirname, '../packages/front');
-    const frontDist = resolve(frontPath, './dist');
-    const backupsFrontZip = fs.readFileSync(resolve(componentPath, './front.zip'));
-    await fs.emptyDir(frontDist)
-    await compressing.zip.uncompress(backupsFrontZip, frontPath);
-    console.log('front 回滚成功！');
+    try {
+      const frontPath = resolve(__dirname, '../packages/front');
+      const frontDist = resolve(frontPath, './dist');
+      const backupsFrontZip = fs.readFileSync(resolve(componentPath, './front.zip'));
+      await fs.emptyDir(frontDist)
+      await compressing.zip.uncompress(backupsFrontZip, frontPath);
+      console.log('front 回滚成功！');
+    } catch (error) {
+      console.log('front 回滚失败', error);
+    }
   }
   // 回滚 generate
   if (type === 'all' || type === 'generate') {
-    const generatePath = resolve(__dirname, '../packages/generate');
-    const generateDist = resolve(generatePath, './dist');
-    const backupsGenerateZip = fs.readFileSync(resolve(componentPath, './generate.zip'));
-    await fs.emptyDir(generateDist)
-    await compressing.zip.uncompress(backupsGenerateZip, generatePath);
-    console.log('generate 回滚成功！');
+    try {
+      const generatePath = resolve(__dirname, '../packages/generate');
+      const generateDist = resolve(generatePath, './dist');
+      const backupsGenerateZip = fs.readFileSync(resolve(componentPath, './generate.zip'));
+      await fs.emptyDir(generateDist)
+      await compressing.zip.uncompress(backupsGenerateZip, generatePath);
+      console.log('generate 回滚成功！');
+    } catch (error) {
+      console.log('generate 回滚失败', error);
+    }
   }
   console.log('回滚结束');
 }
