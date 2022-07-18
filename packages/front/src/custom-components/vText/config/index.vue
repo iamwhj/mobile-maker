@@ -27,13 +27,13 @@ const props = defineProps({
   updateCompDeail: { type: Function },
   content: { type: String, default: '' },
   color: { type: String, default: '#000' },
-  fontSize: { type: Number, default: 16 },
+  fontSize: { type: String, default: '16px' },
 });
 
 const form = reactive({
   content: props.content,
   color: props.color,
-  fontSize: props.fontSize
+  fontSize: props.fontSize,
 });
 
 watch(form, () => {

@@ -19,7 +19,7 @@ const { VUE_APP_UNIT_WIDTH } = process.env;
 const components = ref(activity.components);
 components.value.forEach((comp) => {
   for (const key in comp.style) {
-    // 将px转换成rem
+    // 将px转换成rem(移动端适配)
     if (typeof comp.style[key] === 'number')
       comp.style[key] = comp.style[key] / VUE_APP_UNIT_WIDTH + 'rem';
   }

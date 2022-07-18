@@ -11,7 +11,7 @@ import SuffixCharacter from '@/components/suffixCharacter';
 const props = defineProps({
   modelValue: {
     type: String,
-    default: '1',
+    default: '16px',
   },
   suffix: {
     type: String,
@@ -21,8 +21,8 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue']);
 const update = (value) => {
-  value = value ? value + props.suffix : '0';
-  emit('update:modelValue', value);
+  value = value ? value : '0';
+  emit('update:modelValue', value + props.suffix);
 };
 </script>
 

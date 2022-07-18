@@ -10,7 +10,7 @@ const props = defineProps({
   height: { type: String, default: '20px' },
   content: { type: String, default: '请输入内容' },
   color: { type: String, default: '' },
-  fontSize: { type: Number, default: 16 },
+  fontSize: { type: String, default: '16px' },
 });
 
 const textStyle = computed(() => {
