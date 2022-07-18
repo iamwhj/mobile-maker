@@ -12,6 +12,9 @@
     <el-form-item label="按钮圆角：">
       <BaseInput v-model="form.borderRadius" />
     </el-form-item>
+    <el-form-item label="点击事件：">
+      <ClickEventInput />
+    </el-form-item>
   </el-form>
   <BaseSetting></BaseSetting>
 </template>
@@ -21,6 +24,7 @@ import { reactive, watch } from 'vue';
 import BaseSetting from '@/components/baseSetting';
 import ColorPicker from '@/components/colorPicker';
 import BaseInput from '@/components/baseInput';
+import ClickEventInput from '@/components/clickEventInput';
 
 const props = defineProps({
   updateCompDeail: { type: Function },
