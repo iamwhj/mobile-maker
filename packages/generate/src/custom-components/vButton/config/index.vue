@@ -3,7 +3,7 @@
     <el-form-item label="按钮文字：">
       <el-input v-model="form.content" style="width: 230px" />
     </el-form-item>
-    <el-form-item label="文字颜色：">
+    <el-form-item label="字体颜色：">
       <ColorPicker v-model="form.color"></ColorPicker>
     </el-form-item>
     <el-form-item label="背景颜色：">
@@ -11,6 +11,9 @@
     </el-form-item>
     <el-form-item label="按钮圆角：">
       <BaseInput v-model="form.borderRadius" />
+    </el-form-item>
+    <el-form-item label="点击事件：">
+      <ClickEventInput />
     </el-form-item>
   </el-form>
   <BaseSetting></BaseSetting>
@@ -21,6 +24,7 @@ import { reactive, watch } from 'vue';
 import BaseSetting from '@/components/baseSetting';
 import ColorPicker from '@/components/colorPicker';
 import BaseInput from '@/components/baseInput';
+import ClickEventInput from '@/components/clickEventInput';
 
 const props = defineProps({
   updateCompDeail: { type: Function },

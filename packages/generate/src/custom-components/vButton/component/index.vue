@@ -1,5 +1,5 @@
 <template>
-  <button class="btn-box" :style="btnStyle">
+  <button class="btn-box" :style="btnStyle" @click="clickChock">
     {{ content }}
   </button>
 </template>
@@ -8,6 +8,7 @@
 import { computed } from 'vue';
 
 const props = defineProps({
+  clickChock: { type: Function },
   width: { type: String, default: '240px' },
   height: { type: String, default: '28px' },
   color: { type: String, default: '#fff' },
