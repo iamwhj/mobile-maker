@@ -6,7 +6,7 @@
           <component
             :is="comp.name"
             v-bind="comp.ripeParams"
-            @clickChock="clickChock(comp.click)"
+            :clickChock="clickChock(comp.click)"
           ></component>
         </div>
       </template>
