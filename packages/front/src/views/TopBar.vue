@@ -7,6 +7,11 @@
       </el-icon>
     </div>
     <div class="right-info">
+      <div class="github">
+        <a href="//github.com/iamwhj/mobile-maker" target="_blank">
+          <img src="//s1.ax1x.com/2022/07/19/j73YtA.png" />
+        </a>
+      </div>
       <div class="revert" @click="revertActivity">
         <el-icon><House /></el-icon>
         <span>返回活动</span>
@@ -45,6 +50,13 @@ const revertActivity = () => router.push({ path: 'activity' });
     display: flex;
     gap: 20px;
     font-size: 14px;
+    .github {
+      width: 1.6em;
+      cursor: pointer;
+      img {
+        width: 100%;
+      }
+    }
     .revert {
       cursor: pointer;
     }

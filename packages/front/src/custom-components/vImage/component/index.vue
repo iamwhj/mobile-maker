@@ -8,7 +8,7 @@
 const props = defineProps({
   width: { type: String, default: '240px' },
   height: { type: String, default: 'auto' },
-  src: { type: String, default: 'https://s1.ax1x.com/2022/07/19/j7EdyR.jpg' },
+  src: { type: String, default: '//s1.ax1x.com/2022/07/19/j7EdyR.jpg' },
 });
 </script>
 

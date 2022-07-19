@@ -17,5 +17,6 @@ const props = defineProps({
 .svg-icon {
   width: 1em;
   height: 1em;
+  color: currentColor;
 }
 </style>
