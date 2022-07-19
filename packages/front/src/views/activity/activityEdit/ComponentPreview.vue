@@ -15,12 +15,14 @@
       :style="{ 'text-align': component.style.align }"
       @click="switchComponent(component)"
     >
-      <component
-        :is="component.name"
-        :class="component.mark"
-        v-bind="{ ...component.detail, ...generateStyle(component.style) }"
-        :clickChock="clickChock(component.click)"
-      ></component>
+      <div style="display: inline-block">
+        <component
+          :is="component.name"
+          :class="component.mark"
+          v-bind="{ ...component.detail, ...generateStyle(component.style) }"
+          :clickChock="clickChock(component.click)"
+        ></component>
+      </div>
     </div>
   </div>
   <el-dialog
