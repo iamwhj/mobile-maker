@@ -19,9 +19,9 @@ npm run dev
 
 1. custom-components目录下创建vButton文件夹，组件目录如下：
 
--- component
----- index.vue
--- config
+-- component  
+---- index.vue  
+-- config  
 ---- index.vue  
 
 这是组件固定入口目录，其他的可自行在组件目录内扩展
