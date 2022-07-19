@@ -12,7 +12,7 @@ const buildGenerate = async (componentList) => {
   const generateCompPath = resolve(generatePath, './src/custom-components');
 
   // 清空目录
-  await fs.emptyDir(generateCompPath);
+  fs.emptyDirSync(generateCompPath);
   
   let importStr = '';
   let componentRegisterStr = '';

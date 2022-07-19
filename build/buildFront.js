@@ -12,7 +12,7 @@ const buildFront = async (componentList) => {
   const frontCompPath = resolve(frontPath, './src/custom-components');
 
   // 清空目录
-  await fs.emptyDir(frontCompPath);
+  fs.emptyDirSync(frontCompPath);
   
   let importStr = '';
   let componentRegisterStr = '';
