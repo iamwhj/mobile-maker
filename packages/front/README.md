@@ -13,6 +13,27 @@ npm install
 
 npm run dev
 ```
+### 组件开发
+
+示例：按钮组件（vButton）
+
+1. custom-components目录下创建vButton文件夹，组件目录如下：
+
+-- component
+---- index.vue
+-- config
+---- index.vue  
+
+这是组件固定入口目录，其他的可自行在组件目录内扩展
+
+- updateCompDeail，config/index.vue自动注入该函数，用于同步配置数据到组件中
+
+- clickChock，component/index.vue自动注入该函数，用于统一处理和派发点击事件
+
+2. custom-components目录中修改 index.js 注册组件 vButton
+
+3. 组件上传，将 vButton 目录压缩成zip文件上传，本地环境上传完成后立即能使用，线上环境需要等待几分钟（rebuild）后可使用
+
 ### 组件更新记录
 
 2022/7/16
