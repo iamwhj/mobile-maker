@@ -9,7 +9,9 @@
     <div class="right-info">
       <div class="github">
         <a href="//github.com/iamwhj/mobile-maker" target="_blank">
-          <img src="//s1.ax1x.com/2022/07/19/j73YtA.png" />
+          <img
+            src="http://121.37.148.236:3301/image/upload_fc1b4bb47c49d38370f9b7ae07bc95ec.png"
+          />
         </a>
       </div>
       <div class="revert" @click="revertActivity">
