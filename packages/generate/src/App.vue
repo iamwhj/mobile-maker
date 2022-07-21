@@ -2,7 +2,7 @@
   <div class="wrap">
     <div class="container">
       <template v-for="comp in components" :key="comp.id">
-        <div>
+        <div style="display: inline-block">
           <component
             :is="comp.name"
             v-bind="comp.ripeParams"
