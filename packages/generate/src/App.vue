@@ -2,12 +2,14 @@
   <div class="wrap">
     <div class="container">
       <template v-for="comp in components" :key="comp.id">
-        <div style="display: inline-block">
-          <component
-            :is="comp.name"
-            v-bind="comp.ripeParams"
-            :clickChock="clickChock(comp.click)"
-          ></component>
+        <div :style="{ 'text-align': comp.style.align }">
+          <div style="display: inline-block">
+            <component
+              :is="comp.name"
+              v-bind="comp.ripeParams"
+              :clickChock="clickChock(comp.click)"
+            ></component>
+          </div>
         </div>
       </template>
     </div>
