@@ -7,7 +7,7 @@ export const visitor = () => {
   if (existItem(uuid)) {
     // oldUser
     const lastTime = Number(getItem(uuid));
-    if (nowTime - lastTime > 1 * 60 * 1000) {
+    if (nowTime - lastTime > 10 * 60 * 1000) {
       updateVisitOld();
       setItem(uuid, nowTime);
     }
