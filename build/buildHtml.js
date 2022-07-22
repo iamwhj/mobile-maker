@@ -11,8 +11,13 @@ const buildGenerate = async (componentList) => {
   const generatePath = resolve(__dirname, '../packages/generate');
   const generateCompPath = resolve(generatePath, './src/custom-components');
 
-  // 清空目录
-  fs.emptyDirSync(generateCompPath);
+  // 清空目录 custom-components (采用遍历，emptyDir有点Bug)
+  if (fs.existsSync(generateCompPath)) {
+    const oldCompList = fs.readdirSync(generateCompPath);
+    oldCompList.forEach(folder => fs.removeSync(resolve(generateCompPath, folder)));
+  } else {
+    fs.mkdirSync(generateCompPath);
+  }
   
   let importStr = '';
   let componentRegisterStr = '';

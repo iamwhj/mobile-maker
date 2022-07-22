@@ -11,8 +11,13 @@ const buildFront = async (componentList) => {
   const frontPath = resolve(__dirname, '../packages/front');
   const frontCompPath = resolve(frontPath, './src/custom-components');
 
-  // 清空目录
-  fs.emptyDirSync(frontCompPath);
+  // 清空目录 custom-components
+  if (fs.existsSync(frontCompPath)) {
+    const oldCompList = fs.readdirSync(frontCompPath);
+    oldCompList.forEach(folder => fs.removeSync(resolve(frontCompPath, folder)));
+  } else {
+    fs.mkdirSync(frontCompPath);
+  }
   
   let importStr = '';
   let componentRegisterStr = '';
