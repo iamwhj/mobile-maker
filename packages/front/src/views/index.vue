@@ -16,14 +16,17 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import Nav from './Nav.vue';
 import TopBar from './TopBar.vue';
+import { visitor } from '@/utils/visit';
 
 const menuCollapse = ref(false);
 const changeMenuCollapse = () => {
   menuCollapse.value = !menuCollapse.value;
 };
+
+onMounted(() => visitor());
 </script>
 
 <style lang="scss" scoped>
