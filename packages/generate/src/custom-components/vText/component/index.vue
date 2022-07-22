@@ -25,7 +25,6 @@ const textStyle = computed(() => {
 
 <style lang="scss" scoped>
 .text-wrap {
-  display: inline-block;
   text-overflow: clip;
   overflow: hidden;
 }
