@@ -60,7 +60,7 @@ const store = useStore();
 openActivityConfig(store);
 
 // 保存活动
-const save = () => {
+const save = async () => {
   const page = store.getters.page;
   const activity = {
     name: page.detail.name,
@@ -92,21 +92,26 @@ const save = () => {
     });
   } else {
     // update
-    updateActivity({ id: props.activityId, data: activity }).then((result) => {
-      const res = result.data;
-      if (res.code === 0) {
-        ElMessage({
-          type: 'success',
-          message: '活动更新成功',
-        });
-      }
+    await new Promise((resolve) => {
+      updateActivity({ id: props.activityId, data: activity }).then(
+        (result) => {
+          const res = result.data;
+          if (res.code === 0) {
+            ElMessage({
+              type: 'success',
+              message: '活动更新成功',
+            });
+            resolve();
+          }
+        }
+      );
     });
   }
 };
 
 // 预览
 const isPreview = ref(false);
-const preview = () => {
+const preview = async () => {
   if (!props.activityId) {
     ElMessage({
       type: 'warning',
@@ -114,6 +119,8 @@ const preview = () => {
     });
     return;
   }
+  // 保存活动
+  await save();
   isPreview.value = true;
 };
 

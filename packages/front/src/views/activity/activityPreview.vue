@@ -6,6 +6,11 @@
       </div>
       <div class="qr-code">
         <QrcodeVue :value="src" :size="200" margin="1"></QrcodeVue>
+        <div class="tips">
+          <p>请用手机扫码预览</p>
+          <p>只能打开网页的应用都可以</p>
+          <p>如浏览器，微信等等</p>
+        </div>
       </div>
     </div>
   </div>
@@ -57,6 +62,12 @@ const src = computed(() => {
       width: 200px;
       height: 200px;
       background: #fff;
+      .tips {
+        color: #fff;
+        p {
+          margin: 5px 0;
+        }
+      }
     }
   }
 }
