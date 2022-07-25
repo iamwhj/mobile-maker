@@ -43,8 +43,11 @@ const updateCompDeail = (newDetail, key = 'detail') => {
 <style lang="scss" scoped>
 .component-setting {
   height: 100%;
+  width: 100%;
   padding: 12px;
   font-size: 14px;
+  overflow-y: auto;
+  overflow-x: hidden;
   .title {
     font-weight: 500;
     font-family: Arial, Helvetica, sans-serif;
