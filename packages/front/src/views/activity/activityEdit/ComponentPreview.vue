@@ -115,6 +115,7 @@ const clickChock = (click) => {
 
   .component-container {
     overflow: hidden;
+    font-size: 0;
   }
 }
 </style>
