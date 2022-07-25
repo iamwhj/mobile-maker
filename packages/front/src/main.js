@@ -5,6 +5,7 @@ import 'element-plus/dist/index.css';
 import router from './router';
 import store from './store';
 import '@/style/index.scss';
+import '@/plugins/echarts';
 import registerGlobalComponent from '@/commom/registerGlobalComponent';
 import registerCustomComponents from './custom-components';
 

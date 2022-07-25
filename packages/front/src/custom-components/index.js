@@ -4,6 +4,8 @@ import Button from './vButton/component';
 import ButtonConfig from './vButton/config';
 import Image from './vImage/component';
 import ImageConfig from './vImage/config';
+import PieChart from './pieChart/component';
+import PieChartConfig from './pieChart/config';
 
 const registerCustomComponents = (Vue) => {
   Vue.component('vText', Text);
@@ -12,6 +14,8 @@ const registerCustomComponents = (Vue) => {
   Vue.component('vButtonConfig', ButtonConfig);
   Vue.component('vImage', Image);
   Vue.component('vImageConfig', ImageConfig);
+  Vue.component('pieChart', PieChart);
+  Vue.component('pieChartConfig', PieChartConfig);
 };
 
 export default registerCustomComponents;
