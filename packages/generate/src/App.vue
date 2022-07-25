@@ -2,7 +2,7 @@
   <div class="wrap">
     <div class="container">
       <template v-for="comp in components" :key="comp.id">
-        <div :style="{ 'text-align': comp.style.align }">
+        <div :style="{ 'text-align': comp.style.align, 'font-size': 0 }">
           <div style="display: inline-block">
             <component
               :is="comp.name"
