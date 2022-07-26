@@ -11,16 +11,17 @@
         placeholder="请输入图片链接"
         style="width: 220px"
       />
-      <el-upload
-        v-else
-        class="avatar-uploader"
-        :action="action"
-        :show-file-list="false"
-        :on-success="handleAvatarSuccess"
-        :before-upload="beforeAvatarUpload"
-      >
-        <el-icon class="avatar-uploader-icon"><Plus /></el-icon>
-      </el-upload>
+      <div v-else style="width: 100%">
+        <el-upload
+          class="avatar-uploader"
+          :action="action"
+          :show-file-list="false"
+          :on-success="handleAvatarSuccess"
+          :before-upload="beforeAvatarUpload"
+        >
+          <el-icon class="avatar-uploader-icon"><Plus /></el-icon>
+        </el-upload>
+      </div>
     </el-form-item>
     <el-form-item label="点击事件：">
       <ClickEventInput />
