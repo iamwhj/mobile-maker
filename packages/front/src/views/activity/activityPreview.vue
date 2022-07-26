@@ -8,7 +8,7 @@
         <QrcodeVue :value="src" :size="200" margin="1"></QrcodeVue>
         <div class="tips">
           <p>请用手机扫码预览</p>
-          <p>只能打开网页的应用都可以</p>
+          <p>能打开网页的应用都可以</p>
           <p>如浏览器，微信等等</p>
         </div>
       </div>
