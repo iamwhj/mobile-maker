@@ -11,7 +11,9 @@
         <a href="//github.com/iamwhj/mobile-maker" target="_blank">
           <img
             src="http://121.37.148.236:3301/image/upload_fc1b4bb47c49d38370f9b7ae07bc95ec.png"
+            title="star好吗"
           />
+          <span style="position: relative; bottom: 6px">源码仓库</span>
         </a>
       </div>
       <div class="revert" @click="revertActivity">
@@ -53,10 +55,9 @@ const revertActivity = () => router.push({ path: 'activity' });
     gap: 20px;
     font-size: 14px;
     .github {
-      width: 1.6em;
       cursor: pointer;
       img {
-        width: 100%;
+        width: 1.6em;
       }
     }
     .revert {
