@@ -47,7 +47,8 @@ const updatePieChart = debounce(mountPieChart, 200);
 onMounted(() => {
   // 初始化挂载饼图
   nextTick(() => {
-    mountPieChart();
+    // 修复预览超出容器bug
+    setTimeout(mountPieChart);
   });
 });
 
