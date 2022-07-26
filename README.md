@@ -8,8 +8,8 @@ mobile-maker 是一个低代码平台，通过拖拽的形式快速制作可交�
 
 ## 项目组成和技术栈
 
-1. 配置服务[(front)](https://github.com/iamwhj/mobile-maker/tree/master/packages/front): vue3 + element-plus + webpack
-2. 预览服务[(preview)](https://github.com/iamwhj/mobile-maker/tree/master/packages/generate): vue3 + element-plus + webpack
+1. 配置服务[(front)](https://github.com/iamwhj/mobile-maker/tree/master/packages/front): vue3 + element-plus + webpack + echarts
+2. 预览服务[(preview)](https://github.com/iamwhj/mobile-maker/tree/master/packages/generate): vue3 + element-plus + webpack + echarts
 3. 打包服务[(mobile-maker)](https://github.com/iamwhj/mobile-maker): koa + shell + fs/child_process
 4. 接口服务[(mobile-maker-server)](https://github.com/iamwhj/mobile-maker-server): koa + typescript + mongodb + fs + child_process/exec
 
@@ -22,9 +22,13 @@ mobile-maker 是一个低代码平台，通过拖拽的形式快速制作可交�
 
 ## 工作流程图
 
+1. 目录关联逻辑图
 ![宏观流程图](http://121.37.148.236:3301/image/upload_dd8998d639c6ca84eb4156cdda9e02ba.jpg)
 
-![细化流程图](http://121.37.148.236:3301/image/upload_79e3455c3d126b02e7eaef6d7874b2ff.jpg)
+2. 具细化工作流程图
+![细化流程图](http://121.37.148.236:3301/image/upload_79e3455c3d126b02e7eaef6d7874b2ff.jpg)  
+
+图是项目设计之初画的，画得不太好，有不清楚的链路也可以问我，觉得项目有帮助的话，可以点个stat
 
 ## 项目展示
 
@@ -36,7 +40,7 @@ mobile-maker 是一个低代码平台，通过拖拽的形式快速制作可交�
 
 ## 里程碑
 
-【2022/7/19】完成整套低代码平台架构功能，包括上面的四个服务，还有三个基础的组件，以及额外需要的图床服务。  
+【2022/7/19】完成整套低代码平台架构功能，包括上面的四个服务，还有三个基础的组件，以及额外需要的图床服务(防止滥传，加了ip名单限制，可找我开通)。  
 
 ## JOIN
 
