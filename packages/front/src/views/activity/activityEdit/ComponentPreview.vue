@@ -81,7 +81,7 @@ const clickDialogInfo = ref({
 // 统一处理点击事件
 const clickChock = (click) => {
   // 不是移动端
-  if (!isMobileEnv() || !click) return () => false;
+  if (!isMobileEnv() || !click || click.type === 'none') return () => false;
 
   if (click.type === 'link' && click.url) {
     // link
@@ -92,8 +92,7 @@ const clickChock = (click) => {
       // 弹窗出现
       clickEventDialog.value = true;
       click.dialogTitle && (clickDialogInfo.value.title = click.dialogTitle);
-      click.dialogContent &&
-        (clickDialogInfo.value.content = click.dialogContent);
+      click.dialogContent && (clickDialogInfo.value.content = click.dialogContent);
     };
   }
 };

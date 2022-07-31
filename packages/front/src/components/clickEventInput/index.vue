@@ -41,6 +41,7 @@ import { useStore } from 'vuex';
 
 // 点击事件列表
 const clickEventList = [
+  { label: '无', value: 'none' },
   { label: '跳转链接', value: 'link' },
   { label: '弹出窗口', value: 'dialog' },
 ];
@@ -51,7 +52,7 @@ const currentComponent = getCurrentComponet(store);
 
 // 数据绑定
 const clickEvent = ref(
-  currentComponent.click ? currentComponent.click.type : 'link'
+  currentComponent.click ? currentComponent.click.type : 'none'
 );
 
 // 点击事件表单收集
