@@ -57,7 +57,7 @@ watch(props, () => {
   updatePieChart();
   nextTick(() => {
     // 若容器几何属性发生变化时更新（width、height）
-    pieChart.resize();
+    pieChart && pieChart.resize();
   });
 });
 </script>
