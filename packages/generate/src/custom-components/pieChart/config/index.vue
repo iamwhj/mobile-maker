@@ -35,7 +35,7 @@ import BaseSetting from '@/components/baseSetting';
 import EditTable from '@/components/editTable';
 
 const props = defineProps({
-  updateCompDeail: { type: Function },
+  updateComponentProps: { type: Function },
   dataSource: {
     type: Array,
     default: () => [{ key: 0, name: '样例', dataA: '100', dataB: null }],
@@ -52,7 +52,7 @@ const form = reactive({
 });
 
 watch(form, () => {
-  props.updateCompDeail(form);
+  props.updateComponentProps(form);
 });
 </script>
 

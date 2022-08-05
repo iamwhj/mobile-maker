@@ -27,7 +27,7 @@ import BaseInput from '@/components/baseInput';
 import ClickEventInput from '@/components/clickEventInput';
 
 const props = defineProps({
-  updateCompDeail: { type: Function },
+  updateComponentProps: { type: Function },
   color: { type: String, default: '#fff' },
   backgroundColor: { type: String, default: '#409EFF' },
   borderRadius: { type: String, default: '4px' },
@@ -42,7 +42,7 @@ const form = reactive({
 });
 
 watch(form, () => {
-  props.updateCompDeail(form);
+  props.updateComponentProps(form);
 });
 </script>
 

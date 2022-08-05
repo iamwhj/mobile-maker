@@ -38,7 +38,7 @@ import { Plus } from '@element-plus/icons-vue';
 import { ElMessage } from 'element-plus';
 
 const props = defineProps({
-  updateCompDeail: { type: Function },
+  updateComponentProps: { type: Function },
   src: { type: String, default: '' },
 });
 
@@ -47,7 +47,7 @@ const form = reactive({
 });
 
 watch(form, () => {
-  props.updateCompDeail(form);
+  props.updateComponentProps(form);
 });
 
 // 图片资源

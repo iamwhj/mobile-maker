@@ -24,7 +24,7 @@ import ColorPicker from '@/components/colorPicker';
 import BaseInput from '@/components/baseInput';
 
 const props = defineProps({
-  updateCompDeail: { type: Function },
+  updateComponentProps: { type: Function },
   content: { type: String, default: '' },
   color: { type: String, default: '#000' },
   fontSize: { type: String, default: '16px' },
@@ -37,7 +37,7 @@ const form = reactive({
 });
 
 watch(form, () => {
-  props.updateCompDeail(form);
+  props.updateComponentProps(form);
 });
 </script>
 
