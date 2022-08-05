@@ -50,8 +50,8 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { getActivityList, deleteActivity } from '@/api/activity';
-import { recoverPageData } from '@/commom/helper';
-import { getActivityTemplateData } from '@/commom';
+import { recoverPageData } from '@/common/helper';
+import { getActivityTemplateData } from '@/common';
 import { useStore } from 'vuex';
 import { ElMessage, ElMessageBox } from 'element-plus';
 

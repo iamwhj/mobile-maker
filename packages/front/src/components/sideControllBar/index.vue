@@ -19,7 +19,7 @@
 import { Top, Bottom, Plus, Delete } from '@element-plus/icons-vue';
 import { computed, reactive, watchEffect } from 'vue';
 import { useStore } from 'vuex';
-import { getCurrentComponetIndex, openActivityConfig } from '@/commom/helper';
+import { getCurrentComponetIndex, openActivityConfig } from '@/common/helper';
 import { deepClone } from '@/utils';
 
 const store = useStore();

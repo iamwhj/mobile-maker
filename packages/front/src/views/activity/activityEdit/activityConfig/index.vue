@@ -12,7 +12,7 @@
 import { computed } from 'vue';
 import { useStore } from 'vuex';
 import { ArrowLeft } from '@element-plus/icons-vue';
-import { openActivityConfig } from '@/commom/helper';
+import { openActivityConfig } from '@/common/helper';
 
 const store = useStore();
 const title = computed(() => store.getters.page.detail.title);

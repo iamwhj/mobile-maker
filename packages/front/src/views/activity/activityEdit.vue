@@ -46,7 +46,7 @@ import ComponentSetting from './activityEdit/ComponentSetting.vue';
 import SideControllBar from '@/components/sideControllBar';
 import ToolsBar from '@/components/toolsBar';
 import ActivityPreview from './activityPreview.vue';
-import { openActivityConfig } from '@/commom/helper';
+import { openActivityConfig } from '@/common/helper';
 import { saveActivity, updateActivity, publishActivity } from '@/api/activity';
 import { ElMessage } from 'element-plus';
 import { checkField } from '@/utils/check';

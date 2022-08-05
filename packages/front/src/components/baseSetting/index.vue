@@ -32,7 +32,7 @@
 import { nextTick, reactive, watch } from 'vue';
 import { useStore } from 'vuex';
 import SuffixCharacter from '@/components/suffixCharacter';
-import { getCurrentComponet, updateComponent } from '@/commom/helper';
+import { getCurrentComponet, updateComponent } from '@/common/helper';
 
 const store = useStore();
 const currentComponent = getCurrentComponet(store);

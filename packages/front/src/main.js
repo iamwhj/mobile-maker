@@ -4,7 +4,7 @@ import router from './router';
 import store from './store';
 import '@/style/index.scss';
 import '@/plugins/echarts';
-import registerGlobalComponent from '@/commom/registerGlobalComponent';
+import registerGlobalComponent from '@/common/registerGlobalComponent';
 import registerCustomComponents from './custom-components';
 
 const app = createApp(App).use(store).use(router);

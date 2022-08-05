@@ -1,6 +1,6 @@
 import { createStore } from 'vuex';
-import { getActivityTemplateData } from '@/commom';
-import { collectHistoryData } from '@/commom/helper';
+import { getActivityTemplateData } from '@/common';
+import { collectHistoryData } from '@/common/helper';
 
 export default createStore({
   state: {

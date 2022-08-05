@@ -27,7 +27,7 @@
 <script setup>
 import { BrushFilled, Tickets } from '@element-plus/icons-vue';
 import { useStore } from 'vuex';
-import { recoverPageData } from '@/commom/helper';
+import { recoverPageData } from '@/common/helper';
 
 const store = useStore();
 const historyData = store.getters.historyData;

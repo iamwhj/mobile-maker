@@ -36,7 +36,7 @@
 
 <script setup>
 import { ref, reactive, watch, watchEffect } from 'vue';
-import { getCurrentComponet } from '@/commom/helper';
+import { getCurrentComponet } from '@/common/helper';
 import { useStore } from 'vuex';
 
 // 点击事件列表

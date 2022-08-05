@@ -39,10 +39,10 @@
 
 <script setup>
 import { useStore } from 'vuex';
-import { getComponentTemplateData } from '@/commom';
+import { getComponentTemplateData } from '@/common';
 import { computed, ref } from 'vue';
 import ActivtiyConfig from './activityConfig';
-import { selectComponent, generateStyle } from '@/commom/helper';
+import { selectComponent, generateStyle } from '@/common/helper';
 import { isMobileEnv } from '@/utils';
 
 const store = useStore();

@@ -13,7 +13,7 @@
 <script setup>
 import { computed } from 'vue';
 import { useStore } from 'vuex';
-import { updateComponent } from '@/commom/helper';
+import { updateComponent } from '@/common/helper';
 
 const store = useStore();
 const name = computed(() => store.getters.currentComponent.name + 'Config');
