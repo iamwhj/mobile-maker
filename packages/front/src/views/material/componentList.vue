@@ -136,7 +136,6 @@ import {
   deleteComponent,
   saveComponent,
 } from '@/api/component';
-import { ElMessage } from 'element-plus';
 import { removeFieldForMongodb } from '@/utils';
 
 // 获取分类列表

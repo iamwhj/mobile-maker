@@ -67,7 +67,6 @@ import {
   updateCategory,
   deleteCategory,
 } from '@/api/category';
-import { ElMessage } from 'element-plus';
 import { removeFieldForMongodb } from '@/utils';
 
 // 获取分类列表

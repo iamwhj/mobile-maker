@@ -35,7 +35,6 @@ import { reactive, ref, watch } from 'vue';
 import BaseSetting from '@/components/baseSetting';
 import ClickEventInput from '@/components/clickEventInput';
 import { Plus } from '@element-plus/icons-vue';
-import { ElMessage } from 'element-plus';
 
 const props = defineProps({
   updateComponentProps: { type: Function },

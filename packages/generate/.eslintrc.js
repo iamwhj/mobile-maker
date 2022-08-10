@@ -27,6 +27,6 @@ module.exports = {
   globals: {
     defineProps: true,
     defineEmits: true,
-    $message: true,
+    ElMessage: true,
   },
 };
