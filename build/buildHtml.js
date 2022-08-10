@@ -47,7 +47,7 @@ const buildGenerate = async (componentList) => {
   // 生成覆盖/custom-components/index.js
   await fs.writeFile(resolve(generateCompPath, './index.js'), indexStr);
 
-  console.log('generate 开始打包');
+  console.log(new Date().toLocaleString() + 'generate 开始打包');
   await exec('npm run build', { cwd: generatePath, encoding: 'utf-8' });
   console.log('generate 结束打包');
 

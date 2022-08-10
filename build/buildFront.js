@@ -49,7 +49,7 @@ const buildFront = async (componentList) => {
   // 生成覆盖/custom-components/index.js
   await fs.writeFile(resolve(frontCompPath, './index.js'), indexStr);
 
-  console.log('front 开始打包');
+  console.log(new Date().toLocaleString() + 'front 开始打包');
   await exec('npm run build', { cwd: frontPath, encoding: 'utf-8' });
   console.log('front 结束打包');
 
