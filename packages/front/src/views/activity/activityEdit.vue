@@ -172,7 +172,7 @@ const judge = (type) => {
           if (res.code === 0) {
             ElMessage({
               type: 'success',
-              message: res.message + '，请及时查验',
+              message: res.message + '，投放链接已生成，请及时查验',
             });
           }
         });
