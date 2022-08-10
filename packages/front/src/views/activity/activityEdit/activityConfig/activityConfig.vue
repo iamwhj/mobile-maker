@@ -22,7 +22,7 @@
 import { reactive, watch } from 'vue';
 
 const props = defineProps({
-  updateCompDeail: { type: Function },
+  updateComponentProps: { type: Function },
   name: { type: String, default: '' },
   title: { type: String, default: '' },
   date: { type: Array, default: () => [] },
@@ -34,7 +34,7 @@ const form = reactive({
   date: props.date,
 });
 
-watch(form, () => props.updateCompDeail(form, 'page'));
+watch(form, () => props.updateComponentProps(form, 'page'));
 </script>
 
 <style lang="scss" scoped></style>
