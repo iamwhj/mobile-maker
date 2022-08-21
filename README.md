@@ -28,9 +28,11 @@ mobile-maker 是一个低代码平台，通过拖拽的形式快速制作可交�
 
 ## 分享文档
 
-1. 【2022/8/4】第一次分享，[配置服务学习文档](https://www.yuque.com/u21600751/zudomw/qreu1s)
+1. 【2022/8/4  yuque】第一次分享，[配置服务学习文档](https://www.yuque.com/u21600751/zudomw/qreu1s)
 
-2. 【2022/8/11】第二次分享，[预览服务学习文档](https://www.wolai.com/6FrBS95zaAw3J53XxGhV89)
+2. 【2022/8/11 wolai】第二次分享，[预览服务学习文档](https://www.wolai.com/6FrBS95zaAw3J53XxGhV89)
+
+3. 【2022/8/21 wolai】第三次分享，[打包服务学习文档](https://www.wolai.com/aRHFJJCeTVpXkQBzokWvzG)
 
 ## 优化记录
 
