@@ -6,6 +6,8 @@ import Image from './vImage/component';
 import ImageConfig from './vImage/config';
 import PieChart from './pieChart/component';
 import PieChartConfig from './pieChart/config';
+import Time from './time/component';
+import TimeConfig from './time/config';
 
 const registerCustomComponents = (Vue) => {
   Vue.component('vText', Text);
@@ -16,6 +18,8 @@ const registerCustomComponents = (Vue) => {
   Vue.component('vImageConfig', ImageConfig);
   Vue.component('pieChart', PieChart);
   Vue.component('pieChartConfig', PieChartConfig);
+  Vue.component('Time', Time);
+  Vue.component('TimeConfig', TimeConfig);
 };
 
 export default registerCustomComponents;
