@@ -24,9 +24,7 @@
           >
             编辑
           </el-link>
-          <el-link type="danger" @click="del(scope.row.id)" disabled>
-            删除
-          </el-link>
+          <el-link type="danger" @click="del(scope.row.id)"> 删除 </el-link>
         </template>
       </el-table-column>
     </el-table>

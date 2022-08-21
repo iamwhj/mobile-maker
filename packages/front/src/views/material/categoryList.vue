@@ -106,8 +106,8 @@ let editId = -1;
 const editVisible = ref(false);
 const editCategory = ref({});
 const edit = (data) => {
-  const ripeData = removeFieldForMongodb(data);
   editId = data.id;
+  const ripeData = removeFieldForMongodb(data);
   editCategory.value = ripeData;
   editVisible.value = true;
 };
