@@ -6,7 +6,8 @@ const Components = require('unplugin-vue-components/webpack');
 const { ElementPlusResolver } = require('unplugin-vue-components/resolvers');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-const remoteUrl = 'http://localhost:3000';
+const isLocal = process.env.VUE_APP_ENV === 'localhost' ? true : false;
+const remoteUrl = isLocal ? 'http://localhost:3000' : process.env.VUE_APP_API_URL;
 
 module.exports = defineConfig({
   publicPath: './',
