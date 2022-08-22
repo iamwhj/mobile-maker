@@ -28,11 +28,6 @@ import { ref } from 'vue';
 const props = defineProps(['menuCollapse']);
 // menu style
 const menuBackgroundColor = '#1c1c1c';
-const scrollHeight = ref('100vh');
-
-setTimeout(() => {
-  scrollHeight.value = document.body.scrollHeight + 'px';
-}, 300);
 </script>
 
 <style lang="scss" scoped>
@@ -42,7 +37,7 @@ setTimeout(() => {
     width: 200px;
   }
   :deep(.el-menu) {
-    min-height: v-bind(scrollHeight);
+    min-height: 100vh;
   }
 }
 </style>
