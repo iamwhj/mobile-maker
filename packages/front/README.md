@@ -8,9 +8,17 @@ Vue3全家桶、Element-plus组件库、css预处理语言Sass、可视化库Ech
 
 ### 运行
 
+进入 /packages/front 目录
+
 ```bash
 npm install
 
+// 测试环境服务（推荐）
+npm run dev:test
+
+or
+
+// 本地环境（需要本地跑接口服务）
 npm run dev
 ```
 ### 组件开发
@@ -26,17 +34,20 @@ npm run dev
 
 这是组件固定入口目录，其他的可自行在组件目录内扩展
 
-- updateComponentProps，config/index.vue自动注入该函数，用于同步配置数据到组件中
+- updateComponentProps，config/index.vue自动注入该函数，用于同步配置数据到组件schema中，刷新渲染视图
 
-- clickChock，component/index.vue自动注入该函数，用于统一处理和派发点击事件
+- clickChock（选用），component/index.vue自动注入该函数，用于统一处理和派发点击事件  
 
-2. custom-components目录中修改 index.js 注册组件 vButton
+注入函数的使用方式可以参考别的组件
+
+2. custom-components 目录中修改 index.js 将组件 vButton 注册
 
 ```js
 import Button from './vButton/component';
 import ButtonConfig from './vButton/config';
 
 const registerCustomComponents = (Vue) => {
+  // ...... 若干组价注册代码
   Vue.component('vButton', Button);
   Vue.component('vButtonConfig', ButtonConfig);
 };
@@ -44,7 +55,15 @@ const registerCustomComponents = (Vue) => {
 export default registerCustomComponents;
 ```
 
-3. 组件上传，将 vButton 目录压缩成zip文件上传，本地环境上传完成后立即能使用，线上环境需要等待几分钟（调打包接口，rebuild）后可使用。
+3. 组件上传，将 vButton 目录压缩成zip文件，在平台组件管理中上传。
+
+  - 组件名称：vButton （需要与创建的组件文件夹名称相同）
+  
+  - 组件图标：需要填写图片链接（没有没关系，给你几个示例，直接用）
+
+示例图标-计时：http://81.68.197.70:3301/image/upload_7225757ecd93699ab9c376fd67338ec9.png
+
+示例图标-日期：http://81.68.197.70:3301/image/upload_d1ed5a280c53ef8f9ba05bfdb26eaa5b.png
 
 ### 优势
 
