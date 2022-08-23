@@ -8,7 +8,7 @@ Vue3全家桶、Element-plus组件库、css预处理语言Sass、可视化库Ech
 
 ### 运行
 
-进入 /packages/front 目录
+进入 ./packages/front 目录
 
 ```bash
 npm install
