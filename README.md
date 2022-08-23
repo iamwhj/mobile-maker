@@ -9,14 +9,14 @@ mobile-maker 是一个低代码平台，通过拖拽的形式快速制作可交�
 ## 项目组成和技术栈
 
 1. 配置服务[(front)](https://github.com/iamwhj/mobile-maker/tree/master/packages/front): vue3 + element-plus + webpack + echarts
-2. 预览服务[(preview)](https://github.com/iamwhj/mobile-maker/tree/master/packages/generate): vue3 + element-plus + webpack + echarts
+2. 预览服务[(generate)](https://github.com/iamwhj/mobile-maker/tree/master/packages/generate): vue3 + element-plus + webpack + echarts
 3. 打包服务[(mobile-maker)](https://github.com/iamwhj/mobile-maker): koa + shell + fs/child_process
 4. 接口服务[(mobile-maker-server)](https://github.com/iamwhj/mobile-maker-server): koa + typescript + mongodb + fs + child_process/exec
 
 ## 服务介绍
 
 1. 配置服务(front)：拖拽生成落地页，将落地页JSON传于后台保存至数据库
-2. 预览服务(preview)：提供落地页访问静态资源（js/css），提供移动端适配方案，H5预览
+2. 预览服务(generate)：提供落地页访问静态资源（js/css），提供移动端适配方案，H5预览
 3. 打包服务(mobile-maker)：在线打包front和generate，以及组件上传
 4. 接口服务(mobile-maker-server)：包括数据库存储，以及落地页html的生成
 
@@ -25,6 +25,33 @@ mobile-maker 是一个低代码平台，通过拖拽的形式快速制作可交�
 [在线预览地址](http://81.68.197.70/)  
 
 随便新增修改，但是请不要删除组件 
+
+## 运行
+
+【2022/8/23】完成测试环境搭建，运行配置服务不需要跑接口服务了，直连测试库。
+
+```bash
+// 配置服务（直连测试环境，无需跑接口）
+
+cd /packages/front
+
+npm install
+
+npm run dev:test
+```
+想上手尝试开发一个组件吗？[请点击这里](https://github.com/iamwhj/mobile-maker/tree/master/packages/front)
+
+## 目录结构
+
+1. mobile-maker 打包服务
+
+    - 配置服务：./packages/front 
+
+    - 预览服务：./packages/generate 
+
+2. mobile-maker-server 接口服务
+
+3. drawingBed 图床服务
 
 ## 分享文档
 
