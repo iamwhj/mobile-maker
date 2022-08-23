@@ -36,8 +36,8 @@ module.exports = defineConfig({
       }),
       // new BundleAnalyzerPlugin(),
     ];
-    // 生产环境加入gzip配置
-    if (process.env.NODE_ENV === 'production') {
+    // 生产环境开启gzip配置
+    if (process.env.use_gzip) {
       plugins.push(
         new CompressionPlugin({
           //此插件不能使用太高的版本，否则报错：TypeError: Cannot read property 'tapPromise' of undefined
@@ -54,6 +54,11 @@ module.exports = defineConfig({
       );
     }
     return {
+      output: {
+        crossOriginLoading: 'anonymous',
+        filename: 'scripts/[name].[hash:8].min.js',
+        chunkFilename: 'scripts/[name].[hash:8].min.js',
+      },
       plugins,
     };
   },

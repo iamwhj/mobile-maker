@@ -17,7 +17,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-unused-vars': 'off',
     'vue/multi-word-component-names': 'off',
-    'max-line-length': false,
+    'max-line-length': 0,
     'prettier/prettier': [
       'warn',
       {
