@@ -50,7 +50,7 @@ const buildFront = async (componentList) => {
   await fs.writeFile(resolve(frontCompPath, './index.js'), indexStr);
 
   console.log(new Date().toLocaleString() + ' - front 开始打包');
-  await exec('npm run build', { cwd: frontPath, encoding: 'utf-8' });
+  await exec('npm run build:prod', { cwd: frontPath, encoding: 'utf-8' });
   console.log('front 结束打包');
 
   // 备份打包文件，用于回滚
