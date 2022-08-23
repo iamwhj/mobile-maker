@@ -10,7 +10,7 @@
       <div class="github">
         <a href="//github.com/iamwhj/mobile-maker" target="_blank">
           <img
-            src="http://121.37.148.236:3301/image/upload_fc1b4bb47c49d38370f9b7ae07bc95ec.png"
+            src="http://81.68.197.70:3301/image/upload_146c9c5b5b218e826131a31d51ad6189.png"
             title="star好吗"
           />
           <span style="position: relative; bottom: 6px">源码仓库</span>
