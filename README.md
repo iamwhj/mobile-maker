@@ -4,7 +4,7 @@ mobile-maker 是一个低代码平台，通过拖拽的形式快速制作可交�
 
 该项目寓于加深低代码平台的学习和其中技术点的掌握，有意者可加下方微信联系。  
 
-目前重心在于探索实现核心功能方案，细节方面打磨欠缺，发现问题可提issue。  
+目前重心在于探索实现核心功能方案，细节方面打磨欠缺，有问题可放 issue。  
 
 [![OSCS Status](https://www.oscs1024.com/platform/badge/iamwhj/mobile-maker-server.svg?size=small)](https://www.oscs1024.com/project/iamwhj/mobile-maker-server?ref=badge_small) ![build](https://img.shields.io/github/license/iamwhj/mobile-maker) ![vue](https://img.shields.io/github/languages/top/iamwhj/mobile-maker)
 
