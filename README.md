@@ -2,7 +2,9 @@
 
 mobile-maker 是一个低代码平台，通过拖拽的形式快速制作可交互的h5页面。
 
-该项目寓于加深低代码平台的学习和其中技术点的掌握。  
+该项目寓于加深低代码平台的学习和其中技术点的掌握，有意者可加下方微信联系。  
+
+目前重心在于探索实现核心功能方案，细节方面打磨欠缺，发现问题可提issue。  
 
 [![OSCS Status](https://www.oscs1024.com/platform/badge/iamwhj/mobile-maker-server.svg?size=small)](https://www.oscs1024.com/project/iamwhj/mobile-maker-server?ref=badge_small) ![build](https://img.shields.io/github/license/iamwhj/mobile-maker) ![vue](https://img.shields.io/github/languages/top/iamwhj/mobile-maker)
 
@@ -95,7 +97,9 @@ npm run dev:test
 
 ## 里程碑
 
-【2022/7/19】完成整套低代码平台架构功能，包括上面的四个服务，还有三个基础的组件，以及额外需要的图床服务(防止滥传，加了ip名单限制，可找我开通)。  
+【2022/7/19】完成整套低代码平台架构功能，包括上面的四个服务，还有三个基础的组件，以及额外需要的图床服务(防止滥传，加了ip名单限制，可找我开通)。   
+
+【2022/8/24】完成三个核心模块分享（联合杨村长B站直播间，历经三周，周/次），域名备案通过升级部署服务器，平台总访问500+，star数 40，确定两个后续开发方向：1、组件在线开发；2、组件远程加载。  
 
 ## 联系
 
@@ -103,4 +107,4 @@ npm run dev:test
 
 ## JOIN
 
-如果你对相关的内容也感觉兴趣的话，可以一同参与到该项目中。
+如果你对相关的内容感觉兴趣的话，可以与我一同探讨。
