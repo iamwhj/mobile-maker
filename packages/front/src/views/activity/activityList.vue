@@ -13,9 +13,16 @@
         <el-table-column label="活动名称">
           <template #default="scope">
             <el-link @click="edit(scope.row)">{{ scope.row.name }}</el-link>
+            <el-icon
+              v-if="scope.row.status === 'publish'"
+              @click="copy(scope.row.id)"
+              style="cursor: pointer"
+            >
+              <CopyDocument />
+            </el-icon>
           </template>
         </el-table-column>
-        <el-table-column prop="id" label="活动ID" />
+        <el-table-column prop="id" label="活动ID" width="90" />
         <el-table-column prop="creator" label="创建人" />
         <el-table-column prop="create_time" label="创建时间" width="110" />
         <el-table-column prop="reviewer" label="审核人" />
@@ -54,6 +61,7 @@ import { recoverPageData } from '@/common/helper';
 import { getActivityTemplateData } from '@/common';
 import { useStore } from 'vuex';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { CopyDocument } from '@element-plus/icons-vue';
 
 // table列表
 const activityList = ref([]);
@@ -119,6 +127,21 @@ const del = (id) => {
         message: 'Delete canceled',
       });
     });
+};
+
+// 复制访问链接
+const copy = (url) => {
+  const input = document.createElement('input');
+  input.style.opacity = 0;
+  url = `http://dawsky.top:86/${url}.html`;
+  input.value = url;
+  console.log(document.getElementsByClassName('activity'));
+  const container = document.getElementsByClassName('activity')[0];
+  container.appendChild(input);
+  input.select();
+  document.execCommand('copy');
+  container.removeChild(input);
+  ElMessage.success('端外链接复制成功');
 };
 </script>
 
