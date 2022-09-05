@@ -17,10 +17,13 @@ mobile-maker 是一个低代码平台，通过拖拽的形式快速制作可交�
 
 ## 服务介绍
 
+打算做成微服务的结构，将平台拆分成各个可独立运行的中小型服务，一定程度解耦代码降低维护成本
+
 1. 配置服务(front)：拖拽生成落地页，将落地页JSON传于后台保存至数据库
 2. 预览服务(generate)：提供落地页访问静态资源（js/css），提供移动端适配方案，H5预览
 3. 打包服务(mobile-maker)：在线打包front和generate，以及组件上传
 4. 接口服务(mobile-maker-server)：包括数据库存储，以及落地页html的生成
+5. 在线开发(mobile-maker-component)：**组件在线开发**，目前正在做这个服务模块，[点这查看进度](https://github.com/iamwhj/mobile-maker-component)
 
 ## 预览
 
