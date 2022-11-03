@@ -19,8 +19,13 @@
         <component
           :is="component.name"
           :class="component.mark"
-          v-bind="{ ...component.detail, ...generateStyle(component.style) }"
+          v-bind="{ 
+            ...component.detail, 
+            ...generateStyle(component.style), 
+            components: component.components 
+          }"
           :clickChock="clickChock(component.click)"
+          :addComponent="addComponentToChild"
         ></component>
       </div>
     </div>
@@ -97,6 +102,11 @@ const clickChock = (click) => {
     };
   }
 };
+
+// carrier 容器组件 增加组件函数
+const addComponentToChild = (componentData) => {
+  store.commit('addComponentToChild', componentData);
+}
 </script>
 
 <style lang="scss" scoped>

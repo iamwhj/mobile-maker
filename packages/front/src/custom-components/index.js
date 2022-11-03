@@ -8,6 +8,8 @@ import PieChart from './pieChart/component';
 import PieChartConfig from './pieChart/config';
 import Time from './time/component';
 import TimeConfig from './time/config';
+import Carrier from './carrier/component';
+import CarrierConfig from './carrier/config';
 
 const registerCustomComponents = (Vue) => {
   Vue.component('vText', Text);
@@ -20,6 +22,8 @@ const registerCustomComponents = (Vue) => {
   Vue.component('pieChartConfig', PieChartConfig);
   Vue.component('Time', Time);
   Vue.component('TimeConfig', TimeConfig);
+  Vue.component('Carrier', Carrier);
+  Vue.component('CarrierConfig', CarrierConfig);
 };
 
 export default registerCustomComponents;

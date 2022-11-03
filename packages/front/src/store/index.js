@@ -83,6 +83,16 @@ export default createStore({
     recoverPageData(state, historyData) {
       state.page = { ...state.page, ...historyData };
     },
+
+    addComponentToChild(state, componentData) {
+      // 子组件中添加组件，如容器组件 carrier
+      const page = state.page;
+      const currentComponent = state.currentComponent;
+      if (currentComponent.name !== 'carrier') return ;
+      const carrierComp = page.components.find(comp => comp.mark === currentComponent.mark);
+      if (!carrierComp.components) carrierComp.components = [];
+      carrierComp.components.push(componentData);
+    }
   },
   actions: {},
   modules: {},
