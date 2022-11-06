@@ -13,3 +13,11 @@ export const checkField = (checkList, checkData) => {
   }
   return true;
 };
+
+// 判断是否容器组件
+export const isContainerComponent = (componentName) => {
+  // carrier
+  const containerList = ['carrier'];
+  if (containerList.includes(componentName)) return true;
+  return false;
+}

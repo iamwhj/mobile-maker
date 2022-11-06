@@ -1,6 +1,6 @@
 <template>
-  <div :style="carrierStyle" @drop.stop="componentDrap" @dragover.prevent>
-    <span @click="showData">show</span>
+  <div class="carrier" :style="carrierStyle" @drop.stop="componentDrap" @dragover.prevent>
+    <!-- TODO 自由画布 从这个div下手，需要有个外层div包裹组件进行绝对定位 -->
     <div v-for="component in components" :key="component.mark">
       <component
         :is="component.name"
@@ -9,7 +9,7 @@
           ...component.detail, 
           ...generateStyle(component.style), 
         }"
-        :clickChock="clickChock(component.click)"
+        :clickChock="(component) => clickChock(component.click)"
       ></component>
     </div>
   </div>
@@ -19,20 +19,16 @@
 import { computed } from 'vue';
 import { getComponentTemplateData } from '@/common';
 import { generateStyle } from '@/common/helper';
-import { isMobileEnv } from '@/utils';
 
 const props = defineProps({
-  clickChock: { type: Function },
+  clickChock: { type: Function, default: () => {} },
   addComponent: { type: Function },
+  components: { type: Array, default: () => [] },
   width: { type: String, default: '240px' },
   height: { type: String, default: '200px' },
+  type: { type: String, default: 'free' },
   backgroundColor: { type: String, default: '#EBF29D' },
-  components: { type: Array, default: () => [] }
 });
-
-const showData = () => {
-  console.log(props.components);
-}
 
 const carrierStyle = computed(() => {
   return {
@@ -53,29 +49,12 @@ const componentDrap = (e) => {
   props.addComponent(componentData)
 }
 
-// TODO 没想好怎么做，暂时这么放，后面还得抽出去
-// 统一处理点击事件
-const clickChock = (click) => {
-  // 不是移动端
-  if (!isMobileEnv() || !click || click.type === 'none') return () => false;
-
-  if (click.type === 'link' && click.url) {
-    // link
-    return () => (window.location.href = click.url);
-  } else if (click.type === 'dialog') {
-    // dialog
-    return () => {
-      // 弹窗出现
-      // clickEventDialog.value = true;
-      // click.dialogTitle && (clickDialogInfo.value.title = click.dialogTitle);
-      // click.dialogContent && (clickDialogInfo.value.content = click.dialogContent);
-    };
-  }
-};
 </script>
 
 <style lang="scss" scoped>
-  div {
+  .carrier {
+    position: relative;
     font-size: 12px;
+    overflow: hidden;
   }
 </style>
