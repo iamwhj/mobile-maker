@@ -1,6 +1,6 @@
 import { createStore } from 'vuex';
 import { getActivityTemplateData } from '@/common';
-import { collectHistoryData } from '@/common/helper';
+import { collectHistoryData, getCurrentComponet } from '@/common/helper';
 
 export default createStore({
   state: {
@@ -32,8 +32,8 @@ export default createStore({
         state.page.detail = { ...state.page.detail, ...newDetail };
         return;
       }
-      const mark = state.currentComponent.mark;
-      let currentComp = state.page.components.find((c) => c.mark === mark);
+      // 获取当前选中组件
+      let currentComp = getCurrentComponet(this);
       // 区分更新组件 detail 还是 style
       key === 'style'
         ? (currentComp.style = { ...currentComp.style, ...newDetail })
@@ -86,13 +86,28 @@ export default createStore({
 
     addComponentToChild(state, componentData) {
       // 子组件中添加组件，如容器组件 carrier
+      const containerComponentName = ['carrier'];
       const page = state.page;
       const currentComponent = state.currentComponent;
-      if (currentComponent.name !== 'carrier') return ;
-      const carrierComp = page.components.find(comp => comp.mark === currentComponent.mark);
-      if (!carrierComp.components) carrierComp.components = [];
-      carrierComp.components.push(componentData);
-    }
+      const containerComp = page.components.find((comp) => {
+        // 当前选中的容器组件
+        if (
+          comp.mark === currentComponent.mark &&
+          containerComponentName.includes(currentComponent.name)
+        )
+          return true;
+        // 当前可能选中 容器组件中的子组件，寻找出上层容器组件
+        const subComp = comp.components.find(
+          (c) => c.mark === currentComponent.mark
+        );
+        if (subComp) return true;
+
+        return false;
+      });
+
+      if (!containerComp.components) containerComp.components = [];
+      containerComp.components.push(componentData);
+    },
   },
   actions: {},
   modules: {},

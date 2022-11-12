@@ -23,7 +23,15 @@ export const getCurrentComponet = (store) => {
   const currentMark = store.getters.currentComponent.mark;
   const page = store.getters.page;
   const components = page.components;
-  const currenComp = components.find((c) => c.mark === currentMark);
+  let currenComp = components.find((c) => c.mark === currentMark);
+  // 容器组件内部查找
+  if (!currenComp) {
+    components.forEach((comp) => {
+      if (comp.components) {
+        currenComp = comp.components.find((c) => c.mark === currentMark);
+      }
+    });
+  }
   return currenComp;
 };
 // 获取当前选中组件索引

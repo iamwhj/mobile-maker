@@ -20,7 +20,7 @@ import BaseSetting from '@/components/baseSetting';
 const props = defineProps({
   updateComponentProps: { type: Function },
   type: { type: String, default: 'free' },
-  backgroundColor: { type: String, default: '#409EFF' },
+  backgroundColor: { type: String, default: '#EBF29D' },
 });
 
 const form = reactive({
@@ -33,6 +33,4 @@ watch(form, () => {
 });
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

@@ -1,13 +1,23 @@
 <template>
-  <div class="carrier" :style="carrierStyle" @drop.stop="componentDrap" @dragover.prevent>
-    <!-- TODO 自由画布 从这个div下手，需要有个外层div包裹组件进行绝对定位 -->
-    <div v-for="component in components" :key="component.mark">
+  <div
+    class="carrier"
+    :style="carrierStyle"
+    @drop.stop="componentDrap"
+    @dragover.prevent
+  >
+    <div
+      v-for="component in components"
+      :key="component.mark"
+      :class="{ checked: component.mark === currentMark }"
+      :style="componentWrapperStyle(component.style)"
+      @click.stop="switchComponent(component)"
+    >
       <component
         :is="component.name"
         :class="component.mark"
-        v-bind="{ 
-          ...component.detail, 
-          ...generateStyle(component.style), 
+        v-bind="{
+          ...component.detail,
+          ...generateStyle(component.style),
         }"
         :clickChock="(component) => clickChock(component.click)"
       ></component>
@@ -18,7 +28,8 @@
 <script setup>
 import { computed } from 'vue';
 import { getComponentTemplateData } from '@/common';
-import { generateStyle } from '@/common/helper';
+import { selectComponent, generateStyle } from '@/common/helper';
+import { useStore } from 'vuex';
 
 const props = defineProps({
   clickChock: { type: Function, default: () => {} },
@@ -30,6 +41,7 @@ const props = defineProps({
   backgroundColor: { type: String, default: '#EBF29D' },
 });
 
+// 容器style
 const carrierStyle = computed(() => {
   return {
     width: props.width,
@@ -38,6 +50,17 @@ const carrierStyle = computed(() => {
   };
 });
 
+// 组件包装style
+const componentWrapperStyle = (componentStyle) => {
+  const componentFreeStyle = {
+    position: 'absolute',
+    left: componentStyle.left,
+    top: componentStyle.top,
+  };
+  return props.type === 'free' ? componentFreeStyle : {};
+};
+
+// 元素拖入carrier组件
 const componentDrap = (e) => {
   const data = e.dataTransfer.getData('component-drag');
   const component = JSON.parse(data);
@@ -46,15 +69,25 @@ const componentDrap = (e) => {
     fullName: component.fullName,
   });
   // 组件数据添加到容器components
-  props.addComponent(componentData)
-}
+  props.addComponent(componentData);
+};
 
+const store = useStore();
+const currentMark = computed(() => store.getters.currentComponent.mark);
+// 选中组件
+const switchComponent = (component) => {
+  selectComponent(store, component);
+};
 </script>
 
 <style lang="scss" scoped>
-  .carrier {
-    position: relative;
-    font-size: 12px;
-    overflow: hidden;
-  }
+.carrier {
+  position: relative;
+  font-size: 12px;
+  overflow: hidden;
+}
+
+.checked {
+  border: 1px dashed #1890ff;
+}
 </style>
