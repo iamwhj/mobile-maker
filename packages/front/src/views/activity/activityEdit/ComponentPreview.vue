@@ -19,10 +19,10 @@
         <component
           :is="component.name"
           :class="component.mark"
-          v-bind="{ 
-            ...component.detail, 
-            ...generateStyle(component.style), 
-            ...containerComponentProps(component) 
+          v-model:components="component.components"
+          v-bind="{
+            ...component.detail,
+            ...generateStyle(component.style),
           }"
           :clickChock="clickChock(component.click)"
         ></component>
@@ -48,8 +48,6 @@ import { computed, ref } from 'vue';
 import ActivtiyConfig from './activityConfig';
 import { selectComponent, generateStyle } from '@/common/helper';
 import { isMobileEnv } from '@/utils';
-import { isContainerComponent } from '@/utils/check';
-
 
 const store = useStore();
 const page = computed(() => store.getters.page);
@@ -103,19 +101,6 @@ const clickChock = (click) => {
     };
   }
 };
-
-// 拖入组件（拖入容器组件内）
-const addComponentToChild = (componentData) => {
-  store.commit('addComponentToChild', componentData);
-}
-// 容器组件注入特有参数
-const containerComponentProps = (component) => {
-  if (!isContainerComponent(component.name)) return {};
-  return {
-    components: component.components,
-    addComponent: addComponentToChild
-  }
-}
 </script>
 
 <style lang="scss" scoped>

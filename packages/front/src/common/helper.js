@@ -1,4 +1,5 @@
 import { deepClone } from '@/utils';
+import { isContainerComponent } from '@/utils/check';
 
 // 打开活动配置
 export const openActivityConfig = (store) => {
@@ -34,13 +35,28 @@ export const getCurrentComponet = (store) => {
   }
   return currenComp;
 };
-// 获取当前选中组件索引
-export const getCurrentComponetIndex = (store) => {
+// 获取当前选中组件索引 （传containerCompnonents，即走的容器组件）
+export const getCurrentComponetIndex = (store, containerCompnonents) => {
+  const currentMark = store.getters.currentComponent.mark;
+  const components = containerCompnonents || store.getters.page.components;
+  const index = components.findIndex((c) => c.mark === currentMark);
+  return index;
+};
+// 获取容器组件及选中的子组件
+export const getContainerComponet = (store) => {
   const currentMark = store.getters.currentComponent.mark;
   const page = store.getters.page;
   const components = page.components;
-  const index = components.findIndex((c) => c.mark === currentMark);
-  return index;
+  let containerInfo = {};
+  components.forEach((comp) => {
+    if (isContainerComponent(comp.name)) {
+      const currenComp = comp.components.find((c) => c.mark === currentMark);
+      containerInfo = currenComp
+        ? { container: comp, subComp: currenComp }
+        : {};
+    }
+  });
+  return containerInfo;
 };
 
 // 更新组件数据

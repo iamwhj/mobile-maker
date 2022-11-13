@@ -20,4 +20,4 @@ export const isContainerComponent = (componentName) => {
   const containerList = ['carrier'];
   if (containerList.includes(componentName)) return true;
   return false;
-}
+};

@@ -19,7 +19,11 @@
 import { Top, Bottom, Plus, Delete } from '@element-plus/icons-vue';
 import { computed, reactive, watchEffect } from 'vue';
 import { useStore } from 'vuex';
-import { getCurrentComponetIndex, openActivityConfig } from '@/common/helper';
+import {
+  getCurrentComponetIndex,
+  openActivityConfig,
+  getContainerComponet,
+} from '@/common/helper';
 import { deepClone } from '@/utils';
 
 const store = useStore();
@@ -56,41 +60,82 @@ const curCompIdx = () => {
 
 const move = (type) => {
   // 当前选中的组件数组索引
-  const idx = curCompIdx();
-  if (idx < 0) return;
+  let idx = curCompIdx();
+  let compLen = components.value.length;
+  let containerComponents = null;
 
-  const compLen = components.value.length;
+  if (idx < 0) {
+    // 容器中进行组件操作
+    const containerInfo = getContainerComponet(store);
+    const container = containerInfo.container;
+    idx = getCurrentComponetIndex(store, container.components);
+
+    compLen = container.components.length;
+    containerComponents = container.components;
+  }
+
   if (type === 'up') {
     // 向上移动
     if (idx === 0) return;
     else {
-      store.commit('swapComponent', { orange: idx, target: idx - 1 });
+      store.commit('swapComponent', {
+        orange: idx,
+        target: idx - 1,
+        containerComponents,
+      });
     }
   } else {
     // 向下移动
     if (idx === compLen - 1) return;
     else {
-      store.commit('swapComponent', { orange: idx, target: idx + 1 });
+      store.commit('swapComponent', {
+        orange: idx,
+        target: idx + 1,
+        containerComponents,
+      });
     }
   }
 };
 
 const copy = () => {
   // 当前选中的组件数组索引
-  const idx = curCompIdx();
-  if (idx < 0) return;
+  let idx = curCompIdx();
+  let componentData = deepClone(components.value[idx]);
+  let containerComponents = null;
 
-  const componentData = deepClone(components.value[idx]);
+  if (idx < 0) {
+    // 容器中进行组件操作
+    const containerInfo = getContainerComponet(store);
+    const container = containerInfo.container;
+    idx = getCurrentComponetIndex(store, container.components);
+
+    componentData = deepClone(container.components[idx]);
+    containerComponents = container.components;
+  }
+
   // 更新mark
   componentData.mark = componentData.name + '-' + Date.now();
-  store.commit('insertComponent', { i: idx + 1, componentData });
+  store.commit('insertComponent', {
+    i: idx + 1,
+    componentData,
+    containerComponents,
+  });
 };
 const del = () => {
   // 当前选中的组件数组索引
-  const idx = curCompIdx();
-  if (idx < 0) return;
+  let idx = curCompIdx();
+  let containerComponents = null;
 
-  store.commit('deleteComponent', idx);
+  if (idx < 0) {
+    // 容器中进行组件操作
+    const containerInfo = getContainerComponet(store);
+    const container = containerInfo.container;
+    idx = getCurrentComponetIndex(store, container.components);
+
+    containerComponents = container.components;
+  }
+
+  store.commit('deleteComponent', { i: idx, containerComponents });
 
   openActivityConfig(store);
 };

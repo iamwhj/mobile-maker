@@ -33,7 +33,6 @@ import { useStore } from 'vuex';
 
 const props = defineProps({
   clickChock: { type: Function, default: () => {} },
-  addComponent: { type: Function },
   components: { type: Array, default: () => [] },
   width: { type: String, default: '240px' },
   height: { type: String, default: '200px' },
@@ -60,6 +59,7 @@ const componentWrapperStyle = (componentStyle) => {
   return props.type === 'free' ? componentFreeStyle : {};
 };
 
+const emit = defineEmits(['update:components']);
 // 元素拖入carrier组件
 const componentDrap = (e) => {
   const data = e.dataTransfer.getData('component-drag');
@@ -69,7 +69,7 @@ const componentDrap = (e) => {
     fullName: component.fullName,
   });
   // 组件数据添加到容器components
-  props.addComponent(componentData);
+  emit('update:components', [...props.components, componentData]);
 };
 
 const store = useStore();

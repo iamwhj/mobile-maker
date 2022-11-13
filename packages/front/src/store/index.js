@@ -44,18 +44,20 @@ export default createStore({
         name: '修改样式-' + currentComp.fullName,
       });
     },
-    insertComponent(state, { i, componentData }) {
+    insertComponent(state, { i, componentData, containerComponents }) {
       // 数组任意位置插入组件
-      state.page.components.splice(i, 0, componentData);
+      const components = containerComponents || state.page.components;
+      components.splice(i, 0, componentData);
 
       collectHistoryData(this, {
         type: 'copy',
         name: '复制组件-' + componentData.fullName,
       });
     },
-    deleteComponent(state, i) {
+    deleteComponent(state, { i, containerComponents }) {
       // 提供下标，删除组件
-      const delComp = state.page.components.splice(i, 1);
+      const components = containerComponents || state.page.components;
+      const delComp = components.splice(i, 1);
 
       collectHistoryData(this, {
         type: 'delete',
@@ -66,9 +68,9 @@ export default createStore({
       // 切换选中组件
       state.currentComponent = newComp;
     },
-    swapComponent(state, { orange: i1, target: i2 }) {
+    swapComponent(state, { orange: i1, target: i2, containerComponents }) {
       // 提供组件下标，交换位置
-      const components = state.page.components;
+      const components = containerComponents || state.page.components;
       [components[i1], components[i2]] = [components[i2], components[i1]];
 
       collectHistoryData(this, {
@@ -82,31 +84,6 @@ export default createStore({
     },
     recoverPageData(state, historyData) {
       state.page = { ...state.page, ...historyData };
-    },
-
-    addComponentToChild(state, componentData) {
-      // 子组件中添加组件，如容器组件 carrier
-      const containerComponentName = ['carrier'];
-      const page = state.page;
-      const currentComponent = state.currentComponent;
-      const containerComp = page.components.find((comp) => {
-        // 当前选中的容器组件
-        if (
-          comp.mark === currentComponent.mark &&
-          containerComponentName.includes(currentComponent.name)
-        )
-          return true;
-        // 当前可能选中 容器组件中的子组件，寻找出上层容器组件
-        const subComp = comp.components.find(
-          (c) => c.mark === currentComponent.mark
-        );
-        if (subComp) return true;
-
-        return false;
-      });
-
-      if (!containerComp.components) containerComp.components = [];
-      containerComp.components.push(componentData);
     },
   },
   actions: {},
