@@ -50,3 +50,20 @@ export const debounce = (fn, wait) => {
     }, wait);
   };
 };
+
+// 加载远程js文件
+export const getScript = (url, cb) => {
+  return new Promise((resolve) => {
+    // 创建一个js
+    const script = document.createElement('script')
+    script.type = 'text/javascript'
+    script.onload = function () {
+      cb ? cb(resolve) : resolve()
+    }
+    script.onerror = () => {
+      resolve(false)
+    }
+    script.src = url
+    document.head.appendChild(script)
+  })
+}
