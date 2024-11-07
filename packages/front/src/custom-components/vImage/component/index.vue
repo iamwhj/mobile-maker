@@ -18,7 +18,7 @@ const props = defineProps({
     default:
       'http://81.68.197.70:3301/image/upload_6003934eacc89ca7a49cc0e0b0f2f422.jpg',
   },
-});
+})
 </script>
 
 <style lang="scss" scoped>

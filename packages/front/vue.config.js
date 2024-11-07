@@ -1,13 +1,15 @@
-const { defineConfig } = require('@vue/cli-service');
-const { resolve } = require('path');
-const CompressionPlugin = require('compression-webpack-plugin');
-const AutoImport = require('unplugin-auto-import/webpack');
-const Components = require('unplugin-vue-components/webpack');
-const { ElementPlusResolver } = require('unplugin-vue-components/resolvers');
+const { defineConfig } = require('@vue/cli-service')
+const { resolve } = require('path')
+const CompressionPlugin = require('compression-webpack-plugin')
+const AutoImport = require('unplugin-auto-import/webpack')
+const Components = require('unplugin-vue-components/webpack')
+const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-const isLocal = process.env.VUE_APP_ENV === 'localhost' ? true : false;
-const remoteUrl = isLocal ? 'http://localhost:3000' : process.env.VUE_APP_API_URL;
+const isLocal = process.env.VUE_APP_ENV === 'localhost' ? true : false
+const remoteUrl = isLocal
+  ? 'http://localhost:3000'
+  : process.env.VUE_APP_API_URL
 
 module.exports = defineConfig({
   publicPath: './',
@@ -35,7 +37,7 @@ module.exports = defineConfig({
         resolvers: [ElementPlusResolver()],
       }),
       // new BundleAnalyzerPlugin(),
-    ];
+    ]
     // 生产环境开启gzip配置
     if (process.env.use_gzip) {
       plugins.push(
@@ -51,7 +53,7 @@ module.exports = defineConfig({
           // 假如出现访问.gz文件访问不到的时候，还可以访问源文件双重保障
           deleteOriginalAssets: false,
         })
-      );
+      )
     }
     return {
       output: {
@@ -60,11 +62,11 @@ module.exports = defineConfig({
         chunkFilename: 'scripts/[name].[hash:8].min.js',
       },
       plugins,
-    };
+    }
   },
   chainWebpack(config) {
     // 默认加载svg规则，排除掉我们新建icon文件夹
-    config.module.rule('svg').exclude.add(resolve('src/icon'));
+    config.module.rule('svg').exclude.add(resolve('src/icon'))
 
     // 加入icon文件夹配置规则
     config.module
@@ -74,6 +76,6 @@ module.exports = defineConfig({
       .test(/\.svg$/)
       .use('svg-sprite-loader')
       .loader('svg-sprite-loader')
-      .options({ symbolId: 'icon-[name]' });
+      .options({ symbolId: 'icon-[name]' })
   },
-});
+})

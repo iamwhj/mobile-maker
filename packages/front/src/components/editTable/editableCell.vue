@@ -30,21 +30,21 @@ export default {
   data() {
     return {
       editable: false,
-    };
+    }
   },
   methods: {
     handleChange(val) {
-      this.$emit('update:modelValue', val);
+      this.$emit('update:modelValue', val)
     },
     edit() {
       // 显示输入框并聚焦
-      this.editable = true;
+      this.editable = true
       this.$nextTick(() => {
-        this.$refs.aInput.focus();
-      });
+        this.$refs.aInput.focus()
+      })
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>

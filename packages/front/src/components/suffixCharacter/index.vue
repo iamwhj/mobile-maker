@@ -12,7 +12,7 @@ const props = defineProps({
     type: String,
     default: '8px',
   },
-});
+})
 </script>
 
 <style lang="scss" scoped>

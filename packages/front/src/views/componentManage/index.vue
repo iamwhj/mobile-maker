@@ -6,8 +6,8 @@
 </template>
 
 <script setup>
-import ComponentList from './componentList';
-import CategoryList from './categoryList';
+import ComponentList from './ComponentList'
+import CategoryList from './CategoryList'
 </script>
 
 <style lang="scss" scoped>

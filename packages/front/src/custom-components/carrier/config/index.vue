@@ -14,23 +14,23 @@
 </template>
 
 <script setup>
-import { reactive, watch } from 'vue';
-import BaseSetting from '@/components/baseSetting';
+import { reactive, watch } from 'vue'
+import BaseSetting from '@/components/baseSetting'
 
 const props = defineProps({
   updateComponentProps: { type: Function },
   type: { type: String, default: 'free' },
   backgroundColor: { type: String, default: '#EBF29D' },
-});
+})
 
 const form = reactive({
   type: props.type,
   backgroundColor: props.backgroundColor,
-});
+})
 
 watch(form, () => {
-  props.updateComponentProps(form);
-});
+  props.updateComponentProps(form)
+})
 </script>
 
 <style lang="scss" scoped></style>

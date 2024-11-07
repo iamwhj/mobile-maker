@@ -30,9 +30,9 @@
 </template>
 
 <script setup>
-import { reactive, watch } from 'vue';
-import BaseSetting from '@/components/baseSetting';
-import EditTable from '@/components/editTable';
+import { reactive, watch } from 'vue'
+import BaseSetting from '@/components/baseSetting'
+import EditTable from '@/components/editTable'
 
 const props = defineProps({
   updateComponentProps: { type: Function },
@@ -43,17 +43,17 @@ const props = defineProps({
   innerRadius: { type: Number, default: 40 },
   outerRadius: { type: Number, default: 80 },
   legendShow: { type: Boolean, default: true },
-});
+})
 const form = reactive({
   dataSource: props.dataSource,
   innerRadius: props.innerRadius,
   outerRadius: props.outerRadius,
   legendShow: props.legendShow,
-});
+})
 
 watch(form, () => {
-  props.updateComponentProps(form);
-});
+  props.updateComponentProps(form)
+})
 </script>
 
 <style lang="scss" scoped>

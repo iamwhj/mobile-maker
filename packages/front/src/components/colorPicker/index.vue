@@ -10,27 +10,27 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch } from 'vue'
 
 const props = defineProps({
   modelValue: {
     type: String,
     default: '#000',
   },
-});
+})
 
-const color = ref(props.modelValue);
+const color = ref(props.modelValue)
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue'])
 
 const update = (value) => {
-  emit('update:modelValue', value);
-  color.value = value;
-};
+  emit('update:modelValue', value)
+  color.value = value
+}
 
 watch(color, () => {
-  update(color.value);
-});
+  update(color.value)
+})
 </script>
 
 <style lang="scss" scoped>

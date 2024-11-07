@@ -25,44 +25,44 @@
 </template>
 
 <script setup>
-import { getComponentList } from '@/api/component';
-import { getCategoryList } from '@/api/category';
-import { ref } from 'vue';
+import { getComponentList } from '@/api/component'
+import { getCategoryList } from '@/api/category'
+import { ref } from 'vue'
 
-const activeName = ['基础组件'];
+const activeName = ['基础组件']
 
 // 组件分类
-const categoryList = ref([]);
+const categoryList = ref([])
 const getCategoryListFn = () => {
   getCategoryList().then((result) => {
-    const res = result.data;
+    const res = result.data
     if (res.code === 0) {
-      categoryList.value = res.data;
+      categoryList.value = res.data
     }
-  });
-};
-getCategoryListFn();
+  })
+}
+getCategoryListFn()
 
 // 组件列表
-const componentList = ref([]);
+const componentList = ref([])
 const getComponentListFn = () => {
   getComponentList().then((result) => {
-    const res = result.data;
+    const res = result.data
     if (res.code === 0) {
-      componentList.value = res.data;
+      componentList.value = res.data
     }
-  });
-};
-getComponentListFn();
+  })
+}
+getComponentListFn()
 
 // 拖动组件
 const dragStart = (e, item) => {
   const transferData = {
     name: item.name,
     fullName: item.full_name,
-  };
-  e.dataTransfer.setData('component-drag', JSON.stringify(transferData));
-};
+  }
+  e.dataTransfer.setData('component-drag', JSON.stringify(transferData))
+}
 </script>
 
 <style lang="scss" scoped>

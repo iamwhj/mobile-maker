@@ -31,46 +31,46 @@
 </template>
 
 <script setup>
-import { reactive, ref, watch } from 'vue';
-import BaseSetting from '@/components/baseSetting';
-import ClickEventInput from '@/components/clickEventInput';
-import { Plus } from '@element-plus/icons-vue';
+import { reactive, ref, watch } from 'vue'
+import BaseSetting from '@/components/baseSetting'
+import ClickEventInput from '@/components/clickEventInput'
+import { Plus } from '@element-plus/icons-vue'
 
 const props = defineProps({
   updateComponentProps: { type: Function },
   src: { type: String, default: '' },
-});
+})
 
 const form = reactive({
   src: props.src,
-});
+})
 
 watch(form, () => {
-  props.updateComponentProps(form);
-});
+  props.updateComponentProps(form)
+})
 
 // 图片资源
-const type = ref('upload');
-const action = `${process.env.VUE_APP_IMAGE_URL}/base/uploadImage`;
+const type = ref('upload')
+const action = `${process.env.VUE_APP_IMAGE_URL}/base/uploadImage`
 // 图片格式检验
 const beforeAvatarUpload = (rawFile) => {
-  const typeList = ['image/jpeg', 'image/png'];
+  const typeList = ['image/jpeg', 'image/png']
   if (!typeList.includes(rawFile.type)) {
-    ElMessage.error('文件格式不正确，仅支持jpeg和png格式！');
-    return false;
+    ElMessage.error('文件格式不正确，仅支持jpeg和png格式！')
+    return false
   }
-  return true;
-};
+  return true
+}
 // 图片上传成功
 const handleAvatarSuccess = (response) => {
-  const { code, message, imgUrl } = response;
+  const { code, message, imgUrl } = response
   if (code === 0) {
-    ElMessage.success('图片上传成功！');
-    form.src = imgUrl;
+    ElMessage.success('图片上传成功！')
+    form.src = imgUrl
   } else {
-    ElMessage.error(message || '上传失败！');
+    ElMessage.error(message || '上传失败！')
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

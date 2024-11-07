@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed } from 'vue'
 
 const props = defineProps({
   width: { type: String, default: '240px' },
@@ -11,7 +11,7 @@ const props = defineProps({
   content: { type: String, default: '请输入内容' },
   color: { type: String, default: '' },
   fontSize: { type: String, default: '16px' },
-});
+})
 
 const textStyle = computed(() => {
   return {
@@ -19,8 +19,8 @@ const textStyle = computed(() => {
     height: props.height,
     color: props.color,
     fontSize: props.fontSize,
-  };
-});
+  }
+})
 </script>
 
 <style lang="scss" scoped>

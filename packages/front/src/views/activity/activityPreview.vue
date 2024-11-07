@@ -17,15 +17,15 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import QrcodeVue from 'qrcode.vue';
+import { computed } from 'vue'
+import QrcodeVue from 'qrcode.vue'
 
-const props = defineProps(['id']);
-const emit = defineEmits(['hidePreview']);
+const props = defineProps(['id'])
+const emit = defineEmits(['hidePreview'])
 
 const src = computed(() => {
-  return `${process.env.VUE_APP_API_URL}/activity/preview/${props.id}`;
-});
+  return `${process.env.VUE_APP_API_URL}/activity/preview/${props.id}`
+})
 </script>
 
 <style lang="scss" scoped>

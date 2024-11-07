@@ -1,18 +1,26 @@
 <template>
   <div class="topBar">
     <div class="menu-controll" @click="emit('changeMenuCollapse')">
-      <el-icon :size="22">
-        <Fold v-if="!menuCollapse" />
-        <Expand v-else />
-      </el-icon>
+      <el-tooltip
+        :visible="tooltipVisible"
+        effect="dark"
+        :content="menuCollapse ? '展开' : '收起'"
+        placement="right-start"
+      >
+        <el-icon
+          :size="22"
+          @mouseenter="tooltipVisible = true"
+          @mouseleave="tooltipVisible = false"
+        >
+          <Fold v-if="!menuCollapse" />
+          <Expand v-else />
+        </el-icon>
+      </el-tooltip>
     </div>
     <div class="right-info">
       <div class="github">
         <a href="//github.com/iamwhj/mobile-maker" target="_blank">
-          <img
-            src="http://81.68.197.70:3301/image/upload_146c9c5b5b218e826131a31d51ad6189.png"
-            title="star好吗"
-          />
+          <img src="" title="点下star" />
           <span style="position: relative; bottom: 6px">源码仓库</span>
         </a>
       </div>
@@ -29,14 +37,18 @@
 </template>
 
 <script setup>
-import { Fold, Expand, House, Avatar } from '@element-plus/icons-vue';
-import { useRouter } from 'vue-router';
+import { Fold, Expand, House, Avatar } from '@element-plus/icons-vue'
+import { useRouter } from 'vue-router'
+import { ref } from 'vue'
 
-const props = defineProps(['menuCollapse']);
-const emit = defineEmits(['changeMenuCollapse']);
+const props = defineProps(['menuCollapse'])
+const emit = defineEmits(['changeMenuCollapse'])
 
-const router = useRouter();
-const revertActivity = () => router.push({ path: 'activity' });
+const router = useRouter()
+const revertActivity = () => router.push({ path: 'activity' })
+
+// 展开收起菜单tooltip控制
+const tooltipVisible = ref(false)
 </script>
 
 <style lang="scss" scoped>

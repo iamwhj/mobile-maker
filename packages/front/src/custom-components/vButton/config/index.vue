@@ -20,11 +20,11 @@
 </template>
 
 <script setup>
-import { reactive, watch } from 'vue';
-import BaseSetting from '@/components/baseSetting';
-import ColorPicker from '@/components/colorPicker';
-import BaseInput from '@/components/baseInput';
-import ClickEventInput from '@/components/clickEventInput';
+import { reactive, watch } from 'vue'
+import BaseSetting from '@/components/baseSetting'
+import ColorPicker from '@/components/colorPicker'
+import BaseInput from '@/components/baseInput'
+import ClickEventInput from '@/components/clickEventInput'
 
 const props = defineProps({
   updateComponentProps: { type: Function },
@@ -32,18 +32,18 @@ const props = defineProps({
   backgroundColor: { type: String, default: '#409EFF' },
   borderRadius: { type: String, default: '4px' },
   content: { type: String, default: '按钮' },
-});
+})
 
 const form = reactive({
   content: props.content,
   color: props.color,
   borderRadius: props.borderRadius,
   backgroundColor: props.backgroundColor,
-});
+})
 
 watch(form, () => {
-  props.updateComponentProps(form);
-});
+  props.updateComponentProps(form)
+})
 </script>
 
 <style lang="scss" scoped></style>

@@ -32,53 +32,53 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import EditableCell from './editableCell';
+import { ref } from 'vue'
+import EditableCell from './editableCell'
 
 const props = defineProps({
   dataSource: { type: Array, required: true }, // 表格数据源
   denyDataB: { type: Boolean, default: false }, // 是否禁用DataB
   onAddHook: { type: Function, default: () => {} }, // 添加操作的hook函数
   onDeleteHook: { type: Function, default: () => {} }, // 删除操作的hook函数
-});
+})
 
-let count = 0;
-const tableData = ref(props.dataSource);
+let count = 0
+const tableData = ref(props.dataSource)
 
 // 删除
 const del = (i) => {
   // call hook
-  props.onDeleteHook(tableData.value[i], i);
-  tableData.value.splice(i, 1);
-};
+  props.onDeleteHook(tableData.value[i], i)
+  tableData.value.splice(i, 1)
+}
 
 // 增加
 const add = () => {
-  const { dataSource } = props;
+  const { dataSource } = props
   if (dataSource.length < 8) {
-    const lastItem = dataSource[dataSource.length - 1];
-    count = lastItem ? lastItem.key + 1 : 0;
+    const lastItem = dataSource[dataSource.length - 1]
+    count = lastItem ? lastItem.key + 1 : 0
     const newData = {
       key: count,
       name: null,
       dataA: null,
       dataB: null,
-    };
-    tableData.value.push(newData);
+    }
+    tableData.value.push(newData)
 
     // call hook
-    props.onAddHook(newData);
+    props.onAddHook(newData)
   }
-};
+}
 
 // 初始化处理
 const createHandeler = () => {
   // 如果初始化表格只存在一行时，额外增加两空行
   if (typeof tableData.value === 'object' && tableData.value.length === 1) {
-    for (let i = 0; i < 2; i++) add();
+    for (let i = 0; i < 2; i++) add()
   }
-};
-createHandeler();
+}
+createHandeler()
 </script>
 
 <style lang="scss" scoped>

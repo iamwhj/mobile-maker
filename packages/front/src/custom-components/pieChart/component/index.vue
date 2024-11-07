@@ -5,10 +5,10 @@
 </template>
 
 <script setup>
-import echarts from '@/plugins/echarts';
-import { nextTick, onMounted, watch } from 'vue';
-import { getPieOptions } from './usePieOption';
-import { debounce } from '@/utils';
+import echarts from '@/plugins/echarts'
+import { nextTick, onMounted, watch } from 'vue'
+import { getPieOptions } from './usePieOption'
+import { debounce } from '@/utils'
 
 const props = defineProps({
   width: { type: String, default: '240px' },
@@ -20,46 +20,46 @@ const props = defineProps({
   innerRadius: { type: Number, default: 40 },
   outerRadius: { type: Number, default: 80 },
   legendShow: { type: Boolean, default: true },
-});
+})
 
 // 饼图容器ID
-const container = 'pieChart-' + Math.random();
+const container = 'pieChart-' + Math.random()
 // 饼图实例
-let pieChart = null;
+let pieChart = null
 
 // 挂载更新饼图
 const mountPieChart = () => {
-  const options = getPieOptions(props);
+  const options = getPieOptions(props)
   if (!pieChart) {
     // 初始化
-    const pie = echarts.init(document.getElementById(container));
-    pie.setOption(options);
-    pieChart = pie;
+    const pie = echarts.init(document.getElementById(container))
+    pie.setOption(options)
+    pieChart = pie
   } else {
     // 更新
-    pieChart.setOption(options);
+    pieChart.setOption(options)
   }
-};
+}
 
 // 防抖更新
-const updatePieChart = debounce(mountPieChart, 200);
+const updatePieChart = debounce(mountPieChart, 200)
 
 onMounted(() => {
   // 初始化挂载饼图
   nextTick(() => {
     // 修复预览超出容器bug
-    setTimeout(mountPieChart);
-  });
-});
+    setTimeout(mountPieChart)
+  })
+})
 
 // 更新饼图
 watch(props, () => {
-  updatePieChart();
+  updatePieChart()
   nextTick(() => {
     // 若容器几何属性发生变化时更新（width、height）
-    pieChart && pieChart.resize();
-  });
-});
+    pieChart && pieChart.resize()
+  })
+})
 </script>
 
 <style lang="scss" scoped></style>

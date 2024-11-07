@@ -19,22 +19,22 @@
 </template>
 
 <script setup>
-import { reactive, watch } from 'vue';
+import { reactive, watch } from 'vue'
 
 const props = defineProps({
   updateComponentProps: { type: Function },
   name: { type: String, default: '' },
   title: { type: String, default: '' },
   date: { type: Array, default: () => [] },
-});
+})
 
 const form = reactive({
   name: props.name,
   title: props.title,
   date: props.date,
-});
+})
 
-watch(form, () => props.updateComponentProps(form, 'page'));
+watch(form, () => props.updateComponentProps(form, 'page'))
 </script>
 
 <style lang="scss" scoped></style>

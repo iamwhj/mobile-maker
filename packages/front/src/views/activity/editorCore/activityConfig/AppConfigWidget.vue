@@ -1,7 +1,7 @@
 <template>
   <div class="topStateBar">
     <img src="@/assets/image/topBar.jpg" alt="" />
-    <div class="activity-header" @click="openActivityConfig(store)">
+    <div class="activity-header" @click="openActivityConfig()">
       <el-icon><ArrowLeft /></el-icon>
       {{ title }}
     </div>
@@ -9,13 +9,14 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import { useStore } from 'vuex';
-import { ArrowLeft } from '@element-plus/icons-vue';
-import { openActivityConfig } from '@/common/helper';
+import { computed } from 'vue'
+import { useStore } from '@/store'
+import { ArrowLeft } from '@element-plus/icons-vue'
+import { openActivityConfig } from '@/common/helper'
 
-const store = useStore();
-const title = computed(() => store.getters.page.detail.title);
+const store = useStore()
+
+const title = computed(() => store.page.detail.title)
 </script>
 
 <style lang="scss" scoped>

@@ -11,33 +11,33 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import { useStore } from 'vuex';
-import { updateComponent } from '@/common/helper';
+import { computed } from 'vue'
+import { useStore } from '@/store'
+import { updateComponent } from '@/common/helper'
 
-const store = useStore();
-const name = computed(() => store.getters.currentComponent.name + 'Config');
-const fullName = computed(() => store.getters.currentComponent.fullName);
-const currentMark = computed(() => store.getters.currentComponent.mark);
+const store = useStore()
+const name = computed(() => store.currentComponent.value.name + 'Config')
+const fullName = computed(() => store.currentComponent.value.fullName)
+const currentMark = computed(() => store.currentComponent.value.mark)
 
 const config = computed(() => {
-  const page = store.getters.page;
-  const currentComponent = store.getters.currentComponent;
-  if (currentComponent.name === 'activity') {
-    return page.detail;
+  const page = store.page
+  const currentComponent = store.currentComponent
+  if (currentComponent.value.name === 'activity') {
+    return page.detail
   } else {
     const component = page.components.find(
-      (c) => c.mark === currentComponent.mark
-    );
-    const componentConfig = component?.detail || {};
-    return componentConfig;
+      (c) => c.mark === currentComponent.value.mark
+    )
+    const componentConfig = component?.detail || {}
+    return componentConfig
   }
-});
+})
 
 // 注入更新配置函数
 const updateComponentProps = (newDetail, key = 'detail') => {
-  updateComponent(store, { newDetail, key });
-};
+  updateComponent({ newDetail, key })
+}
 </script>
 
 <style lang="scss" scoped>

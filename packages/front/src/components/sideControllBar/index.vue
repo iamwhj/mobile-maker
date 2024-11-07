@@ -16,129 +16,129 @@
 </template>
 
 <script setup>
-import { Top, Bottom, Plus, Delete } from '@element-plus/icons-vue';
-import { computed, reactive, watchEffect } from 'vue';
-import { useStore } from 'vuex';
+import { Top, Bottom, Plus, Delete } from '@element-plus/icons-vue'
+import { computed, reactive, watchEffect } from 'vue'
+import { useStore } from '@/store'
 import {
   getCurrentComponetIndex,
   openActivityConfig,
   getContainerComponet,
-} from '@/common/helper';
-import { deepClone } from '@/utils';
+} from '@/common/helper'
+import { deepClone } from '@/utils'
 
-const store = useStore();
-const components = computed(() => store.getters.page.components);
-const currentComponent = computed(() => store.getters.currentComponent);
+const store = useStore()
+const components = computed(() => store.page.components)
+const currentComponent = computed(() => store.currentComponent)
 
 // 是否已选中组件
 const checked = computed(() => {
-  const mark = currentComponent.value.mark;
-  if (mark && !mark.startsWith('activity-')) return true;
-  return false;
-});
+  const mark = currentComponent.value.mark
+  if (mark && !mark.startsWith('activity-')) return true
+  return false
+})
 
 // icon动态样式
-const elIconStyle = reactive({});
+const elIconStyle = reactive({})
 watchEffect(() => {
   if (checked.value) {
-    elIconStyle.cursor = 'pointer';
-    elIconStyle.color = '#000';
-    elIconStyle.hoverColor = 'rgb(62, 144, 211)';
+    elIconStyle.cursor = 'pointer'
+    elIconStyle.color = '#000'
+    elIconStyle.hoverColor = 'rgb(62, 144, 211)'
   } else {
-    elIconStyle.cursor = 'not-allowed';
-    elIconStyle.color = '#aaa';
-    elIconStyle.hoverColor = '#aaa';
+    elIconStyle.cursor = 'not-allowed'
+    elIconStyle.color = '#aaa'
+    elIconStyle.hoverColor = '#aaa'
   }
-});
+})
 
 // 返回选中组件的索引
 const curCompIdx = () => {
-  if (!checked.value) return -1;
-  const curCompIdx = getCurrentComponetIndex(store);
-  return curCompIdx;
-};
+  if (!checked.value) return -1
+  const curCompIdx = getCurrentComponetIndex()
+  return curCompIdx
+}
 
 const move = (type) => {
   // 当前选中的组件数组索引
-  let idx = curCompIdx();
-  let compLen = components.value.length;
-  let containerComponents = null;
+  let idx = curCompIdx()
+  let compLen = components.value.length
+  let containerComponents = null
 
   if (idx < 0) {
     // 容器中进行组件操作
-    const containerInfo = getContainerComponet(store);
-    const container = containerInfo.container;
-    idx = getCurrentComponetIndex(store, container.components);
+    const containerInfo = getContainerComponet()
+    const container = containerInfo.container
+    idx = getCurrentComponetIndex(container.components)
 
-    compLen = container.components.length;
-    containerComponents = container.components;
+    compLen = container.components.length
+    containerComponents = container.components
   }
 
   if (type === 'up') {
     // 向上移动
-    if (idx === 0) return;
+    if (idx === 0) return
     else {
-      store.commit('swapComponent', {
+      store.swapComponent({
         orange: idx,
         target: idx - 1,
         containerComponents,
-      });
+      })
     }
   } else {
     // 向下移动
-    if (idx === compLen - 1) return;
+    if (idx === compLen - 1) return
     else {
-      store.commit('swapComponent', {
+      store.swapComponent({
         orange: idx,
         target: idx + 1,
         containerComponents,
-      });
+      })
     }
   }
-};
+}
 
 const copy = () => {
   // 当前选中的组件数组索引
-  let idx = curCompIdx();
-  let componentData = deepClone(components.value[idx]);
-  let containerComponents = null;
+  let idx = curCompIdx()
+  let componentData = deepClone(components.value[idx])
+  let containerComponents = null
 
   if (idx < 0) {
     // 容器中进行组件操作
-    const containerInfo = getContainerComponet(store);
-    const container = containerInfo.container;
-    idx = getCurrentComponetIndex(store, container.components);
+    const containerInfo = getContainerComponet()
+    const container = containerInfo.container
+    idx = getCurrentComponetIndex(container.components)
 
-    componentData = deepClone(container.components[idx]);
-    containerComponents = container.components;
+    componentData = deepClone(container.components[idx])
+    containerComponents = container.components
   }
 
   // 更新mark
-  componentData.mark = componentData.name + '-' + Date.now();
-  store.commit('insertComponent', {
+  componentData.mark = componentData.name + '-' + Date.now()
+  store.insertComponent({
     i: idx + 1,
     componentData,
     containerComponents,
-  });
-};
+  })
+}
 const del = () => {
   // 当前选中的组件数组索引
-  let idx = curCompIdx();
-  let containerComponents = null;
+  let idx = curCompIdx()
+  let containerComponents = null
 
   if (idx < 0) {
     // 容器中进行组件操作
-    const containerInfo = getContainerComponet(store);
-    const container = containerInfo.container;
-    idx = getCurrentComponetIndex(store, container.components);
+    const containerInfo = getContainerComponet()
+    const container = containerInfo.container
+    idx = getCurrentComponetIndex(container.components)
 
-    containerComponents = container.components;
+    containerComponents = container.components
   }
 
-  store.commit('deleteComponent', { i: idx, containerComponents });
+  store.deleteComponent({ i: idx, containerComponents })
 
-  openActivityConfig(store);
-};
+  openActivityConfig()
+}
 </script>
 
 <style lang="scss" scoped>

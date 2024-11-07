@@ -25,14 +25,14 @@
 </template>
 
 <script setup>
-import { BrushFilled, Tickets } from '@element-plus/icons-vue';
-import { useStore } from 'vuex';
-import { recoverPageData } from '@/common/helper';
+import { BrushFilled, Tickets } from '@element-plus/icons-vue'
+import { useStore } from '@/store'
+import { recoverPageData } from '@/common/helper'
 
-const store = useStore();
-const historyData = store.getters.historyData;
+const store = useStore()
+const historyData = store.historyData
 
-const recoverData = (historyItem) => recoverPageData(store, historyItem.data);
+const recoverData = (historyItem) => recoverPageData(historyItem.data)
 </script>
 
 <style lang="scss" scoped>

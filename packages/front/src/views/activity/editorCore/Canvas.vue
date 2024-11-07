@@ -42,65 +42,65 @@
 </template>
 
 <script setup>
-import { useStore } from 'vuex';
-import { getComponentTemplateData } from '@/common';
-import { computed, ref } from 'vue';
-import ActivtiyConfig from './activityConfig';
-import { selectComponent, generateStyle } from '@/common/helper';
-import { isMobileEnv } from '@/utils';
+import { useStore } from '@/store'
+import { getComponentTemplateData } from '@/common'
+import { computed, ref } from 'vue'
+import ActivtiyConfig from './activityConfig/AppConfigWidget'
+import { selectComponent, generateStyle } from '@/common/helper'
+import { isMobileEnv } from '@/utils'
 
-const store = useStore();
-const page = computed(() => store.getters.page);
-const currentMark = computed(() => store.getters.currentComponent.mark);
+const store = useStore()
+const page = computed(() => store.page)
+const currentMark = computed(() => store.currentComponent.mark)
 
 // 拖入组件
 const componentDrap = (e) => {
-  const data = e.dataTransfer.getData('component-drag');
-  const component = JSON.parse(data);
+  const data = e.dataTransfer.getData('component-drag')
+  const component = JSON.parse(data)
   const componentData = getComponentTemplateData({
     name: component.name,
     fullName: component.fullName,
-  });
+  })
   // 添加组件
-  store.commit('addComponent', componentData);
+  store.addComponent(componentData)
   // 更新选中组件
-  selectComponent(store, {
+  selectComponent({
     name: component.name,
     fullName: component.fullName,
     mark: componentData.mark,
-  });
-};
+  })
+}
 
 // 选中组件
 const switchComponent = (component) => {
-  selectComponent(store, component);
-};
+  selectComponent(component)
+}
 
 // 点击事件弹窗
-const clickEventDialog = ref(false);
+const clickEventDialog = ref(false)
 const clickDialogInfo = ref({
   title: '默认弹窗',
   content: '默认弹窗内容',
-});
+})
 // 统一处理点击事件
 const clickChock = (click) => {
   // 不是移动端
-  if (!isMobileEnv() || !click || click.type === 'none') return () => false;
+  if (!isMobileEnv() || !click || click.type === 'none') return () => false
 
   if (click.type === 'link' && click.url) {
     // link
-    return () => (window.location.href = click.url);
+    return () => (window.location.href = click.url)
   } else if (click.type === 'dialog') {
     // dialog
     return () => {
       // 弹窗出现
-      clickEventDialog.value = true;
-      click.dialogTitle && (clickDialogInfo.value.title = click.dialogTitle);
+      clickEventDialog.value = true
+      click.dialogTitle && (clickDialogInfo.value.title = click.dialogTitle)
       click.dialogContent &&
-        (clickDialogInfo.value.content = click.dialogContent);
-    };
+        (clickDialogInfo.value.content = click.dialogContent)
+    }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

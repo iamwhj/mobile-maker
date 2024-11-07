@@ -26,10 +26,10 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import { getComponentTemplateData } from '@/common';
-import { selectComponent, generateStyle } from '@/common/helper';
-import { useStore } from 'vuex';
+import { computed } from 'vue'
+import { getComponentTemplateData } from '@/common'
+import { selectComponent, generateStyle } from '@/common/helper'
+import { useStore } from '@/store'
 
 const props = defineProps({
   clickChock: { type: Function, default: () => {} },
@@ -38,7 +38,7 @@ const props = defineProps({
   height: { type: String, default: '200px' },
   type: { type: String, default: 'free' },
   backgroundColor: { type: String, default: '#EBF29D' },
-});
+})
 
 // 容器style
 const carrierStyle = computed(() => {
@@ -46,8 +46,8 @@ const carrierStyle = computed(() => {
     width: props.width,
     height: props.height,
     backgroundColor: props.backgroundColor,
-  };
-});
+  }
+})
 
 // 组件包装style
 const componentWrapperStyle = (componentStyle) => {
@@ -55,29 +55,29 @@ const componentWrapperStyle = (componentStyle) => {
     position: 'absolute',
     left: componentStyle.left,
     top: componentStyle.top,
-  };
-  return props.type === 'free' ? componentFreeStyle : {};
-};
+  }
+  return props.type === 'free' ? componentFreeStyle : {}
+}
 
-const emit = defineEmits(['update:components']);
+const emit = defineEmits(['update:components'])
 // 元素拖入carrier组件
 const componentDrap = (e) => {
-  const data = e.dataTransfer.getData('component-drag');
-  const component = JSON.parse(data);
+  const data = e.dataTransfer.getData('component-drag')
+  const component = JSON.parse(data)
   const componentData = getComponentTemplateData({
     name: component.name,
     fullName: component.fullName,
-  });
+  })
   // 组件数据添加到容器components
-  emit('update:components', [...props.components, componentData]);
-};
+  emit('update:components', [...props.components, componentData])
+}
 
-const store = useStore();
-const currentMark = computed(() => store.getters.currentComponent.mark);
+const store = useStore()
+const currentMark = computed(() => store.currentComponent.mark)
 // 选中组件
 const switchComponent = (component) => {
-  selectComponent(store, component);
-};
+  selectComponent(component)
+}
 </script>
 
 <style lang="scss" scoped>

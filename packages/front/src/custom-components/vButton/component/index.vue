@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed } from 'vue'
 
 const props = defineProps({
   clickChock: { type: Function },
@@ -15,7 +15,7 @@ const props = defineProps({
   backgroundColor: { type: String, default: '#409EFF' },
   borderRadius: { type: String, default: '4px' },
   content: { type: String, default: '按钮' },
-});
+})
 
 const btnStyle = computed(() => {
   return {
@@ -24,8 +24,8 @@ const btnStyle = computed(() => {
     color: props.color,
     backgroundColor: props.backgroundColor,
     borderRadius: props.borderRadius,
-  };
-});
+  }
+})
 </script>
 
 <style lang="scss" scoped>

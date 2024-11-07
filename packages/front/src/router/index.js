@@ -1,5 +1,5 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
-import HomeView from '../views/index.vue';
+import { createRouter, createWebHashHistory } from 'vue-router'
+import HomeView from '@/layout/index'
 
 const routes = [
   {
@@ -11,29 +11,29 @@ const routes = [
       {
         path: 'activity',
         name: 'activity',
-        component: () => import('@/views/activity/activityList.vue'),
+        component: () => import('@/views/activity/ActivityList'),
       },
       {
         path: 'activityEdit',
         name: 'activityEdit',
-        component: () => import('@/views/activity/activityEdit.vue'),
+        component: () => import('@/views/activity/ActivityEdit'),
         props: (r) => ({
           activityId: r.query.activityId,
           status: r.query.status,
         }),
       },
       {
-        path: '/component',
-        name: 'component',
-        component: () => import('@/views/material'),
+        path: '/componentManage',
+        name: 'componentManage',
+        component: () => import('@/views/componentManage'),
       },
     ],
   },
-];
+]
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
-});
+})
 
-export default router;
+export default router

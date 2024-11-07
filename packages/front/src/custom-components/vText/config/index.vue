@@ -18,27 +18,27 @@
 </template>
 
 <script setup>
-import { reactive, watch } from 'vue';
-import BaseSetting from '@/components/baseSetting';
-import ColorPicker from '@/components/colorPicker';
-import BaseInput from '@/components/baseInput';
+import { reactive, watch } from 'vue'
+import BaseSetting from '@/components/baseSetting'
+import ColorPicker from '@/components/colorPicker'
+import BaseInput from '@/components/baseInput'
 
 const props = defineProps({
   updateComponentProps: { type: Function },
   content: { type: String, default: '' },
   color: { type: String, default: '#000' },
   fontSize: { type: String, default: '16px' },
-});
+})
 
 const form = reactive({
   content: props.content,
   color: props.color,
   fontSize: props.fontSize,
-});
+})
 
 watch(form, () => {
-  props.updateComponentProps(form);
-});
+  props.updateComponentProps(form)
+})
 </script>
 
 <style lang="scss" scoped></style>

@@ -18,10 +18,10 @@
     "dayjs": "^1.11.3",
     "echarts": "^5.3.3",
     "element-plus": "^2.2.9",
+    "pinia": "^2.2.6",
     "qrcode.vue": "^3.3.3",
     "vue": "^3.2.13",
-    "vue-router": "^4.0.3",
-    "vuex": "^4.0.0"
+    "vue-router": "^4.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

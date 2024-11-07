@@ -15,14 +15,14 @@
     </div>
     <div class="activity-assemble">
       <div class="components">
-        <ComponentList />
+        <SideList />
       </div>
       <div class="mobile">
-        <ComponentPreview />
+        <CanvasCore />
         <SideControllBar />
       </div>
       <div class="attribute">
-        <ComponentSetting />
+        <PropSetting />
       </div>
       <div class="toolsBar">
         <ToolsBar />
@@ -37,115 +37,115 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
-import { useStore } from 'vuex';
-import { useRouter } from 'vue-router';
-import ComponentList from './activityEdit/ComponentList.vue';
-import ComponentPreview from './activityEdit/ComponentPreview.vue';
-import ComponentSetting from './activityEdit/ComponentSetting.vue';
-import SideControllBar from '@/components/sideControllBar';
-import ToolsBar from '@/components/toolsBar';
-import ActivityPreview from './activityPreview.vue';
-import { openActivityConfig } from '@/common/helper';
-import { saveActivity, updateActivity, publishActivity } from '@/api/activity';
-import { checkField } from '@/utils/check';
-import { formatTime } from '@/utils';
+import { computed, ref } from 'vue'
+import { useStore } from '@/store'
+import { useRouter } from 'vue-router'
+import SideList from './editorCore/SideList'
+import CanvasCore from './editorCore/Canvas'
+import PropSetting from './editorCore/PropSetting'
+import SideControllBar from '@/components/sideControllBar'
+import ToolsBar from '@/components/toolsBar'
+import ActivityPreview from './ActivityPreview'
+import { openActivityConfig } from '@/common/helper'
+import { saveActivity, updateActivity, publishActivity } from '@/api/activity'
+import { checkField } from '@/utils/check'
+import { formatTime } from '@/utils'
 
-const props = defineProps(['activityId', 'status']);
+const props = defineProps(['activityId', 'status'])
 
-const router = useRouter();
-const store = useStore();
+const router = useRouter()
+const store = useStore()
 // 默认选中顶部栏
-openActivityConfig(store);
+openActivityConfig()
 
 // 保存活动
 const save = async () => {
-  const page = store.getters.page;
+  const page = store.page
   const activity = {
     name: page.detail.name,
     date: JSON.stringify(page.detail.date),
     creator: 'Admin',
     status: 'create',
     page: JSON.stringify(page),
-  };
+  }
 
   const checkList = {
     name: { message: '请填写活动名称' },
-  };
-  if (!checkField(checkList, activity)) return;
+  }
+  if (!checkField(checkList, activity)) return
 
   if (!props.activityId) {
     // save
     saveActivity(activity).then((result) => {
-      const res = result.data;
+      const res = result.data
       if (res.code === 0) {
         router.push({
           path: '/activityEdit',
           query: { activityId: res.data.id, status: res.data.status },
-        });
+        })
         ElMessage({
           type: 'success',
           message: '活动保存成功',
-        });
+        })
       }
-    });
+    })
   } else {
     // update
     await new Promise((resolve) => {
       updateActivity({ id: props.activityId, data: activity }).then(
         (result) => {
-          const res = result.data;
+          const res = result.data
           if (res.code === 0) {
             ElMessage({
               type: 'success',
               message: '活动更新成功',
-            });
-            resolve();
+            })
+            resolve()
           }
         }
-      );
-    });
+      )
+    })
   }
-};
+}
 
 // 预览
-const isPreview = ref(false);
+const isPreview = ref(false)
 const preview = async () => {
   if (!props.activityId) {
     ElMessage({
       type: 'warning',
       message: '请先保存活动',
-    });
-    return;
+    })
+    return
   }
   // 保存活动
-  await save();
-  isPreview.value = true;
-};
+  await save()
+  isPreview.value = true
+}
 
 // 发布
-const isRelease = computed(() => props.status === 'release');
+const isRelease = computed(() => props.status === 'release')
 const release = () => {
   if (!props.activityId) {
     ElMessage({
       type: 'warning',
       message: '请先将活动保存再发布',
-    });
-    return;
+    })
+    return
   }
 
-  const data = { status: 'release' };
+  const data = { status: 'release' }
   updateActivity({ id: props.activityId, data: data }).then((result) => {
-    const res = result.data;
+    const res = result.data
     if (res.code === 0) {
       ElMessage({
         type: 'success',
         message: '活动更新至待发布状态，请审核',
-      });
-      router.push({ path: '/activity' });
+      })
+      router.push({ path: '/activity' })
     }
-  });
-};
+  })
+}
 
 // 审核
 const judge = (type) => {
@@ -153,33 +153,33 @@ const judge = (type) => {
     status: 'publish',
     reviewer: 'Daw，结果：通过',
     reviewer_time: formatTime(),
-  };
+  }
   if (type === 'deny') {
     // 不通过
     data = {
       status: 'create',
       reviewer: 'Daw，结果：不通过',
       reviewer_time: formatTime(),
-    };
+    }
   }
   updateActivity({ id: props.activityId, data: data }).then((result) => {
-    const res = result.data;
+    const res = result.data
     if (res.code === 0) {
-      router.push({ path: '/activity' });
+      router.push({ path: '/activity' })
       if (type === 'pass') {
         publishActivity({ id: props.activityId }).then((result) => {
-          const res = result.data;
+          const res = result.data
           if (res.code === 0) {
             ElMessage({
               type: 'success',
               message: res.message + '，投放链接已生成，请及时查验',
-            });
+            })
           }
-        });
+        })
       }
     }
-  });
-};
+  })
+}
 </script>
 
 <style lang="scss" scoped>

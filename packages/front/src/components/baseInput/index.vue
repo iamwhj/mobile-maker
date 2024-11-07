@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-import SuffixCharacter from '@/components/suffixCharacter';
+import SuffixCharacter from '@/components/suffixCharacter'
 
 const props = defineProps({
   modelValue: {
@@ -17,13 +17,13 @@ const props = defineProps({
     type: String,
     default: 'px',
   },
-});
+})
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue'])
 const update = (value) => {
-  value = value ? value : '0';
-  emit('update:modelValue', value + props.suffix);
-};
+  value = value ? value : '0'
+  emit('update:modelValue', value + props.suffix)
+}
 </script>
 
 <style lang="scss" scoped>

@@ -62,85 +62,85 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
 import {
   getCategoryList,
   saveCategory,
   updateCategory,
   deleteCategory,
-} from '@/api/category';
-import { removeFieldForMongodb } from '@/utils';
+} from '@/api/category'
+import { removeFieldForMongodb } from '@/utils'
 
 // 获取分类列表
-const categoryList = ref([]);
+const categoryList = ref([])
 const getClassList = () => {
   getCategoryList().then((result) => {
-    const res = result.data;
+    const res = result.data
     if (res.code === 0) {
-      categoryList.value = res.data;
+      categoryList.value = res.data
     }
-  });
-};
-getClassList();
+  })
+}
+getClassList()
 
 // 添加分类
-const addVisible = ref(false);
-const addCategory = ref({});
+const addVisible = ref(false)
+const addCategory = ref({})
 const addCategoryFn = () => {
   saveCategory(addCategory.value).then((result) => {
-    const res = result.data;
+    const res = result.data
     if (res.code === 0) {
       ElMessage({
         type: 'success',
         message: '分类添加成功',
-      });
-      getClassList();
-      addVisible.value = false;
-      addCategory.value = {};
+      })
+      getClassList()
+      addVisible.value = false
+      addCategory.value = {}
     }
-  });
-};
+  })
+}
 
 // 编辑分类
-let editId = -1;
-const editVisible = ref(false);
-const editCategory = ref({});
+let editId = -1
+const editVisible = ref(false)
+const editCategory = ref({})
 const edit = (data) => {
-  editId = data.id;
-  const ripeData = removeFieldForMongodb(data);
-  editCategory.value = ripeData;
-  editVisible.value = true;
-};
+  editId = data.id
+  const ripeData = removeFieldForMongodb(data)
+  editCategory.value = ripeData
+  editVisible.value = true
+}
 const editCategoryFn = () => {
   updateCategory({
     id: editId,
     data: editCategory.value,
   }).then((result) => {
-    const res = result.data;
+    const res = result.data
     if (res.code === 0) {
       ElMessage({
         type: 'success',
         message: '分类更新成功',
-      });
-      getClassList();
-      editVisible.value = false;
+      })
+      getClassList()
+      editVisible.value = false
     }
-  });
-};
+  })
+}
 
 // 删除分类
 const del = (id) => {
   deleteCategory({ id }).then((result) => {
-    const res = result.data;
+    const res = result.data
     if (res.code === 0) {
       ElMessage({
         type: 'success',
         message: '分类删除成功',
-      });
-      getClassList();
+      })
+      getClassList()
     }
-  });
-};
+  })
+}
 </script>
 
 <style lang="scss" scoped>

@@ -130,135 +130,135 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { getCategoryList } from '@/api/category';
+import { ref } from 'vue'
+import { getCategoryList } from '@/api/category'
 import {
   getComponentList,
   updateComponent,
   deleteComponent,
   saveComponent,
-} from '@/api/component';
-import { removeFieldForMongodb } from '@/utils';
+} from '@/api/component'
+import { removeFieldForMongodb } from '@/utils'
 
 // 获取分类列表
-const categoryList = ref([]);
+const categoryList = ref([])
 const getCategoryListFn = () => {
   getCategoryList().then((result) => {
-    const res = result.data;
+    const res = result.data
     if (res.code === 0) {
-      categoryList.value = res.data;
+      categoryList.value = res.data
     }
-  });
-};
-getCategoryListFn();
+  })
+}
+getCategoryListFn()
 // 获取组件列表
-const componentList = ref([]);
+const componentList = ref([])
 const getCompList = () => {
   getComponentList().then((result) => {
-    const res = result.data;
+    const res = result.data
     if (res.code === 0) {
-      componentList.value = res.data;
+      componentList.value = res.data
     }
-  });
-};
-getCompList();
+  })
+}
+getCompList()
 
 // 添加组件
-const addVisible = ref(false);
-const addComponent = ref({});
+const addVisible = ref(false)
+const addComponent = ref({})
 const add = () => {
-  addVisible.value = true;
-  addComponent.value = {};
-  dialogType = 'add';
-};
+  addVisible.value = true
+  addComponent.value = {}
+  dialogType = 'add'
+}
 const addComponentFn = () => {
   if (!addComponent.value.version) {
-    ElMessage.error('还未上传组件代码');
-    return false;
+    ElMessage.error('还未上传组件代码')
+    return false
   }
 
   // 没做登录系统，先设置默认作者
-  addComponent.value.author = 'Admin';
+  addComponent.value.author = 'Admin'
   saveComponent(addComponent.value).then((result) => {
-    const res = result.data;
+    const res = result.data
     if (res.code === 0) {
       ElMessage({
         type: 'success',
         message: '组件添加成功',
-      });
-      getCompList();
-      addVisible.value = false;
-      addComponent.value = {};
+      })
+      getCompList()
+      addVisible.value = false
+      addComponent.value = {}
     }
-  });
-};
+  })
+}
 
 // 编辑组件
-let editId = -1;
-const editVisible = ref(false);
-const editComponent = ref({});
+let editId = -1
+const editVisible = ref(false)
+const editComponent = ref({})
 const edit = (data) => {
-  editId = data.id;
-  const ripeData = removeFieldForMongodb(data);
-  editComponent.value = ripeData;
-  editVisible.value = true;
-  dialogType = 'edit';
-};
+  editId = data.id
+  const ripeData = removeFieldForMongodb(data)
+  editComponent.value = ripeData
+  editVisible.value = true
+  dialogType = 'edit'
+}
 const editComponentFn = () => {
   updateComponent({
     id: editId,
     data: editComponent.value,
   }).then((result) => {
-    const res = result.data;
+    const res = result.data
     if (res.code === 0) {
       ElMessage({
         type: 'success',
         message: '组件更新成功',
-      });
-      getCompList();
-      editVisible.value = false;
+      })
+      getCompList()
+      editVisible.value = false
     }
-  });
-};
+  })
+}
 
 // 删除组件
 const del = (id) => {
   deleteComponent({ id }).then((result) => {
-    const res = result.data;
+    const res = result.data
     if (res.code === 0) {
       ElMessage({
         type: 'success',
         message: '组件删除成功',
-      });
-      getCompList();
+      })
+      getCompList()
     }
-  });
-};
+  })
+}
 
 // 组件上传地址
-const action = process.env.VUE_APP_BUILD_URL + '/upload-component';
+const action = process.env.VUE_APP_BUILD_URL + '/upload-component'
 // 组件上传格式校验
 const beforeCompUpload = (rawFile) => {
   if (rawFile.type !== 'application/x-zip-compressed') {
-    ElMessage.error('上传的格式必须是zip');
-    return false;
+    ElMessage.error('上传的格式必须是zip')
+    return false
   }
-  return true;
-};
+  return true
+}
 // 组件上传成功
-let dialogType = 'add';
+let dialogType = 'add'
 const successCompUpload = (res, file) => {
-  ElMessage.success('组件代码上传成功');
-  const version = res.data.version;
+  ElMessage.success('组件代码上传成功')
+  const version = res.data.version
   if (dialogType === 'add') {
     // 添加组件
-    addComponent.value.version = version;
+    addComponent.value.version = version
   } else {
     // 编辑组件(记录上一个版本)
-    editComponent.value.lastVersion = editComponent.value.version;
-    editComponent.value.version = version;
+    editComponent.value.lastVersion = editComponent.value.version
+    editComponent.value.version = version
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

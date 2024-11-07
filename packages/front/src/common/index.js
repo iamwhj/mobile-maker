@@ -8,8 +8,8 @@ export const getActivityTemplateData = () => {
       date: [],
     },
     mark: 'activity-' + Date.now(),
-  };
-};
+  }
+}
 
 // 组件数据标准model
 export const getComponentTemplateData = ({ name, fullName }) => {
@@ -19,5 +19,5 @@ export const getComponentTemplateData = ({ name, fullName }) => {
     mark: name + '-' + Date.now(),
     detail: {},
     style: {},
-  };
-};
+  }
+}

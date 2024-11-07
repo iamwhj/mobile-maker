@@ -54,54 +54,53 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { getActivityList, deleteActivity } from '@/api/activity';
-import { recoverPageData } from '@/common/helper';
-import { getActivityTemplateData } from '@/common';
-import { useStore } from 'vuex';
-import { ElMessage, ElMessageBox } from 'element-plus';
-import { CopyDocument } from '@element-plus/icons-vue';
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { getActivityList, deleteActivity } from '@/api/activity'
+import { recoverPageData } from '@/common/helper'
+import { getActivityTemplateData } from '@/common'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import { CopyDocument } from '@element-plus/icons-vue'
 
 // table列表
-const activityList = ref([]);
+const activityList = ref([])
 const getList = () => {
   getActivityList().then((result) => {
-    const res = result.data;
+    const res = result.data
     if (res.code === 0) {
-      activityList.value = res.data.data;
+      activityList.value = res.data.data
     }
-  });
-};
-getList();
+  })
+}
+getList()
 
-const router = useRouter();
-const store = useStore();
+const router = useRouter()
 // 新增活动
 const add = () => {
-  recoverPageData(store, getActivityTemplateData());
-  router.push({ path: '/activityEdit' });
-};
+  recoverPageData(getActivityTemplateData())
+  router.push({ path: '/activityEdit' })
+}
 // 编辑活动
 const edit = (activity) => {
-  const page = JSON.parse(activity.page);
-  recoverPageData(store, page);
+  const page = JSON.parse(activity.page)
+  recoverPageData(page)
+
   router.push({
     path: '/activityEdit',
     query: { activityId: activity.id, status: activity.status },
-  });
-};
+  })
+}
 // 审核活动
 const judge = (activity) => {
   if (activity.status !== 'release') {
     ElMessage({
       type: 'warning',
       message: '活动未进入审核状态',
-    });
-    return;
+    })
+    return
   }
-  edit(activity);
-};
+  edit(activity)
+}
 // 删除活动
 const del = (id) => {
   ElMessageBox.confirm('确认删除该活动吗?', {
@@ -111,38 +110,38 @@ const del = (id) => {
   })
     .then(() => {
       deleteActivity({ id }).then((result) => {
-        const res = result.data;
+        const res = result.data
         if (res.code === 0) {
           ElMessage({
             type: 'success',
             message: res.message,
-          });
-          getList();
+          })
+          getList()
         }
-      });
+      })
     })
     .catch(() => {
       ElMessage({
         type: 'info',
         message: 'Delete canceled',
-      });
-    });
-};
+      })
+    })
+}
 
 // 复制访问链接
 const copy = (url) => {
-  const input = document.createElement('input');
-  input.style.opacity = 0;
-  url = `http://dawsky.top:86/${url}.html`;
-  input.value = url;
-  console.log(document.getElementsByClassName('activity'));
-  const container = document.getElementsByClassName('activity')[0];
-  container.appendChild(input);
-  input.select();
-  document.execCommand('copy');
-  container.removeChild(input);
-  ElMessage.success('端外链接复制成功');
-};
+  const input = document.createElement('input')
+  input.style.opacity = 0
+  url = `http://dawsky.top:86/${url}.html`
+  input.value = url
+  console.log(document.getElementsByClassName('activity'))
+  const container = document.getElementsByClassName('activity')[0]
+  container.appendChild(input)
+  input.select()
+  document.execCommand('copy')
+  container.removeChild(input)
+  ElMessage.success('端外链接复制成功')
+}
 </script>
 
 <style lang="scss" scoped>
