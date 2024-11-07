@@ -50,6 +50,8 @@ import { openActivityConfig } from '@/common/helper'
 import { saveActivity, updateActivity, publishActivity } from '@/api/activity'
 import { checkField } from '@/utils/check'
 import { formatTime } from '@/utils'
+import { useNavStore } from '@/store/modules/navBar'
+import { storeToRefs } from 'pinia'
 
 const props = defineProps(['activityId', 'status'])
 
@@ -57,6 +59,11 @@ const router = useRouter()
 const store = useStore()
 // 默认选中顶部栏
 openActivityConfig()
+
+// 收起菜单
+const navStore = useNavStore()
+const { menuCollapse } = storeToRefs(navStore)
+if (!menuCollapse.value) navStore.changeMenuCollapse()
 
 // 保存活动
 const save = async () => {

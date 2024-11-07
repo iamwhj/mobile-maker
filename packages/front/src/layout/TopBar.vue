@@ -1,6 +1,6 @@
 <template>
   <div class="topBar">
-    <div class="menu-controll" @click="emit('changeMenuCollapse')">
+    <div class="menu-controll" @click="changeMenuCollapse">
       <el-tooltip
         :visible="tooltipVisible"
         effect="dark"
@@ -40,9 +40,16 @@
 import { Fold, Expand, House, Avatar } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useNavStore } from '@/store/modules/navBar'
 
-const props = defineProps(['menuCollapse'])
-const emit = defineEmits(['changeMenuCollapse'])
+const store = useNavStore()
+
+const { menuCollapse } = storeToRefs(store)
+
+const changeMenuCollapse = () => {
+  store.changeMenuCollapse()
+}
 
 const router = useRouter()
 const revertActivity = () => router.push({ path: 'activity' })

@@ -61,6 +61,13 @@ import { recoverPageData } from '@/common/helper'
 import { getActivityTemplateData } from '@/common'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { CopyDocument } from '@element-plus/icons-vue'
+import { useNavStore } from '@/store/modules/navBar'
+import { storeToRefs } from 'pinia'
+
+// 展开菜单
+const store = useNavStore()
+const { menuCollapse } = storeToRefs(store)
+if (menuCollapse.value) store.changeMenuCollapse()
 
 // table列表
 const activityList = ref([])

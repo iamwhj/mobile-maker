@@ -1,13 +1,10 @@
 <template>
   <div class="home-container">
     <div class="left-menu" ref="menu">
-      <Nav :menuCollapse="menuCollapse" />
+      <Nav />
     </div>
     <div class="right-main">
-      <TopBar
-        :menuCollapse="menuCollapse"
-        @changeMenuCollapse="changeMenuCollapse"
-      />
+      <TopBar />
       <div class="main">
         <router-view />
       </div>
@@ -16,33 +13,16 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { onMounted, computed } from 'vue'
+import { useNavStore } from '@/store/modules/navBar'
 import Nav from './Nav'
 import TopBar from './TopBar'
 import { visitor } from '@/utils/visit'
 
-// 菜单控制，展开和收起
-const menuCollapse = ref(false)
-const changeMenuCollapse = () => {
-  menuCollapse.value = !menuCollapse.value
-  // 收缩菜单宽度时重新计算
-  resizeLayout()
-}
+const store = useNavStore()
+const menuWidth = computed(() => store.menuWidth)
 
 onMounted(() => visitor())
-
-// 动态计算赋值 menu 和 main 的宽度
-const menu = ref(null)
-const menuWidth = ref('200px')
-const resizeLayout = () => {
-  if (menuCollapse.value) {
-    // 菜单收起
-    menuWidth.value = 64 + 'px'
-  } else {
-    // 菜单展开
-    menuWidth.value = 200 + 'px'
-  }
-}
 
 // 滚动条动画
 let timer = null

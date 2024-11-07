@@ -23,8 +23,12 @@
 
 <script setup>
 import { Menu as IconMenu, Document } from '@element-plus/icons-vue'
+import { useNavStore } from '@/store/modules/navBar'
+import { computed } from 'vue'
 
-const props = defineProps(['menuCollapse'])
+const store = useNavStore()
+
+const menuCollapse = computed(() => store.menuCollapse)
 // menu style
 const menuBackgroundColor = '#1c1c1c'
 </script>
