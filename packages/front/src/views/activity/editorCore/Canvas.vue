@@ -61,8 +61,10 @@ const componentDrap = (e) => {
     name: component.name,
     fullName: component.fullName,
   })
+  
   // 添加组件
   store.addComponent(componentData)
+  
   // 更新选中组件
   selectComponent({
     name: component.name,

@@ -25,9 +25,10 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import { getComponentList } from '@/api/component'
 import { getCategoryList } from '@/api/category'
-import { ref } from 'vue'
+import devList from '@/custom-components/list'
 
 const activeName = ['基础组件']
 
@@ -46,6 +47,12 @@ getCategoryListFn()
 // 组件列表
 const componentList = ref([])
 const getComponentListFn = () => {
+  // 开发环境用本地组件列表
+  if (process.env.NODE_ENV === 'development') {
+    componentList.value = devList
+    return 
+  }
+
   getComponentList().then((result) => {
     const res = result.data
     if (res.code === 0) {

@@ -22,12 +22,13 @@ const currentMark = computed(() => store.currentComponent.value.mark)
 
 const config = computed(() => {
   const page = store.page
-  const currentComponent = store.currentComponent
-  if (currentComponent.value.name === 'activity') {
+  const currentComponent = store.currentComponent.value
+  
+  if (currentComponent.name === 'activity') {
     return page.detail
   } else {
     const component = page.components.find(
-      (c) => c.mark === currentComponent.value.mark
+      (c) => c.mark === currentComponent.mark
     )
     const componentConfig = component?.detail || {}
     return componentConfig

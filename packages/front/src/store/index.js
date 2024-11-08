@@ -33,6 +33,7 @@ export const useStore = defineStore('main', () => {
     }
     // 获取当前选中组件
     let currentComp = getCurrentComponet()
+    
     // 区分更新组件 detail 还是 style
     key === 'style'
       ? (currentComp.style = { ...currentComp.style, ...newDetail })
@@ -77,9 +78,9 @@ export const useStore = defineStore('main', () => {
       name: '移动组件-' + components[i2].fullName,
     })
   }
-  function addHistoryData(historyData) {
+  function addHistoryData(history) {
     // 添加历史记录数据
-    historyData.value.unshift(historyData)
+    historyData.value.unshift(history)
   }
   function recoverPageData(historyData) {
     page.value = { ...page.value, ...historyData }
