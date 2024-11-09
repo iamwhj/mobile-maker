@@ -16,7 +16,7 @@ const props = defineProps({
   src: {
     type: String,
     default:
-      'http://81.68.197.70:3301/image/upload_6003934eacc89ca7a49cc0e0b0f2f422.jpg',
+      'https://img0.baidu.com/it/u=2075518181,1224688219&fm=253&fmt=auto&app=138&f=JPEG?w=617&h=449',
   },
 })
 </script>
