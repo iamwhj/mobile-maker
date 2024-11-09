@@ -63,7 +63,7 @@ openActivityConfig()
 // 收起菜单
 const navStore = useNavStore()
 const { menuCollapse } = storeToRefs(navStore)
-if (!menuCollapse.value) navStore.changeMenuCollapse()
+if (!menuCollapse.value) setTimeout(navStore.changeMenuCollapse, 500)
 
 // 保存活动
 const save = async () => {

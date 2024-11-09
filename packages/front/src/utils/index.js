@@ -51,6 +51,18 @@ export const debounce = (fn, wait) => {
   }
 }
 
+// throttle节流函数
+export const throttle = (fn, delay) => {
+  let lastTime = Date.now()
+  return function (...arg) {
+    const nowTime = Date.now()
+    if (nowTime - lastTime >= delay) {
+      fn.apply(this, arg)
+      lastTime = nowTime
+    }
+  }
+}
+
 // 加载远程js文件
 export const getScript = (url, cb) => {
   return new Promise((resolve) => {
