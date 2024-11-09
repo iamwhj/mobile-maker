@@ -56,6 +56,7 @@ const currentMark = computed(() => store.currentComponent.mark)
 // 拖入组件
 const componentDrap = (e) => {
   const data = e.dataTransfer.getData('component-drag')
+  if (!data) return 
   const component = JSON.parse(data)
   const componentData = getComponentTemplateData({
     name: component.name,
