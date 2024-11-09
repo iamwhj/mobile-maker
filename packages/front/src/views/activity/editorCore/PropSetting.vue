@@ -16,19 +16,19 @@ import { useStore } from '@/store'
 import { updateComponent } from '@/common/helper'
 
 const store = useStore()
-const name = computed(() => store.currentComponent.value.name + 'Config')
-const fullName = computed(() => store.currentComponent.value.fullName)
-const currentMark = computed(() => store.currentComponent.value.mark)
+const currentComponent = computed(() => store.currentComponent || {})
+const name = computed(() => currentComponent.value.name + 'Config')
+const fullName = computed(() => currentComponent.value.fullName)
+const currentMark = computed(() => currentComponent.value.mark)
 
 const config = computed(() => {
   const page = store.page
-  const currentComponent = store.currentComponent.value
   
-  if (currentComponent.name === 'activity') {
+  if (currentComponent.value.name === 'activity') {
     return page.detail
   } else {
     const component = page.components.find(
-      (c) => c.mark === currentComponent.mark
+      (c) => c.mark === currentComponent.value.mark
     )
     const componentConfig = component?.detail || {}
     return componentConfig

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 import { getActivityTemplateData } from '@/common'
 import { collectHistoryData, getCurrentComponet } from '@/common/helper'
 
@@ -8,7 +8,7 @@ export const useStore = defineStore('main', () => {
   const page = ref(getActivityTemplateData())
 
   // 当前选中的组件
-  const currentComponent = reactive({
+  const currentComponent = ref({
     name: '',
     fullName: '',
     mark: '',

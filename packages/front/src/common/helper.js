@@ -25,7 +25,7 @@ export const selectComponent = (component) => {
 // 获取当前选中组件
 export const getCurrentComponet = () => {
   const store = useStore()
-  const currentMark = store.currentComponent.value.mark
+  const currentMark = store.currentComponent.mark
   const page = store.page
   const components = page.components
   let currenComp = components.find((c) => c.mark === currentMark)
