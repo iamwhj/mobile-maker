@@ -59,7 +59,7 @@ watch(props, () => {
     // 若容器几何属性发生变化时更新（width、height）
     pieChart && pieChart.resize()
   })
-})
+}, { deep: true })
 </script>
 
 <style lang="scss" scoped></style>
