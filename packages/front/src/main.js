@@ -3,7 +3,7 @@ import App from './App'
 import router from './router'
 import { createPinia } from 'pinia'
 import '@/style/index.scss'
-import '@/plugins/echarts'
+import '@/plugins'
 import registerGlobalComponent from '@/common/registerGlobalComponent'
 import registerCustomComponents from './custom-components'
 

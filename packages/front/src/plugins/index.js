@@ -1,0 +1,2 @@
+import './echarts'
+import './resizeObserver'
