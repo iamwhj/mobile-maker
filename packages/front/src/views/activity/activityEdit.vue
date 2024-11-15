@@ -57,8 +57,12 @@ const props = defineProps(['activityId', 'status'])
 
 const router = useRouter()
 const store = useStore()
-// 默认选中顶部栏
+
+// 初始选中顶部栏
 openActivityConfig()
+
+// 重置历史操作数据
+store.resetHistoryData()
 
 // 收起菜单
 const navStore = useNavStore()

@@ -78,6 +78,10 @@ export const useStore = defineStore('main', () => {
       name: '移动组件-' + components[i2].fullName,
     })
   }
+  // 重置历史记录
+  function resetHistoryData() {
+    historyData.value = []
+  }
   function addHistoryData(history) {
     // 添加历史记录数据
     historyData.value.unshift(history)
@@ -98,5 +102,6 @@ export const useStore = defineStore('main', () => {
     deleteComponent,
     swapComponent,
     addHistoryData,
+    resetHistoryData
   }
 })
