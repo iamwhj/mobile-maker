@@ -20,8 +20,8 @@
     <div class="right-info">
       <div class="github">
         <a href="//github.com/iamwhj/mobile-maker" target="_blank">
-          <img src="" title="点下star" />
-          <span style="position: relative; bottom: 6px">源码仓库</span>
+          <img src="//github.com/iamwhj/picx-images-hosting/raw/master/mobile-maker/96cbdd469ebf2a8bed92fe4c0f6bcea6.5xany121jx.webp" title="can you star" />
+          <span>仓库</span>
         </a>
       </div>
       <div class="revert" @click="revertActivity">
@@ -75,12 +75,21 @@ const tooltipVisible = ref(false)
     font-size: 14px;
     .github {
       cursor: pointer;
-      img {
-        width: 1.6em;
+      a {
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        img {
+          width: 80px;
+        }
       }
     }
     .revert {
       cursor: pointer;
+      margin: auto 0;
+    }
+    .userName {
+      margin: auto 0;
     }
     .el-icon {
       position: relative;
