@@ -1,0 +1,23 @@
+{
+  "name": "@mk/build-server",
+  "version": "1.0.0",
+  "description": "mobile-maker 是一个低代码平台，通过拖拽的形式快速制作可交互的h5页面。",
+  "main": "app.js",
+  "scripts": {
+    "dev": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamwhj/mobile-maker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iamwhj/mobile-maker/issues"
+  },
+  "homepage": "https://github.com/iamwhj/mobile-maker#readme",
+  "dependencies": {},
+  "devDependencies": {}
+}

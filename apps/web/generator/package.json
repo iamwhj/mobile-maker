@@ -1,0 +1,11 @@
+{
+  "name": "@mk/generator",
+  "version": "0.1.0",
+  "main": "./src/export.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

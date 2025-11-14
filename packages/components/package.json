@@ -1,0 +1,24 @@
+{
+  "name": "@mk/components",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "index.js",
+  "module": "index.js",
+  "exports": {
+    ".": {
+      "import": "index.js",
+      "require": "index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "vite lint"
+  },
+  "devDependencies": {
+    "cross-env": "^10.1.0"
+  }
+}

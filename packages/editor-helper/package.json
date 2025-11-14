@@ -1,0 +1,13 @@
+{
+  "name": "@mk/editor-helper",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "vite lint"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

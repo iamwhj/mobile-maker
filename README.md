@@ -1,86 +1,217 @@
-## 简介
+<div align="center">
+  <a href="https://github.com/iamwhj/mobile-maker">
+    <img alt="Mobile Maker Logo" width="215" src="apps/web/admin/public/lowcode.png">
+  </a>
+  <br>
+  <br>
 
-mobile-maker 是一个低代码搭建平台，拖拽快速制作可交互的 H5落地页。
+[![license](https://img.shields.io/github/license/iamwhj/mobile-maker.svg)](LICENSE)
 
-该项目着重于探究低代码平台核心功能，具备完整低代码平台生产链路（编辑-预览-发布），可在线打包组件，但其并未实现太多的业务功能，非常适合作为低代码平台入门学习项目。
+  <h1>Mobile Maker</h1>
+  <h3>A Low-Code Platform for Building Interactive H5 Pages</h3>
+</div>
 
-如果对你有帮助的话，请顺手点个 star，这将给予我极大的鼓励。
+[![license](https://img.shields.io/github/license/iamwhj/mobile-maker.svg)](LICENSE) [![vue](https://img.shields.io/github/languages/top/iamwhj/mobile-maker.svg)](https://github.com/iamwhj/mobile-maker) [![pnpm](https://img.shields.io/badge/pnpm-8.0+-orange.svg)](https://pnpm.io/)
 
-[![OSCS Status](https://www.oscs1024.com/platform/badge/iamwhj/mobile-maker-server.svg?size=small)](https://www.oscs1024.com/project/iamwhj/mobile-maker-server?ref=badge_small) ![build](https://img.shields.io/github/license/iamwhj/mobile-maker) ![vue](https://img.shields.io/github/languages/top/iamwhj/mobile-maker)
+**English** | [中文](./README.zh-CN.md)
 
-## 界面
+## Introduction
 
-![编辑界面](https://github.com/iamwhj/picx-images-hosting/raw/master/mobile-maker/mobile-maker.77dl4d3bij.webp)
+Mobile Maker is a free and open-source low-code platform that enables rapid creation of interactive H5 pages through drag-and-drop functionality. The project focuses on exploring core features of low-code platforms, providing a complete production workflow (editing-preview-publishing) with online component packaging capabilities. It's an excellent learning resource for understanding low-code platform architecture.
 
-## 文档
+## Design Philosophy
 
-开发文档：  
+**Comfortable Development, Efficient Production**
 
-- [编辑服务开发文档](https://github.com/iamwhj/mobile-maker/blob/master/packages/front/README.md)
+## Features
 
-- [预览服务开发文档](https://github.com/iamwhj/mobile-maker/blob/master/packages/generate/README.md)
+- **🎨 Drag-and-Drop Editor**: Intuitive visual editor for building H5 pages without coding
+- **📱 Mobile-First Design**: Optimized for mobile devices with responsive layouts
+- **🔧 Component System**: Extensible component library with built-in common components
+- **👀 Live Preview**: Real-time preview of pages during editing
+- **📦 Component Packaging**: Online component building and packaging
+- **🎯 TypeScript**: Type-safe development experience
+- **⚡ Modern Tech Stack**: Built with Vue 3, Vite, and latest frontend technologies
+- **🏗️ Monorepo Architecture**: Well-organized monorepo structure using pnpm workspace
+- **🔄 Complete Workflow**: Full pipeline from editing to preview to publishing
 
-## 运行
+## Technology Stack
 
-mobile-maker项目
+- **Package Management**: pnpm workspace
+- **Build Tool**: Turbo
+- **Frontend**: Vue 3 + Element Plus + Vue Router + Pinia + Vite
+- **Backend**: Node.js + Koa + TypeScript + MongoDB
+- **Code Quality**: ESLint + Prettier + TypeScript
+
+## Project Structure
+
+```
+mobile-maker/
+├── apps/
+│   ├── server/
+│   │   ├── data-server/           # Main backend service (TypeScript + Koa)
+│   │   └── build-server/          # Build service (Node.js + Koa)
+│   └── web/
+│       ├── admin/                 # Admin management interface (Vue 3)
+│       ├── editor/                # Page editor (Vue 3)
+│       └── generator/             # Page generator/preview (Vue 3)
+├── packages/                      # Shared packages
+│   ├── api/                       # API utilities
+│   ├── components/                # Component library
+│   ├── editor-core/               # Editor core
+│   ├── editor-helper/             # Editor helpers
+│   ├── stores/                    # State management
+│   └── utils/                     # Utility functions
+├── scripts/                       # Build scripts
+│   └── mk/                        # Custom CLI tool
+├── pnpm-workspace.yaml          # pnpm workspace config
+├── package.json                  # Root package.json
+├── turbo.json                    # Turbo config
+└── tsconfig.json                 # TypeScript config
+```
+
+## Install and Use
+
+### Prerequisites
+
+- Node.js >= 22
+- pnpm >= 8.0
+- MongoDB (for backend services)
+
+### Installation
+
+1. Get the project code
+
 ```bash
-// 进入编辑服务
-cd ./packages/front
-
-// 安装依赖
-yarn
-
-yarn dev
+git clone https://github.com/iamwhj/mobile-maker.git
+cd mobile-maker
 ```
 
-mobile-maker-server项目  
+2. Install dependencies
 
-确保你的环境有mongoDB，没有就需要先安装
 ```bash
-yarn
+# Install pnpm globally (if not installed)
+npm i -g corepack
 
-yarn dev
+# Enable corepack
+corepack enable
+
+# Install all dependencies
+pnpm install
 ```
 
-## 项目结构
+### Development
 
-```base
-- mobile-maker 打包服务
-    - 编辑服务：./packages/front 
-    - 预览服务：./packages/generate 
+```bash
+# Start all services (admin + data-server)
+pnpm dev
 
-- mobile-maker-server 接口服务 
+# Start specific services
+pnpm dev:editor      # Start editor only
+pnpm dev:generator   # Start generator only
+
+# For more scripts look at the package.json
 ```
 
-1. 打包服务[(mobile-maker)](https://github.com/iamwhj/mobile-maker): 通过该服务实现组件在线上传打包，技术栈：koa + shell + fs/child_process
-2. 编辑服务[(front)](https://github.com/iamwhj/mobile-maker/tree/master/packages/front): 拖拽生成落地页，将落地页JSON传于后台保存至数据库，技术栈：vue3 + element-plus + webpack + echarts
-3. 预览服务[(generate)](https://github.com/iamwhj/mobile-maker/tree/master/packages/generate): 提供落地页访问静态资源（js/css），提供移动端适配方案，H5预览，技术栈：vue3 + element-plus + webpack + echarts
-4. 接口服务[(mobile-maker-server)](https://github.com/iamwhj/mobile-maker-server): 数据库存储，以及落地页html的生成，技术栈：koa + typescript + mongodb + fs + child_process/exec
+### Build
 
-## 分享文档
+```bash
+# Build all projects for development
+pnpm build
+# Build all projects for prodution
+pnpm build:prod
 
-联合杨村长做的B站直播分享。
+# Build specific projects
+pnpm build:server     # Build backend services
+pnpm build:admin      # Build admin interface
+pnpm build:editor     # Build editor
+pnpm build:components # Build component library
+pnpm build:generator  # Build generator
+```
 
-1. 【2022/8/4】第一次分享，[编辑服务学习文档](https://www.yuque.com/u21600751/zudomw/qreu1s)
+## Project Components
 
-2. 【2022/8/11】第二次分享，[预览服务学习文档](https://www.yuque.com/u21600751/zudomw/qb77op)
+### Admin (Management Interface)
 
-3. 【2022/8/21】第三次分享，[打包服务学习文档](https://www.yuque.com/u21600751/zudomw/zagfh2)
+- **Port**: 8080 (default)
+- **Tech Stack**: Vue 3 + Element Plus + Vue Router + Pinia
+- **Features**: Activity management, component management, page editing
 
-## 优化记录
+### Editor (Page Editor)
 
-1. 首屏优化，[博文地址](https://juejin.cn/post/7127927760692969509)
+- **Tech Stack**: Vue 3 + Element Plus
+- **Features**: Drag-and-drop page building, component configuration, live preview
 
-## 里程碑
+### Generator (Page Generator/Preview)
 
-【2022/7/19】完成整套低代码平台架构功能，包括上面的四个服务，还有三个基础的组件，以及额外需要的图床服务(ip名单限制)
+- **Tech Stack**: Vue 3 + Element Plus
+- **Features**: Generate interactive H5 pages, mobile adaptation, static resource serving
 
-【2022/8/24】完成三个核心模块分享（B站的直播分享，历经三周，每周一次），域名备案通过升级部署服务器，平台访问量1k+，star数 40+
+### Data Server (Backend Service)
 
-【2024/11/21】进行若干优化后，V1版本的迭代告一段落，此版本会打一个Tag版本v1.0.0，该版本的初衷在于学习理解低代码核心逻辑，降低初入门者的学习门槛。新版本计划架构重写，1.平台方面抽出平台和编辑器，实现绝对定位画布 2.组件方面实现远程组件，不再使用在线打包 3.功能方面实现组件嵌套和组件树 4.基于抽出的编辑器实现组件开发脚手架 
+- **Port**: 3000 (default)
+- **Tech Stack**: Node.js + Koa + TypeScript + MongoDB
+- **Features**: API services, data management, page generation
 
-## ENJOY
+### Build Server (Build Service)
 
-如果你对相关的内容感觉兴趣的话，可以与我一同探讨。
+- **Tech Stack**: Node.js + Koa
+- **Features**: Component building, static resource generation
 
-微信：wx962983053
+## Configuration
+
+### Catalog Dependency Management
+
+The project uses pnpm catalog feature to centrally manage dependency versions. All common dependencies are defined in the `catalog` section of `pnpm-workspace.yaml`.
+
+### Configuration Files
+
+- Root-level configuration files apply to all sub-projects
+- Sub-projects can have their own configuration files to override root settings
+- TypeScript configuration supports inheritance and path mapping
+
+## Browser Support
+
+The `Chrome 80+` browser is recommended for local development
+
+Supports modern browsers, not IE
+
+| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari |
+| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|                                                                                            last 2 versions                                                                                            |                                                                                                  last 2 versions                                                                                                  |                                                                                                last 2 versions                                                                                                |                                                                                                last 2 versions                                                                                                |
+
+## How to Contribute
+
+You are very welcome to join! [Raise an issue](https://github.com/iamwhj/mobile-maker/issues/new/choose) or submit a Pull Request.
+
+**Pull Request Process:**
+
+1. Fork the code
+2. Create your branch: `git checkout -b feat/xxxx`
+3. Submit your changes: `git commit -am 'feat(function): add xxxxx'`
+4. Push your branch: `git push origin feat/xxxx`
+5. Submit `pull request`
+
+## Git Contribution Submission Specification
+
+Reference [Vue](https://github.com/vuejs/vue/blob/dev/.github/COMMIT_CONVENTION.md) specification ([Angular](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular))
+
+- `feat` Add new features
+- `fix` Fix the problem/BUG
+- `style` The code style is related and does not affect the running result
+- `perf` Optimization/performance improvement
+- `refactor` Refactor
+- `revert` Undo edit
+- `test` Test related
+- `docs` Documentation/notes
+- `chore` Dependency update/scaffolding configuration modification etc.
+- `ci` Continuous integration
+- `types` Type definition file changes
+
+## License
+
+[MIT © 2024](./LICENSE)
+
+## Author
+
+[@iamwhj](https://github.com/iamwhj)

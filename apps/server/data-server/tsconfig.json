@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES2015", // 目标语言版本
+    "module": "commonjs", // 指定生成代码的模板标准
+    "outDir": "dist",
+    "rootDir": "./",
+    "strict": true, // 严格模式
+    "allowSyntheticDefaultImports": true, // 没有默认导出时, 编译器会创建一个默认导出
+    "esModuleInterop": true, // 允许export= 导出, 由import from导入
+    "forceConsistentCasingInFileNames": true, // 强制区分大小写
+    "skipLibCheck": true /* 跳过声明文件的类型检查 */
+  },
+  "include": [
+    // 需要编译的的文件和目录
+    "src/**/*"
+  ],
+  "files": ["src/app.ts"]
+}

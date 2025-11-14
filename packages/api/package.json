@@ -1,0 +1,13 @@
+{
+  "name": "@mk/api",
+  "version": "0.1.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "vite lint"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

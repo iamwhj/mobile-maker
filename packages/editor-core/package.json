@@ -1,0 +1,12 @@
+{
+  "name": "@mk/editor-core",
+  "version": "0.1.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "vite lint"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
