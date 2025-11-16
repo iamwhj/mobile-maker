@@ -4,6 +4,7 @@ import './plugins/dotenv'
 import connectDB from './db'
 import { generateRouter } from './utils/generate'
 import { resolve } from 'path'
+import applicationPreview from './middleware/applicationPreview'
 
 const app = new Koa()
 
@@ -11,6 +12,9 @@ app.use(bodyParser())
 
 // 连接数据库
 connectDB()
+
+// 应用预览静态资源处理中间件
+app.use(applicationPreview)
 
 // 自动生成路由
 generateRouter(app, resolve(__dirname, './routes/'))

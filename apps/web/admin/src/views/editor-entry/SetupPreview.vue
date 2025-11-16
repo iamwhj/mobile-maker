@@ -31,7 +31,7 @@ onBeforeUnmount(() => {
 })
 
 const src = computed(() => {
-  return `${import.meta.env.VITE_API_URL}/activity/preview/${appId}`
+  return `${import.meta.env.VITE_API_URL}/application/preview/${appId.value}`
 })
 </script>
 
@@ -52,49 +52,48 @@ const src = computed(() => {
     </div>
   </div>
 </template>
-  
+
 <style lang="scss" scoped>
-  .preview {
-    position: fixed;
-    background: rgba(0, 0, 0, 0.7);
-    width: 100%;
+.preview {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  &-box {
+    position: relative;
     height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    &-box {
-      position: relative;
-      height: 100%;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-evenly;
-      .model {
-        width: 276px;
-        height: 560px;
-        background-image: url('../../assets/model.png');
-        background-repeat: no-repeat;
-        background-size: 276px 560px;
-        box-sizing: border-box;
-        padding: 69px 18px 66px;
-        iframe {
-          background: #f1eaea;
-          width: 100%;
-          height: 100%;
-        }
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    .model {
+      width: 276px;
+      height: 560px;
+      background-image: url('../../assets/model.png');
+      background-repeat: no-repeat;
+      background-size: 276px 560px;
+      box-sizing: border-box;
+      padding: 69px 18px 66px;
+      iframe {
+        background: #f1eaea;
+        width: 100%;
+        height: 100%;
       }
-      .qr-code {
-        width: 200px;
-        height: 200px;
-        background: #fff;
-        .tips {
-          color: #fff;
-          p {
-            margin: 5px 0;
-          }
+    }
+    .qr-code {
+      width: 200px;
+      height: 200px;
+      background: #fff;
+      .tips {
+        color: #fff;
+        p {
+          margin: 5px 0;
         }
       }
     }
   }
+}
 </style>
-  
