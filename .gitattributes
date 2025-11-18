@@ -1,0 +1,3 @@
+*.vue linguist-language=Vue
+
+*.html linguist-detectable=false
